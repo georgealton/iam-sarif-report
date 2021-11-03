@@ -1,0 +1,1 @@
+# iam-policy-validator-to-sarif
