@@ -1,0 +1,114 @@
+{
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "IAM Policy Validator",
+          "rules": [
+            {
+              "id": "suggestion_redundant_action",
+              "help": {
+                "text": "When you use wildcards (*) in the `Action` element, you can include redundant\npermissions. AWS recommends that you review your policy and include only the\npermissions that you need. This can help you remove redundant actions.",
+                "markdown": "When you use wildcards (*) in the `Action` element, you can include redundant\npermissions. AWS recommends that you review your policy and include only the\npermissions that you need. This can help you remove redundant actions."
+              },
+              "name": "RedundantAction",
+              "fullDescription": {
+                "text": "When you use wildcards (*) in the `Action` element, you can include redundant\npermissions. AWS recommends that you review your policy and include only the\npermissions that you need. This can help you remove redundant actions.\n\nFor example, the following actions include the `iam:GetCredentialReport`\naction twice.\n\n    \n    \n        \"Action\": [\n            \"iam:Get*\",\n            \"iam:List*\",\n            \"iam:GetCredentialReport\"\n        ],\n    \n\nIn this example, permissions are defined for every IAM action that begins with\n`Get` or `List`. When IAM adds additional get or list operations, this policy\nwill allow them. You might want to allow all of these read-only actions. The\n`iam:GetCredentialReport` action is already included as part of `iam:Get*`. To\nremove the duplicate permissions, you could remove `iam:GetCredentialReport`.\n\nYou receive a finding for this policy check when all of the contents of an\naction are redundant. In this example, if the element included\n`iam:*CredentialReport`, it is not considered redundant. That includes\n`iam:GetCredentialReport`, which is redundant, and\n`iam:GenerateCredentialReport`, which is not. Removing either `iam:Get*` or\n`iam:*CredentialReport` would change the policy's permissions.\n\n  * [IAM JSON policy elements: Action](./reference_policies_elements_action.html)\n\n### AWS managed policies with this suggestion\n\n[AWS managed policies](./access_policies_managed-vs-inline.html#aws-managed-\npolicies) enable you to get started with AWS by assigning permissions based on\ngeneral AWS use cases.\n\nRedundant actions do not affect the permissions granted by the policy. When\nusing an AWS managed policy as a reference to create your customer managed\npolicy, AWS recommends that you remove redundant actions from your policy.",
+                "markdown": "When you use wildcards (*) in the `Action` element, you can include redundant\npermissions. AWS recommends that you review your policy and include only the\npermissions that you need. This can help you remove redundant actions.\n\nFor example, the following actions include the `iam:GetCredentialReport`\naction twice.\n\n    \n    \n        \"Action\": [\n            \"iam:Get*\",\n            \"iam:List*\",\n            \"iam:GetCredentialReport\"\n        ],\n    \n\nIn this example, permissions are defined for every IAM action that begins with\n`Get` or `List`. When IAM adds additional get or list operations, this policy\nwill allow them. You might want to allow all of these read-only actions. The\n`iam:GetCredentialReport` action is already included as part of `iam:Get*`. To\nremove the duplicate permissions, you could remove `iam:GetCredentialReport`.\n\nYou receive a finding for this policy check when all of the contents of an\naction are redundant. In this example, if the element included\n`iam:*CredentialReport`, it is not considered redundant. That includes\n`iam:GetCredentialReport`, which is redundant, and\n`iam:GenerateCredentialReport`, which is not. Removing either `iam:Get*` or\n`iam:*CredentialReport` would change the policy's permissions.\n\n  * [IAM JSON policy elements: Action](./reference_policies_elements_action.html)\n\n### AWS managed policies with this suggestion\n\n[AWS managed policies](./access_policies_managed-vs-inline.html#aws-managed-\npolicies) enable you to get started with AWS by assigning permissions based on\ngeneral AWS use cases.\n\nRedundant actions do not affect the permissions granted by the policy. When\nusing an AWS managed policy as a reference to create your customer managed\npolicy, AWS recommends that you remove redundant actions from your policy."
+              },
+              "helpUri": "https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-reference-policy-checks.html#access-analyzer-reference-policy-checks-suggestion-redundant-action",
+              "shortDescription": {
+                "text": "When you use wildcards (*) in the `Action` element, you can include redundant\npermissions. AWS recommends that you review your policy and include only the\npermissions that you need. This can help you remove redundant actions.",
+                "markdown": "When you use wildcards (*) in the `Action` element, you can include redundant\npermissions. AWS recommends that you review your policy and include only the\npermissions that you need. This can help you remove redundant actions."
+              }
+            }
+          ],
+          "fullName": "IAM Access Analyzer Policy Validator",
+          "informationUri": "https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-policy-validation.html"
+        }
+      },
+      "results": [
+        {
+          "message": {
+            "text": "The 2 action(s) are redundant because they provide similar permissions. Update the policy to remove the redundant action such as: s3:GetObject."
+          },
+          "level": "note",
+          "locations": [
+            {
+              "physicalLocation": {
+                "region": {
+                  "endColumn": 27,
+                  "endLine": 6,
+                  "startColumn": 18,
+                  "startLine": 6
+                },
+                "artifactLocation": {
+                  "uri": "tests/data/policy_checks/redundant-action.policy.json",
+                  "uriBaseId": "EXECUTIONROOT"
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "region": {
+                  "endColumn": 43,
+                  "endLine": 6,
+                  "startColumn": 29,
+                  "startLine": 6
+                },
+                "artifactLocation": {
+                  "uri": "tests/data/policy_checks/redundant-action.policy.json",
+                  "uriBaseId": "EXECUTIONROOT"
+                }
+              }
+            }
+          ],
+          "ruleId": "suggestion_redundant_action"
+        },
+        {
+          "message": {
+            "text": "The 2 action(s) are redundant because they provide similar permissions. Update the policy to remove the redundant action such as: s3:GetObject."
+          },
+          "level": "note",
+          "locations": [
+            {
+              "physicalLocation": {
+                "region": {
+                  "endColumn": 43,
+                  "endLine": 6,
+                  "startColumn": 29,
+                  "startLine": 6
+                },
+                "artifactLocation": {
+                  "uri": "tests/data/policy_checks/redundant-action.policy.json",
+                  "uriBaseId": "EXECUTIONROOT"
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "region": {
+                  "endColumn": 27,
+                  "endLine": 6,
+                  "startColumn": 18,
+                  "startLine": 6
+                },
+                "artifactLocation": {
+                  "uri": "tests/data/policy_checks/redundant-action.policy.json",
+                  "uriBaseId": "EXECUTIONROOT"
+                }
+              }
+            }
+          ],
+          "ruleId": "suggestion_redundant_action"
+        }
+      ]
+    }
+  ],
+  "version": "2.1.0",
+  "$schema": "https://docs.oasis-open.org/sarif/sarif/v2.1.0/cos02/schemas/sarif-schema-2.1.0.json"
+}

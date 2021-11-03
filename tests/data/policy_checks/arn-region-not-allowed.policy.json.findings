@@ -1,0 +1,37 @@
+{
+    "findings": [
+        {
+            "findingDetails": "The service iam does not support specifying a Region in the resource ARN.",
+            "findingType": "ERROR",
+            "issueCode": "ARN_REGION_NOT_ALLOWED",
+            "learnMoreLink": "https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-reference-policy-checks.html#access-analyzer-reference-policy-checks-error-arn-region-not-allowed",
+            "locations": [
+                {
+                    "path": [
+                        {
+                            "value": "Statement"
+                        },
+                        {
+                            "index": 0
+                        },
+                        {
+                            "value": "Resource"
+                        }
+                    ],
+                    "span": {
+                        "end": {
+                            "column": 49,
+                            "line": 7,
+                            "offset": 160
+                        },
+                        "start": {
+                            "column": 18,
+                            "line": 7,
+                            "offset": 129
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}

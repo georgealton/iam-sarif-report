@@ -1,0 +1,68 @@
+{
+    "findings": [
+        {
+            "findingDetails": "The 2 action(s) are redundant because they provide similar permissions. Update the policy to remove the redundant action such as: s3:GetObject.",
+            "findingType": "SUGGESTION",
+            "issueCode": "REDUNDANT_ACTION",
+            "learnMoreLink": "https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-reference-policy-checks.html#access-analyzer-reference-policy-checks-suggestion-redundant-action",
+            "locations": [
+                {
+                    "path": [
+                        {
+                            "value": "Statement"
+                        },
+                        {
+                            "index": 0
+                        },
+                        {
+                            "value": "Action"
+                        },
+                        {
+                            "index": 0
+                        }
+                    ],
+                    "span": {
+                        "end": {
+                            "column": 26,
+                            "line": 6,
+                            "offset": 103
+                        },
+                        "start": {
+                            "column": 17,
+                            "line": 6,
+                            "offset": 94
+                        }
+                    }
+                },
+                {
+                    "path": [
+                        {
+                            "value": "Statement"
+                        },
+                        {
+                            "index": 0
+                        },
+                        {
+                            "value": "Action"
+                        },
+                        {
+                            "index": 1
+                        }
+                    ],
+                    "span": {
+                        "end": {
+                            "column": 42,
+                            "line": 6,
+                            "offset": 119
+                        },
+                        "start": {
+                            "column": 28,
+                            "line": 6,
+                            "offset": 105
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}

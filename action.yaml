@@ -1,0 +1,24 @@
+name: IAM Policy Validator as SARIF
+author: George Alton
+description: Uses the IAM ValidatePolicy to generate Findings and converts those findings be SARIF compatible
+branding:
+  icon: check-square
+  color: green
+inputs:
+  policies:
+    description: "path to policy/policies"
+    required: true
+  policy_type:
+    default: IDENTITY_POLICY
+  locale:
+    default: EN
+  results:
+    description: "where to store results"
+    default: "-"
+runs:
+  using: docker
+  image: Dockerfile
+  args:
+    - "${{ inputs.policy_type }}"
+    - "${{ inputs.locale }}"
+    - "${{ inputs.policies }}"
