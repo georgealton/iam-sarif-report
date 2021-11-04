@@ -9,6 +9,15 @@ from mypy_boto3_accessanalyzer.type_defs import (
 Finding = ValidatePolicyFindingTypeDef
 Findings = List[Finding]
 
+tool_name = "ValidatePolicy"
+tool_full_name = "IAM Access Analyzer ValidatePolicy"
+tool_info_uri = "https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-policy-validation.html"
+schema = "https://docs.oasis-open.org/sarif/sarif/v2.1.0/cos02/schemas/sarif-schema-2.1.0.json"
+version = "2.1.0"
+driver = sarif.ToolComponent(
+    name=tool_name, full_name=tool_full_name, information_uri=tool_info_uri
+)
+tool = sarif.Tool(driver=driver)
 
 class SarifConverter:
     def to_sarif_level(self, finding: Finding) -> str:
@@ -28,15 +37,6 @@ class SarifConverter:
         self.policy_path = policy_path
 
     def convert(self, findings: Findings) -> sarif.SarifLog:
-        tool_name = "ValidatePolicy"
-        tool_full_name = "IAM Access Analyzer ValidatePolicy"
-        tool_info_uri = "https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-policy-validation.html"
-        schema = "https://docs.oasis-open.org/sarif/sarif/v2.1.0/cos02/schemas/sarif-schema-2.1.0.json"
-        version = "2.1.0"
-        driver = sarif.ToolComponent(
-            name=tool_name, full_name=tool_full_name, information_uri=tool_info_uri
-        )
-        tool = sarif.Tool(driver=driver)
         results = self.findings_to_results(findings)
         run = sarif.Run(tool=tool, results=results)
         log = sarif.SarifLog(schema_uri=schema, version=version, runs=[run])
