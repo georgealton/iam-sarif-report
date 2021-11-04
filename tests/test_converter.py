@@ -1,3 +1,5 @@
+import pathlib
+import json
 from iam_policy_validate_sarif import converter
 
 finding = {
@@ -37,3 +39,18 @@ def test_span_to_region():
 
 def test_to_sarif_level():
     converter.SarifConverter.to_sarif_level()
+
+
+def test_convertor():
+    policy = 'redundant-action'
+    policy = f"tests/data/{policy}.policy.json"
+    with open(f"{policy}.findings") as data:
+        findings = json.load(data)['findings']
+
+    converted_sarif = json.loads(converter.SarifConverter(pathlib.Path(policy)).convert(findings))
+    print(json.dumps(converted_sarif))
+
+    with open(f"{policy}.findings.sarif") as data:
+        expected_sarif = json.load(data)
+
+    assert converted_sarif == expected_sarif

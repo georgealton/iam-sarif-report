@@ -4,3 +4,7 @@ requires = [
   "wheel",
 ]
 build-backend = "setuptools.build_meta"
+
+[tool.mypy]
+warn_return_any = true
+warn_unused_configs = true

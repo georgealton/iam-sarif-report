@@ -1,0 +1,44 @@
+{
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "ValidatePolicy",
+          "fullName": "IAM Access Analyzer ValidatePolicy",
+          "informationUri": "https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-policy-validation.html"
+        }
+      },
+      "results": [
+        {
+          "message": {
+            "arguments": [
+              "The service iam does not support specifying a Region in the resource ARN.",
+              "https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-reference-policy-checks.html#access-analyzer-reference-policy-checks-error-arn-region-not-allowed"
+            ],
+            "text": "{0} - {1}"
+          },
+          "level": "error",
+          "locations": [
+            {
+              "physicalLocation": {
+                "region": {
+                  "endColumn": 49,
+                  "endLine": 7,
+                  "startColumn": 18,
+                  "startLine": 7
+                },
+                "artifactLocation": {
+                  "uri": "arn-region-not-allowed.policy.json",
+                  "uriBaseId": "EXECUTIONROOT"
+                }
+              }
+            }
+          ],
+          "ruleId": "ARN_REGION_NOT_ALLOWED"
+        }
+      ]
+    }
+  ],
+  "version": "2.1.0",
+  "$schema": "https://docs.oasis-open.org/sarif/sarif/v2.1.0/cos02/schemas/sarif-schema-2.1.0.json"
+}

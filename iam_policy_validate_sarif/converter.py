@@ -4,7 +4,10 @@ import sarif_om as sarif
 from mypy_boto3_accessanalyzer.type_defs import (
     SpanTypeDef,
     ValidatePolicyFindingTypeDef,
+    LocationTypeDef
 )
+from jschema_to_python.to_json import to_json
+import itertools
 
 Finding = ValidatePolicyFindingTypeDef
 Findings = Iterable[Finding]
@@ -19,7 +22,6 @@ iam_policy_validator_tool = sarif.Tool(
         information_uri="https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-policy-validation.html",
     )
 )
-
 
 class SarifConverter:
     def __init__(self, policy_path: Path) -> None:
@@ -36,9 +38,10 @@ class SarifConverter:
         return level_map.get(finding["findingType"], "none")
 
     @staticmethod
-    def build_message_from_finding(finding: Finding) -> str:
-        text = finding["findingDetails"]
-        return sarif.Message(text=text)
+    def build_message_from_finding(finding: Finding) -> sarif.Message:
+        details, moreInfo = finding["findingDetails"], finding["learnMoreLink"]
+        text_fmt = "{0} - {1}"
+        return sarif.Message(text=text_fmt, arguments=[details, moreInfo])
 
     @staticmethod
     def span_to_region(span: SpanTypeDef) -> sarif.Region:
@@ -51,27 +54,48 @@ class SarifConverter:
         )
 
     def convert(self, findings: Findings) -> sarif.SarifLog:
-        results = self.findings_to_results(findings)
+        """Converts Findings to a SARIF Log
+
+        :param findings: [description]
+        :return: [description]
+        """
+        results = list(self.findings_to_results(findings))
         run = sarif.Run(tool=iam_policy_validator_tool, results=results)
-        return sarif.SarifLog(schema_uri=schema, version=version, runs=[run])
+        return to_json(sarif.SarifLog(schema_uri=schema, version=version, runs=[run]))
 
-    def findings_to_results(self, findings: Findings) -> List[sarif.Run]:
-        return [self.finding_to_result(finding) for finding in findings]
+    def findings_to_results(self, findings: Findings) -> Iterable[sarif.Result]:
+        return list(itertools.chain.from_iterable(self.finding_to_results(finding) for finding in findings))
 
-    def finding_location(self, finding: Finding) -> sarif.Location:
+    def finding_location(self, location: LocationTypeDef) -> sarif.Location:
+        """[summary]
+
+        :param location: [description]
+        :return: [description]
+        """
         uri = self.policy_path.name
         artifact_location = sarif.ArtifactLocation(uri=uri, uri_base_id="EXECUTIONROOT")
-        region = SarifConverter.span_to_region(finding["locations"][0]["span"])
+        region = SarifConverter.span_to_region(location["span"])
         physical_location = sarif.PhysicalLocation(
             artifact_location=artifact_location, region=region
         )
         return sarif.Location(physical_location=physical_location)
 
-    def finding_to_result(self, finding: Finding) -> sarif.Result:
-        level = SarifConverter.to_sarif_level(finding)
-        message = SarifConverter.build_message_from_finding(finding)
-        location = self.finding_location(finding)
-        rule_id = finding["issueCode"]
-        return sarif.Result(
-            rule_id=rule_id, level=level, message=message, locations=[location]
-        )
+    def finding_to_results(self, finding: Finding) -> Iterable[sarif.Result]:
+        """Generates SARIF Results from a Finding
+
+        Produces multiple Results when we have more than 1 Location in Finding. SARIF Results
+        should only have multiple locations when **every** location needs changing. Findings with
+        issueCode REDUNDANT_ACTION may only need correct in 1 location to resolve.
+
+        https://docs.oasis-open.org/sarif/sarif/v2.1.0/csprd01/sarif-v2.1.0-csprd01.html#_Toc10541088
+
+        :param finding: [description]
+        :return: [description]]
+        """
+        for location in finding["locations"]:
+            level = SarifConverter.to_sarif_level(finding)
+            message = SarifConverter.build_message_from_finding(finding)
+            location = self.finding_location(location)
+            rule_id = finding["issueCode"]
+            yield sarif.Result(rule_id=rule_id, level=level, message=message, locations=[location])
+

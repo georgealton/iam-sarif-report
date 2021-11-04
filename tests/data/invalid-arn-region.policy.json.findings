@@ -1,0 +1,37 @@
+{
+    "findings": [
+        {
+            "findingDetails": "The Region invalid-region-1 is not valid for this resource. Update the resource ARN to include a supported Region.",
+            "findingType": "ERROR",
+            "issueCode": "INVALID_ARN_REGION",
+            "learnMoreLink": "https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-reference-policy-checks.html#access-analyzer-reference-policy-checks-error-invalid-arn-region",
+            "locations": [
+                {
+                    "path": [
+                        {
+                            "value": "Statement"
+                        },
+                        {
+                            "index": 0
+                        },
+                        {
+                            "value": "Resource"
+                        }
+                    ],
+                    "span": {
+                        "end": {
+                            "column": 59,
+                            "line": 7,
+                            "offset": 177
+                        },
+                        "start": {
+                            "column": 18,
+                            "line": 7,
+                            "offset": 136
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,71 @@
+{
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "ValidatePolicy",
+          "fullName": "IAM Access Analyzer ValidatePolicy",
+          "informationUri": "https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-policy-validation.html"
+        }
+      },
+      "results": [
+        {
+          "message": {
+            "arguments": [
+              "The 2 action(s) are redundant because they provide similar permissions. Update the policy to remove the redundant action such as: s3:GetObject.",
+              "https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-reference-policy-checks.html#access-analyzer-reference-policy-checks-suggestion-redundant-action"
+            ],
+            "text": "{0} - {1}"
+          },
+          "level": "note",
+          "locations": [
+            {
+              "physicalLocation": {
+                "region": {
+                  "endColumn": 26,
+                  "endLine": 6,
+                  "startColumn": 17,
+                  "startLine": 6
+                },
+                "artifactLocation": {
+                  "uri": "redundant-action.policy.json",
+                  "uriBaseId": "EXECUTIONROOT"
+                }
+              }
+            }
+          ],
+          "ruleId": "REDUNDANT_ACTION"
+        },
+        {
+          "message": {
+            "arguments": [
+              "The 2 action(s) are redundant because they provide similar permissions. Update the policy to remove the redundant action such as: s3:GetObject.",
+              "https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-reference-policy-checks.html#access-analyzer-reference-policy-checks-suggestion-redundant-action"
+            ],
+            "text": "{0} - {1}"
+          },
+          "level": "note",
+          "locations": [
+            {
+              "physicalLocation": {
+                "region": {
+                  "endColumn": 42,
+                  "endLine": 6,
+                  "startColumn": 28,
+                  "startLine": 6
+                },
+                "artifactLocation": {
+                  "uri": "redundant-action.policy.json",
+                  "uriBaseId": "EXECUTIONROOT"
+                }
+              }
+            }
+          ],
+          "ruleId": "REDUNDANT_ACTION"
+        }
+      ]
+    }
+  ],
+  "version": "2.1.0",
+  "$schema": "https://docs.oasis-open.org/sarif/sarif/v2.1.0/cos02/schemas/sarif-schema-2.1.0.json"
+}
