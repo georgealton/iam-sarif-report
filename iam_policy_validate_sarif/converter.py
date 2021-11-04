@@ -1,5 +1,5 @@
 from pathlib import Path
-from typing import List
+from typing import Iterable, List
 import sarif_om as sarif
 from mypy_boto3_accessanalyzer.type_defs import (
     SpanTypeDef,
@@ -7,7 +7,7 @@ from mypy_boto3_accessanalyzer.type_defs import (
 )
 
 Finding = ValidatePolicyFindingTypeDef
-Findings = List[Finding]
+Findings = Iterable[Finding]
 
 schema = "https://docs.oasis-open.org/sarif/sarif/v2.1.0/cos02/schemas/sarif-schema-2.1.0.json"
 version = "2.1.0"
