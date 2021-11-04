@@ -53,8 +53,7 @@ class SarifConverter:
     def convert(self, findings: Findings) -> sarif.SarifLog:
         results = self.findings_to_results(findings)
         run = sarif.Run(tool=iam_policy_validator_tool, results=results)
-        log = sarif.SarifLog(schema_uri=schema, version=version, runs=[run])
-        return log
+        return sarif.SarifLog(schema_uri=schema, version=version, runs=[run])
 
     def findings_to_results(self, findings: Findings) -> List[sarif.Run]:
         return [self.finding_to_result(finding) for finding in findings]
