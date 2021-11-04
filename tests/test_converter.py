@@ -34,3 +34,6 @@ def test_span_to_region():
         "start": {"column": 8, "line": 83, "offset": 2550},
     }
     assert converter.spanToRegion(span) == 0
+
+def test_to_sarif_level():
+    converter.SarifConverter.to_sarif_level()

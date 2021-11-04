@@ -9,18 +9,24 @@ from mypy_boto3_accessanalyzer.type_defs import (
 Finding = ValidatePolicyFindingTypeDef
 Findings = List[Finding]
 
-tool_name = "ValidatePolicy"
-tool_full_name = "IAM Access Analyzer ValidatePolicy"
-tool_info_uri = "https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-policy-validation.html"
 schema = "https://docs.oasis-open.org/sarif/sarif/v2.1.0/cos02/schemas/sarif-schema-2.1.0.json"
 version = "2.1.0"
-driver = sarif.ToolComponent(
-    name=tool_name, full_name=tool_full_name, information_uri=tool_info_uri
+
+iam_policy_validator_tool = sarif.Tool(
+    driver=sarif.ToolComponent(
+        name="ValidatePolicy",
+        full_name="IAM Access Analyzer ValidatePolicy",
+        information_uri="https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-policy-validation.html",
+    )
 )
-tool = sarif.Tool(driver=driver)
+
 
 class SarifConverter:
-    def to_sarif_level(self, finding: Finding) -> str:
+    def __init__(self, policy_path: Path) -> None:
+        self.policy_path = policy_path
+
+    @staticmethod
+    def to_sarif_level(finding: Finding) -> str:
         level_map = {
             "ERROR": "error",
             "SECURITY_WARNING": "warning",
@@ -29,32 +35,13 @@ class SarifConverter:
         }
         return level_map.get(finding["findingType"], "none")
 
-    def build_message_from_finding(self, finding: Finding) -> str:
+    @staticmethod
+    def build_message_from_finding(finding: Finding) -> str:
         text = finding["findingDetails"]
         return sarif.Message(text=text)
 
-    def __init__(self, policy_path) -> None:
-        self.policy_path = policy_path
-
-    def convert(self, findings: Findings) -> sarif.SarifLog:
-        results = self.findings_to_results(findings)
-        run = sarif.Run(tool=tool, results=results)
-        log = sarif.SarifLog(schema_uri=schema, version=version, runs=[run])
-        return log
-
-    def findings_to_results(self, findings: Findings) -> List[sarif.Run]:
-        return [self.finding_to_result(finding) for finding in findings]
-
-    def finding_location(self, policy_path: Path, finding: Finding) -> sarif.Location:
-        uri = policy_path.name
-        artifact_location = sarif.ArtifactLocation(uri=uri, uri_base_id="EXECUTIONROOT")
-        region = self.span_to_region(finding["locations"][0]["span"])
-        physical_location = sarif.PhysicalLocation(
-            artifact_location=artifact_location, region=region
-        )
-        return sarif.Location(physical_location=physical_location)
-
-    def span_to_region(self, span: SpanTypeDef) -> sarif.Region:
+    @staticmethod
+    def span_to_region(span: SpanTypeDef) -> sarif.Region:
         start, end = span["start"], span["end"]
         return sarif.Region(
             start_line=start["line"],
@@ -63,10 +50,28 @@ class SarifConverter:
             end_column=end["column"],
         )
 
+    def convert(self, findings: Findings) -> sarif.SarifLog:
+        results = self.findings_to_results(findings)
+        run = sarif.Run(tool=iam_policy_validator_tool, results=results)
+        log = sarif.SarifLog(schema_uri=schema, version=version, runs=[run])
+        return log
+
+    def findings_to_results(self, findings: Findings) -> List[sarif.Run]:
+        return [self.finding_to_result(finding) for finding in findings]
+
+    def finding_location(self, finding: Finding) -> sarif.Location:
+        uri = self.policy_path.name
+        artifact_location = sarif.ArtifactLocation(uri=uri, uri_base_id="EXECUTIONROOT")
+        region = SarifConverter.span_to_region(finding["locations"][0]["span"])
+        physical_location = sarif.PhysicalLocation(
+            artifact_location=artifact_location, region=region
+        )
+        return sarif.Location(physical_location=physical_location)
+
     def finding_to_result(self, finding: Finding) -> sarif.Result:
-        level = self.to_sarif_level(finding)
-        message = self.build_message_from_finding(finding)
-        location = self.finding_location(Path(self.policy_path), finding)
+        level = SarifConverter.to_sarif_level(finding)
+        message = SarifConverter.build_message_from_finding(finding)
+        location = self.finding_location(finding)
         rule_id = finding["issueCode"]
         return sarif.Result(
             rule_id=rule_id, level=level, message=message, locations=[location]
