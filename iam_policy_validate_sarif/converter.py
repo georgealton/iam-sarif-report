@@ -64,7 +64,7 @@ class SarifConverter:
         return to_json(sarif.SarifLog(schema_uri=schema, version=version, runs=[run]))
 
     def findings_to_results(self, findings: Findings) -> Iterable[sarif.Result]:
-        return list(itertools.chain.from_iterable(self.finding_to_results(finding) for finding in findings))
+        return itertools.chain.from_iterable(self.finding_to_results(finding) for finding in findings)
 
     def finding_location(self, location: LocationTypeDef) -> sarif.Location:
         """[summary]
