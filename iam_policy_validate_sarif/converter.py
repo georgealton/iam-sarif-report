@@ -80,6 +80,7 @@ class SarifConverter:
                 id=rule_id,
                 name=checks.get(rule_id).get("name"),
                 help_uri=checks.get(rule_id).get("url"),
+                short_description=sarif.MultiformatMessageString(text=checks.get(rule_id).get("short_description")),
                 full_description=sarif.MultiformatMessageString(text=checks.get(rule_id).get("description")),
             )
             for rule_id in matched_rules

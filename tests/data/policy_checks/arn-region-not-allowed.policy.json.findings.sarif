@@ -8,8 +8,11 @@
           "informationUri": "https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-policy-validation.html",
           "rules": [
             {
+              "shortDescription": {
+                "text": "Remove the Region from the resource ARN. The resource ARNs for some AWS\nservices do not support specifying a Region."
+              },
               "fullDescription": {
-                "text": "Remove the Region from the resource ARN. The resource ARNs for some AWS\nservices do not support specifying a Region.\n\nFor example, IAM is a global service. The Region portion of an IAM resource\nARN is always kept blank. IAM resources are global, like an AWS account is\ntoday. For example, after you sign in as an IAM user, you can access AWS\nservices in any geographic region."
+                "text": "Remove the Region from the resource ARN. The resource ARNs for some AWS\nservices do not support specifying a Region.\n\nFor example, IAM is a global service. The Region portion of an IAM resource\nARN is always kept blank. IAM resources are global, like an AWS account is\ntoday. For example, after you sign in as an IAM user, you can access AWS\nservices in any geographic region.\n\n  * [Policy resources](./reference_policies_elements_resource.html)\n\n  * [Resource ARNs](./reference_identifiers.html#identifiers-arns)\n\n  * [AWS service resources with ARN formats](https://docs.aws.amazon.com/service-authorization/latest/reference/reference_policies_actions-resources-contextkeys.html)"
               },
               "helpUri": "https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-reference-policy-checks.html#access-analyzer-reference-policy-checks-error-arn-region-not-allowed",
               "id": "error_arn_region_not_allowed",

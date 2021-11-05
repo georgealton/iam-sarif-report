@@ -22,6 +22,10 @@ def paragraph_matches_resolving(node):
     return node.name == "p" and node.b and node.b.contents[0].startswith("Resolving")
 
 
+def hit_next_finding(node):
+    return getattr(node, "attrs", {}).get("id", "").startswith("access-analyzer-reference-policy-checks")
+
+
 rules = {}
 for check in checks:
     result = finding_type_name_pattern.match(check.attrs["id"])
@@ -35,8 +39,11 @@ for check in checks:
     desc = ""
     capture = False
     for sib in check.next_siblings:
-        if sib.name == "div":
+        if hit_next_finding(sib):
             capture = False
+            full_description = html2text.html2text(desc).strip()
+            short_description = full_description.split("\n\n")[0]
+            rules[rule_id]["short_description"] = short_description
             rules[rule_id]["description"] = html2text.html2text(desc).strip()
             break
         elif paragraph_matches_resolving(sib):
