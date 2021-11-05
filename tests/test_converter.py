@@ -42,7 +42,7 @@ def test_to_sarif_level():
 
 
 def test_convertor():
-    policy = 'redundant-action'
+    policy = 'arn-region-not-allowed'
     policy = f"tests/data/{policy}.policy.json"
     with open(f"{policy}.findings") as data:
         findings = json.load(data)['findings']
