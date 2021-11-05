@@ -34,7 +34,7 @@ for check in checks:
     rule_id = regex.sub("-", "_", rule_id)
     rules[rule_id] = {
         "url": f'{check_reference}#{check.attrs["id"]}',
-        "name": finding_name,
+        "name": regex.sub('-', '', finding_name.title())
     }
     desc = ""
     capture = False

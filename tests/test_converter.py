@@ -4,7 +4,7 @@ from iam_policy_validate_sarif import converter
 
 def test_convertor():
     policy = 'arn-region-not-allowed'
-    policy = f"tests/data/{policy}.policy.json"
+    policy = f"tests/data/policy_checks/{policy}.policy.json"
 
     with open(f"{policy}.findings") as data:
         findings = json.load(data)['findings']

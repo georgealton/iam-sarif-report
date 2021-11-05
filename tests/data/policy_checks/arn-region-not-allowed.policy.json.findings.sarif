@@ -16,7 +16,7 @@
               },
               "helpUri": "https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-reference-policy-checks.html#access-analyzer-reference-policy-checks-error-arn-region-not-allowed",
               "id": "error_arn_region_not_allowed",
-              "name": "arn-region-not-allowed"
+              "name": "ArnRegionNotAllowed"
             }
           ]
         }
