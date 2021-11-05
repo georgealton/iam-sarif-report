@@ -14,7 +14,7 @@ def test_convertor(policy):
     with open(f"{policy_path}.findings") as data:
         findings = json.load(data)['findings']
 
-    sarif_converter = converter.SarifConverter(pathlib.Path(policy))
+    sarif_converter = converter.SarifConverter(pathlib.Path(policy_path))
     sarif = json.loads(sarif_converter.convert(findings))
     print(json.dumps(sarif))
 

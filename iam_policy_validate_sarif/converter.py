@@ -95,7 +95,7 @@ class SarifConverter:
         )
 
     def finding_location(self, location: LocationTypeDef) -> sarif.Location:
-        uri = self.policy_path.name
+        uri = self.policy_path
         artifact_location = sarif.ArtifactLocation(uri=uri, uri_base_id="EXECUTIONROOT")
         region = SarifConverter.span_to_region(location["span"])
         physical_location = sarif.PhysicalLocation(

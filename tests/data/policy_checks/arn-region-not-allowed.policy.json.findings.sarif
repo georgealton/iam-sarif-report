@@ -41,7 +41,7 @@
                   "startLine": 7
                 },
                 "artifactLocation": {
-                  "uri": "arn-region-not-allowed.policy.json",
+                  "uri": "tests/data/policy_checks/arn-region-not-allowed.policy.json",
                   "uriBaseId": "EXECUTIONROOT"
                 }
               }
