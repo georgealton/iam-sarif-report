@@ -95,11 +95,6 @@ class SarifConverter:
         )
 
     def finding_location(self, location: LocationTypeDef) -> sarif.Location:
-        """[summary]
-
-        :param location: [description]
-        :return: [description]
-        """
         uri = self.policy_path.name
         artifact_location = sarif.ArtifactLocation(uri=uri, uri_base_id="EXECUTIONROOT")
         region = SarifConverter.span_to_region(location["span"])
@@ -116,9 +111,6 @@ class SarifConverter:
         issueCode REDUNDANT_ACTION may only need correct in 1 location to resolve.
 
         https://docs.oasis-open.org/sarif/sarif/v2.1.0/csprd01/sarif-v2.1.0-csprd01.html#_Toc10541088
-
-        :param finding: [description]
-        :return: [description]]
         """
         for location in finding["locations"]:
             level = SarifConverter.to_sarif_level(finding)
