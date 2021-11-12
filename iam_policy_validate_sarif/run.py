@@ -1,9 +1,9 @@
-from pathlib import Path
 from typing import TYPE_CHECKING
 
 from . import converter, validator
 
 if TYPE_CHECKING:
+    from pathlib import Path
     from typing import TextIO
 
     from mypy_boto3_accessanalyzer.literals import LocaleType, PolicyTypeType

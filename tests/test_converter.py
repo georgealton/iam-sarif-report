@@ -1,10 +1,19 @@
-import pathlib
 import json
-from iam_policy_validate_sarif import converter
-import pytest
-import jsonschema
+import pathlib
 
-@pytest.mark.parametrize("policy", [("arn-region-not-allowed.policy.json"),("redundant-action.policy.json")])
+import jsonschema
+import pytest
+
+from iam_policy_validate_sarif import converter
+
+
+@pytest.mark.parametrize(
+    "policy",
+    [
+        ("arn-region-not-allowed.policy.json"),
+        ("redundant-action.policy.json"),
+    ],
+)
 def test_convertor(policy):
     policy_path = f"tests/data/policy_checks/{policy}"
     sarif_path = f"tests/data/policy_checks/sarif/{policy}"
@@ -13,7 +22,7 @@ def test_convertor(policy):
         schema = json.load(schema_file)
 
     with open(f"{policy_path}.findings") as data:
-        findings = json.load(data)['findings']
+        findings = json.load(data)["findings"]
 
     sarif_converter = converter.SarifConverter(pathlib.Path(policy_path))
     sarif = json.loads(sarif_converter.convert(findings))
