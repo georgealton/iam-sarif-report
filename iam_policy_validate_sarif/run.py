@@ -10,11 +10,11 @@ if TYPE_CHECKING:
 
 
 def validate_as_sarif(
-    policy_location: Path,
+    policy_location: "Path",
     policy_document: str,
-    policy_type: PolicyTypeType,
-    locale: LocaleType,
-    output_location: TextIO,
+    policy_type: "PolicyTypeType",
+    locale: "LocaleType",
+    output_location: "TextIO",
 ) -> None:
     findings = validator.validate(
         policy_type=policy_type, locale=locale, policy=policy_document

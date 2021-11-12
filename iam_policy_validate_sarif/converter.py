@@ -32,7 +32,7 @@ checks = json.load(checks_fp)
 
 
 class SarifConverter:
-    def __init__(self, policy_path: Path) -> None:
+    def __init__(self, policy_path: "Path") -> None:
         self.policy_path = policy_path
 
     @staticmethod
