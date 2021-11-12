@@ -1,11 +1,12 @@
-import boto3
 from typing import TYPE_CHECKING
 
+import boto3
 
 if TYPE_CHECKING:
+    from typing import Iterable
+
     from mypy_boto3_accessanalyzer.literals import LocaleType, PolicyTypeType
     from mypy_boto3_accessanalyzer.type_defs import ValidatePolicyFindingTypeDef
-    from typing import Iterable
 
 
 def validate(

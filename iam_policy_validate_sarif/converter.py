@@ -1,7 +1,8 @@
 import json
+from pathlib import Path
 from typing import TYPE_CHECKING, Iterable
-import pkg_resources
 
+import pkg_resources
 import sarif_om as sarif
 from jschema_to_python.to_json import to_json
 
@@ -31,7 +32,7 @@ checks = json.load(checks_fp)
 
 
 class SarifConverter:
-    def __init__(self, policy_path: str) -> None:
+    def __init__(self, policy_path: Path) -> None:
         self.policy_path = policy_path
 
     @staticmethod

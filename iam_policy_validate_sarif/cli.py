@@ -4,7 +4,6 @@ import click
 
 from . import run
 
-
 policy_types = (
     "IDENTITY_POLICY",
     "RESOURCE_POLICY",
