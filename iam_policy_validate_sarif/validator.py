@@ -10,7 +10,9 @@ if TYPE_CHECKING:
 
 
 def validate(
-    locale: "LocaleType", policy: str, policy_type: "PolicyTypeType"
+    locale: "LocaleType",
+    policy_type: "PolicyTypeType",
+    policy: str,
 ) -> "Iterable[ValidatePolicyFindingTypeDef]":
     client = boto3.client("accessanalyzer")
     paginator = client.get_paginator("validate_policy")

@@ -4,7 +4,7 @@ from . import converter, validator
 
 if TYPE_CHECKING:
     from pathlib import Path
-    from typing import TextIO
+    from typing import Any, Callable
 
     from mypy_boto3_accessanalyzer.literals import LocaleType, PolicyTypeType
 
@@ -14,10 +14,10 @@ def validate_as_sarif(
     policy_document: str,
     policy_type: "PolicyTypeType",
     locale: "LocaleType",
-    output_location: "TextIO",
+    result_writer: "Callable[[str], Any]",
 ) -> None:
     findings = validator.validate(
-        policy_type=policy_type, locale=locale, policy=policy_document
+        locale=locale, policy_type=policy_type, policy=policy_document
     )
-    converted = converter.SarifConverter(policy_path=policy_location).convert(findings)
-    output_location.write(converted)
+    converted = converter.SarifConverter(policy_location).convert(findings)
+    result_writer(converted)

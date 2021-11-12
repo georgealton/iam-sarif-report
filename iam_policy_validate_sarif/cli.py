@@ -1,4 +1,5 @@
 import pathlib
+from functools import partial
 
 import click
 
@@ -54,6 +55,5 @@ def validate_as_sarif(policy, policy_type, locale, result):
         policy_document=policy_document,
         policy_type=policy_type,
         locale=locale,
-        output_location=result,
+        result_writer=partial(click.echo, file=result),
     )
-    result.write("\n")

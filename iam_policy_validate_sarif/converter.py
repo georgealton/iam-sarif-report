@@ -106,14 +106,14 @@ class SarifConverter:
             yield from self.to_results(finding)
 
     def to_location(self, location: "LocationTypeDef") -> "sarif.Location":
-        artifact_location = sarif.ArtifactLocation(
-            uri=self.policy_path, uri_base_id="EXECUTIONROOT"
+        return sarif.Location(
+            physical_location=sarif.PhysicalLocation(
+                artifact_location=sarif.ArtifactLocation(
+                    uri=self.policy_path, uri_base_id="EXECUTIONROOT"
+                ),
+                region=SarifConverter.to_region(location["span"]),
+            )
         )
-        region = SarifConverter.to_region(location["span"])
-        physical_location = sarif.PhysicalLocation(
-            artifact_location=artifact_location, region=region
-        )
-        return sarif.Location(physical_location=physical_location)
 
     def to_results(self, finding: "Finding") -> "Iterable[sarif.Result]":
         for location in finding["locations"]:
