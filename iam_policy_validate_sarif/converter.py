@@ -1,12 +1,14 @@
 import json
-from pathlib import Path
-from typing import TYPE_CHECKING, Iterable
+from typing import TYPE_CHECKING
 
 import pkg_resources
 import sarif_om as sarif
 from jschema_to_python.to_json import to_json
 
 if TYPE_CHECKING:
+    from pathlib import Path
+    from typing import Iterable
+
     from mypy_boto3_accessanalyzer.type_defs import (
         LocationTypeDef,
         SpanTypeDef,
