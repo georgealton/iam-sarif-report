@@ -22,3 +22,4 @@ runs:
     - "${{ inputs.policy_type }}"
     - "${{ inputs.locale }}"
     - "${{ inputs.policies }}"
+    - "${{ inputs.results }}"
