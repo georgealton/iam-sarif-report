@@ -12,6 +12,8 @@ inputs:
     default: IDENTITY_POLICY
   locale:
     default: EN
+  resource_type:
+    required: false
   results:
     description: "where to store results"
     default: "-"
@@ -23,3 +25,4 @@ runs:
     - "${{ inputs.locale }}"
     - "${{ inputs.policies }}"
     - "${{ inputs.results }}"
+    - "${{ inputs.resource_type }}"

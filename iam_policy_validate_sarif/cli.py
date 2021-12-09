@@ -23,6 +23,13 @@ locales = (
     "ZH_TW",
 )
 
+resource_types = (
+    "AWS::S3::Bucket",
+    "AWS::S3::AccessPoint",
+    "AWS::S3::MultiRegionAccessPoint",
+    "AWS::S3ObjectLambda::AccessPoint",
+)
+
 
 @click.command()
 @click.option(
@@ -37,6 +44,12 @@ locales = (
     default="EN",
     help="The locale to use for localizing the findings. Defaults to 'EN'",
 )
+@click.option(
+    "--resource-type",
+    type=click.Choice(resource_types),
+    default=None,
+    help="Specify a value for the policy validation resource type only if the policy type is RESOURCE_POLICY",
+)
 @click.argument(
     "policy",
     type=click.Path(
@@ -45,7 +58,7 @@ locales = (
     default="-",
 )
 @click.argument("result", type=click.File("w"), default="-")
-def validate_as_sarif(policy, policy_type, locale, result):
+def validate_as_sarif(policy, policy_type, locale, resource_type, result):
 
     with click.open_file(policy) as data:
         policy_document = data.read()
@@ -55,5 +68,6 @@ def validate_as_sarif(policy, policy_type, locale, result):
         policy_document=policy_document,
         policy_type=policy_type,
         locale=locale,
+        resource_type=resource_type,
         result_writer=partial(click.echo, file=result),
     )
