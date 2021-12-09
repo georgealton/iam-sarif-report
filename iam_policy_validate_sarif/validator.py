@@ -21,11 +21,13 @@ def validate(
 ) -> "Iterable[ValidatePolicyFindingTypeDef]":
     client = boto3.client("accessanalyzer")
     paginator = client.get_paginator("validate_policy")
-    pages = paginator.paginate(
-        locale=locale,
-        policyDocument=policy,
-        policyType=policy_type,
-        validatePolicyResourceType=resource_type,
-    )
+    opts = {
+        "locale": locale,
+        "policyDocument": policy,
+        "policyType": policy_type,
+    }
+    if resource_type:
+        opts["resource_type"] = resource_type
+    pages = paginator.paginate(**opts)
     for page in pages:
         yield from page["findings"]
