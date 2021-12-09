@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 policy_type=$1
 locale=$2
 policy_path=$3
