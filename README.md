@@ -42,5 +42,5 @@ jobs:
 ### Locally
 
 ```sh
-pipx run iam-policy-validator-to-sarif "policies/test-policy.json" > "test-policy.sarif"
+pipx run iam-policy-validator-to-sarif "policies/test-policy.json" "results/test-policy.sarif"
 ```
