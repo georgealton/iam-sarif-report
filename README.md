@@ -1,9 +1,11 @@
-# IAM Policy Validator To Sarif
+# IAM Policy Validator To SARIF
 
 [![Open in VSCode](https://open.vscode.dev/badges/open-in-vscode.svg)](https://open.vscode.dev/georgealton/iam-policy-validator-to-sarif)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 When you've got IAM Policies and you want to report on Policy issues.
+
+SAST
 
 Converts IAM Policy Validator Findings to SARIF.
 
@@ -28,8 +30,8 @@ jobs:
       - uses: actions/checkout@v1
       - uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          role-to-assume: arn:aws:iam::111111111111:role/my-github-actions-role-test
+          aws-region: eu-west-1
       - uses: georgealton/iam-policy-validator-to-sarif@v1
         with:
           policies: policies/
