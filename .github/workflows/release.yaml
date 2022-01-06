@@ -1,0 +1,22 @@
+name: Release
+
+on:
+  push:
+    branches: [main]
+  release:
+    types: [published, edited]
+
+jobs:
+  create-release:
+    if: ${{ github.event_name == 'push' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: rymndhng/release-on-push-action@ae59f5ce1c46bfaf372ba9cf49ea97de64939731
+        with:
+          bump_version_scheme: norelease
+
+  update-major-tag:
+    if: ${{ github.event_name == 'release' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: Actions-R-Us/actions-tagger@f411bd910a5ad370d4511517e3eac7ff887c90ea
