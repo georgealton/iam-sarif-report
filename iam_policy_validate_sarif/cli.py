@@ -63,11 +63,13 @@ def validate_as_sarif(policy, policy_type, locale, resource_type, result):
     with click.open_file(policy) as data:
         policy_document = data.read()
 
+    result_writer = partial(click.echo, file=result)
+
     run.validate_as_sarif(
         policy_location=policy,
         policy_document=policy_document,
         policy_type=policy_type,
         locale=locale,
         resource_type=resource_type,
-        result_writer=partial(click.echo, file=result),
+        result_writer=result_writer,
     )

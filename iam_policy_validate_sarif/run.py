@@ -19,7 +19,7 @@ def validate_as_sarif(
     policy_type: "PolicyTypeType",
     resource_type: "Optional[ValidatePolicyResourceTypeType]",
     locale: "LocaleType",
-    result_writer: "Callable[[str], Any]",
+    result_writer: "Callable[[str], None]",
 ) -> None:
     findings = validator.validate(
         locale=locale,

@@ -1,4 +1,5 @@
 import json
+from types import MappingProxyType
 from typing import TYPE_CHECKING
 
 import pkg_resources
@@ -32,6 +33,15 @@ iam_policy_validator_tool = sarif.Tool(
 checks_fp = pkg_resources.resource_stream(__name__, "checks.json")
 checks = json.load(checks_fp)
 
+level_map = MappingProxyType(
+    {
+        "ERROR": "error",
+        "SECURITY_WARNING": "warning",
+        "SUGGESTION": "note",
+        "WARNING": "warning",
+    }
+)
+
 
 class SarifConverter:
     def __init__(self, policy_path: "Path") -> None:
@@ -48,12 +58,6 @@ class SarifConverter:
 
     @staticmethod
     def to_sarif_level(finding: "Finding") -> str:
-        level_map = {
-            "ERROR": "error",
-            "SECURITY_WARNING": "warning",
-            "SUGGESTION": "note",
-            "WARNING": "warning",
-        }
         return level_map.get(finding["findingType"], "none")
 
     @staticmethod
@@ -82,24 +86,25 @@ class SarifConverter:
         matched_rules = set(result.rule_id for result in results if result.rule_id)
         for rule_id in matched_rules:
             check = checks.get(rule_id)
-            if check:
-                yield sarif.ReportingDescriptor(
-                    id=rule_id,
-                    name=check.get("name"),
-                    help=sarif.MultiformatMessageString(
-                        text=check.get("short_description"),
-                        markdown=check.get("short_description"),
-                    ),
-                    help_uri=check.get("url"),
-                    short_description=sarif.MultiformatMessageString(
-                        text=check.get("short_description"),
-                        markdown=check.get("short_description"),
-                    ),
-                    full_description=sarif.MultiformatMessageString(
-                        text=check.get("description"),
-                        markdown=check.get("description"),
-                    ),
-                )
+            if not check:
+                continue
+            yield sarif.ReportingDescriptor(
+                id=rule_id,
+                name=check.get("name"),
+                help=sarif.MultiformatMessageString(
+                    text=check.get("short_description"),
+                    markdown=check.get("short_description"),
+                ),
+                help_uri=check.get("url"),
+                short_description=sarif.MultiformatMessageString(
+                    text=check.get("short_description"),
+                    markdown=check.get("short_description"),
+                ),
+                full_description=sarif.MultiformatMessageString(
+                    text=check.get("description"),
+                    markdown=check.get("description"),
+                ),
+            )
 
     def findings_to_results(self, findings: "Findings") -> "Iterable[sarif.Result]":
         for finding in findings:
@@ -128,7 +133,7 @@ class SarifConverter:
 
     def to_related_locations(
         self, finding: "Finding", current_location: "LocationTypeDef"
-    ):
+    ) -> "Iterable[sarif.Location]":
         for related_location in finding["locations"]:
             if related_location != current_location:
                 yield self.to_location(related_location)
