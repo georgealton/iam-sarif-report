@@ -4,7 +4,7 @@ from . import converter, validator
 
 if TYPE_CHECKING:
     from pathlib import Path
-    from typing import Any, Callable, Optional
+    from typing import Callable, Optional
 
     from mypy_boto3_accessanalyzer.literals import (
         LocaleType,

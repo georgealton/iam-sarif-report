@@ -4,49 +4,25 @@ from functools import partial
 import click
 
 from . import run
-
-policy_types = (
-    "IDENTITY_POLICY",
-    "RESOURCE_POLICY",
-    "SERVICE_CONTROL_POLICY",
-)
-locales = (
-    "DE",
-    "EN",
-    "ES",
-    "FR",
-    "IT",
-    "JA",
-    "KO",
-    "PT_BR",
-    "ZH_CN",
-    "ZH_TW",
-)
-
-resource_types = (
-    "AWS::S3::Bucket",
-    "AWS::S3::AccessPoint",
-    "AWS::S3::MultiRegionAccessPoint",
-    "AWS::S3ObjectLambda::AccessPoint",
-)
+from .definitions import POLICY_TYPES, LOCALES, RESOURCE_TYPES
 
 
 @click.command()
 @click.option(
     "--policy-type",
-    type=click.Choice(policy_types),
+    type=click.Choice(POLICY_TYPES),
     default="IDENTITY_POLICY",
     help="The type of policy to validate. Defaults to 'IDENTITY_POLICY'",
 )
 @click.option(
     "--locale",
-    type=click.Choice(locales),
+    type=click.Choice(LOCALES),
     default="EN",
     help="The locale to use for localizing the findings. Defaults to 'EN'",
 )
 @click.option(
     "--resource-type",
-    type=click.Choice(resource_types),
+    type=click.Choice(RESOURCE_TYPES),
     default=None,
     help="Specify a value for the policy validation resource type only if the policy type is RESOURCE_POLICY",
 )

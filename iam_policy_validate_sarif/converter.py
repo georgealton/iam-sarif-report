@@ -85,26 +85,24 @@ class SarifConverter:
     ) -> "Iterable[sarif.ReportingDescriptor]":
         matched_rules = set(result.rule_id for result in results if result.rule_id)
         for rule_id in matched_rules:
-            check = checks.get(rule_id)
-            if not check:
-                continue
-            yield sarif.ReportingDescriptor(
-                id=rule_id,
-                name=check.get("name"),
-                help=sarif.MultiformatMessageString(
-                    text=check.get("short_description"),
-                    markdown=check.get("short_description"),
-                ),
-                help_uri=check.get("url"),
-                short_description=sarif.MultiformatMessageString(
-                    text=check.get("short_description"),
-                    markdown=check.get("short_description"),
-                ),
-                full_description=sarif.MultiformatMessageString(
-                    text=check.get("description"),
-                    markdown=check.get("description"),
-                ),
-            )
+            if check := checks.get(rule_id):
+                yield sarif.ReportingDescriptor(
+                    id=rule_id,
+                    name=check.get("name"),
+                    help=sarif.MultiformatMessageString(
+                        text=check.get("short_description"),
+                        markdown=check.get("short_description"),
+                    ),
+                    help_uri=check.get("url"),
+                    short_description=sarif.MultiformatMessageString(
+                        text=check.get("short_description"),
+                        markdown=check.get("short_description"),
+                    ),
+                    full_description=sarif.MultiformatMessageString(
+                        text=check.get("description"),
+                        markdown=check.get("description"),
+                    ),
+                )
 
     def findings_to_results(self, findings: "Findings") -> "Iterable[sarif.Result]":
         for finding in findings:
