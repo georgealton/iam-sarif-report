@@ -1,7 +1,6 @@
 from typing import TYPE_CHECKING
 
 import boto3
-from mypy_boto3_accessanalyzer.type_defs import ValidatePolicyRequestRequestTypeDef
 
 if TYPE_CHECKING:
     from typing import Iterable, Optional
@@ -11,7 +10,10 @@ if TYPE_CHECKING:
         PolicyTypeType,
         ValidatePolicyResourceTypeType,
     )
-    from mypy_boto3_accessanalyzer.type_defs import ValidatePolicyFindingTypeDef
+    from mypy_boto3_accessanalyzer.type_defs import (
+        ValidatePolicyFindingTypeDef,
+        ValidatePolicyRequestRequestTypeDef,
+    )
 
 
 def validate(
