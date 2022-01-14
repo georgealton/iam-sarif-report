@@ -3,21 +3,19 @@
 [![Open in VSCode](https://open.vscode.dev/badges/open-in-vscode.svg)](https://open.vscode.dev/georgealton/iam-policy-validator-to-sarif)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
-When you've got IAM Policies and you want to report on Policy issues.
-
-SAST
-
-Converts IAM Policy Validator Findings to SARIF.
-
-SARIF (Static Analysis Results Interchange Format)
-
-The motivation for this was to report SARIF results to GitHub
+Validate your IAM Policies and SCPs for best practice, and convert those results into SARIF documents for reporting.
 
 ## Use Me
 
-To generate Findings, we've got to make API requests to AWS. The AWS Principal must be allowed to perform
+To generate findings, we've got to make API requests to AWS. The AWS Principal you use must be allowed to use the access-analyzer service ValidatePolicy action.
 
-- **iam:ValidatePolicy**
+```json
+{
+  "Effect": "Allow",
+  "Action": "access-analyzer:ValidatePolicy",
+  "Resource": "*"
+}
+```
 
 ### GitHub Action
 
@@ -44,5 +42,5 @@ jobs:
 ### Locally
 
 ```sh
-pipx run iam-policy-validator-to-sarif "policies/test-policy.json" "results/test-policy.sarif"
+pipx run iam-policy-validator-to-sarif "policies/test-policy.json" "test-policy.sarif"
 ```
