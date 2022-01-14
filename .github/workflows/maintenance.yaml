@@ -16,3 +16,4 @@ jobs:
           python-version: "3.10"
       - run: pip install -e '.[scraper]'
       - run: cd scripts && ./scrape_checks.py
+      - uses: peter-evans/create-pull-request@v3
