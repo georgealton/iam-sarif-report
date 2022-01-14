@@ -1,4 +1,5 @@
 import json
+from types import MappingProxyType
 from typing import TYPE_CHECKING
 
 import pkg_resources
@@ -32,6 +33,15 @@ iam_policy_validator_tool = sarif.Tool(
 checks_fp = pkg_resources.resource_stream(__name__, "checks.json")
 checks = json.load(checks_fp)
 
+level_map = MappingProxyType(
+    {
+        "ERROR": "error",
+        "SECURITY_WARNING": "warning",
+        "SUGGESTION": "note",
+        "WARNING": "warning",
+    }
+)
+
 
 class SarifConverter:
     def __init__(self, policy_path: "Path") -> None:
@@ -48,12 +58,6 @@ class SarifConverter:
 
     @staticmethod
     def to_sarif_level(finding: "Finding") -> str:
-        level_map = {
-            "ERROR": "error",
-            "SECURITY_WARNING": "warning",
-            "SUGGESTION": "note",
-            "WARNING": "warning",
-        }
         return level_map.get(finding["findingType"], "none")
 
     @staticmethod
@@ -128,7 +132,7 @@ class SarifConverter:
 
     def to_related_locations(
         self, finding: "Finding", current_location: "LocationTypeDef"
-    ):
+    ) -> "Iterable[sarif.Location]":
         for related_location in finding["locations"]:
             if related_location != current_location:
                 yield self.to_location(related_location)
