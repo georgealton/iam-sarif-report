@@ -42,7 +42,7 @@ python =
     3.10: py310
 
 [testenv]
-extras = dev
+extras = test
 commands = pytest
 """
 
