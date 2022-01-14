@@ -10,6 +10,8 @@ jobs:
   create-release:
     if: ${{ github.event_name == 'push' }}
     runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: rymndhng/release-on-push-action@ae59f5ce1c46bfaf372ba9cf49ea97de64939731
         with:
