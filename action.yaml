@@ -23,8 +23,8 @@ runs:
   using: docker
   image: Dockerfile
   args:
-    - "--policy-type '${{ inputs.policy_type }}'"
-    - "--locale '${{ inputs.locale }}'"
-    - "'${{ inputs.policies }}'"
-    - "'${{ inputs.results }}'"
+    - "--policy-type ${{ inputs.policy_type }}"
+    - "--locale ${{ inputs.locale }}"
+    - "${{ inputs.policies }}"
+    - "${{ inputs.results }}"
     - "${{ inputs.resource_type }}"
