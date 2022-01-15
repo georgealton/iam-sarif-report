@@ -5,7 +5,7 @@ on:
     - cron: "1 2 * * *"
 
 jobs:
-  Update Checks:
+  Update-Checks:
     runs-on: ubuntu-latest
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
