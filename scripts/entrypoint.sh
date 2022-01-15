@@ -11,8 +11,7 @@ for policy in $(find_policies "$policy_path"); do
         mkdir -p "$result_path"
         result="$result_path/$(basename $policy).sarif"
     fi
-    opts+=( --policy-type "$policy_type" )
-    opts+=( --locale "$locale" )
+    opts+=( "$policy_type" "$locale" )
     if [[ -n "$resource_type" ]]; then
         opts+=( --resource-type "$resource_type" )
     fi
