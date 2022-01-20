@@ -1,6 +1,6 @@
 import json
 from types import MappingProxyType
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Protocol
 
 import pkg_resources
 import sarif_om as sarif
@@ -43,7 +43,10 @@ level_map = MappingProxyType(
 )
 
 
-class SarifConverter:
+class Converter(Protocol):
+    def __call__(self, findings: "Findings") -> "sarif.SarifLog": ...
+
+class SarifConverter(Converter):
     def __init__(self, policy_path: "Path") -> None:
         self.policy_path = policy_path
 
@@ -74,7 +77,7 @@ class SarifConverter:
             end_column=end["column"] + 1,
         )
 
-    def convert(self, findings: "Findings") -> "sarif.SarifLog":
+    def __call__(self, findings: "Findings") -> "sarif.SarifLog":
         results = list(self.findings_to_results(findings))
         iam_policy_validator_tool.driver.rules = list(self.get_rules(results))
         run = sarif.Run(tool=iam_policy_validator_tool, results=results)
