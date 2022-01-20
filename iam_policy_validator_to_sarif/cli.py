@@ -1,11 +1,8 @@
 import pathlib
-from functools import partial
 import boto3
 import click
 
-
-from . import service, converter, validator
-from .definitions import POLICY_TYPES, LOCALES, RESOURCE_TYPES
+from . import bootstrap, converter, handlers, validator, commands
 
 
 @click.command()
@@ -40,16 +37,18 @@ def validate_as_sarif(policy, policy_type, locale, resource_type, result):
     with click.open_file(policy) as data:
         policy_document = data.read()
 
-    generate_and_convert = service.GenerateFindingsAndConvertToSarif(
-        validator=validator.AWSAccessAnalyzerValidator(boto3.session.Session()),
-        converter=converter.SarifConverter(policy),
-    )
-
-    result_writer = partial(click.echo, file=result)
-    results = generate_and_convert(
+    command = commands.GenerateFindingsAndReportSarif(
+        policy_path=policy,
         policy_document=policy_document,
         policy_type=policy_type,
         locale=locale,
         resource_type=resource_type,
     )
-    result_writer(results)
+    
+    reporter = reporter.CLIReporter(result)
+    converter = converter.SarifConverter()
+    validator = validator.AWSAccessAnalyzerValidator(boto3.session.Session())
+    Handler = handlers.COMMAND_HANDLERS[type(command)]
+    handler = Handler(validator=validator, converter=converter, reporter=reporter)
+
+    handler(command)

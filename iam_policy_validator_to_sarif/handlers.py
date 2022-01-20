@@ -1,5 +1,8 @@
 from dataclasses import dataclass
-from typing import TYPE_CHECKING
+from types import MappingProxyType
+from typing import TYPE_CHECKING, Callable, final
+
+from . import commands
 
 if TYPE_CHECKING:
     from .converter import Converter
@@ -13,10 +16,12 @@ if TYPE_CHECKING:
         ValidatePolicyResourceTypeType,
     )
 
+@final
 @dataclass(frozen=True)
-class GenerateFindingsAndConvertToSarif:
+class GenerateFindingsAndReportSarif:
     validator: Validator
     converter: Converter
+    reporter: Callable[]
 
     def __call__(self,
         policy_document: str,
@@ -31,4 +36,8 @@ class GenerateFindingsAndConvertToSarif:
             resource_type=resource_type,
         )
         results = self.converter(findings)
-        return results
+        self.reporter(results)
+
+COMMAND_HANDLERS = MappingProxyType({
+    commands.GenerateFindingsAndReportSarif: GenerateFindingsAndReportSarif
+})
