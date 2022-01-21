@@ -42,8 +42,11 @@ level_map = MappingProxyType(
     }
 )
 
+
 class Converter(Protocol):
-    def __call__(self, findings: "Findings") -> "sarif.SarifLog": ...
+    def __call__(self, findings: "Findings") -> "sarif.SarifLog":
+        ...
+
 
 class SarifConverter(Converter):
     def __init__(self, policy_path: "Path") -> None:

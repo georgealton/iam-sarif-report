@@ -1,26 +1,25 @@
 import pathlib
-import boto3
 import click
 
-from . import bootstrap, converter, handlers, validator, commands
+from . import bootstrap, commands, definitions
 
 
 @click.command()
 @click.option(
     "--policy-type",
-    type=click.Choice(POLICY_TYPES),
+    type=click.Choice(definitions.POLICY_TYPES.values()),
     default="IDENTITY_POLICY",
     help="The type of policy to validate. Defaults to 'IDENTITY_POLICY'",
 )
 @click.option(
     "--locale",
-    type=click.Choice(LOCALES),
+    type=click.Choice(definitions.LOCALES),
     default="EN",
     help="The locale to use for localizing the findings. Defaults to 'EN'",
 )
 @click.option(
     "--resource-type",
-    type=click.Choice(RESOURCE_TYPES),
+    type=click.Choice(definitions.RESOURCE_TYPES),
     default=None,
     help="Specify a value for the policy validation resource type only if the policy type is RESOURCE_POLICY",
 )
@@ -32,7 +31,7 @@ from . import bootstrap, converter, handlers, validator, commands
     default="-",
 )
 @click.argument("result", type=click.File("w"), default="-")
-def validate_as_sarif(policy, policy_type, locale, resource_type, result):
+def generate_findings_and_report_sarif(policy, policy_type, locale, resource_type, result):
 
     with click.open_file(policy) as data:
         policy_document = data.read()
@@ -44,11 +43,6 @@ def validate_as_sarif(policy, policy_type, locale, resource_type, result):
         locale=locale,
         resource_type=resource_type,
     )
-    
-    reporter = reporter.CLIReporter(result)
-    converter = converter.SarifConverter()
-    validator = validator.AWSAccessAnalyzerValidator(boto3.session.Session())
-    Handler = handlers.COMMAND_HANDLERS[type(command)]
-    handler = Handler(validator=validator, converter=converter, reporter=reporter)
 
+    handler = bootstrap.bootstrap()
     handler(command)

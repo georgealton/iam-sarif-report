@@ -23,7 +23,8 @@ class GenerateFindingsAndReportSarif:
     converter: Converter
     reporter: Callable[]
 
-    def __call__(self,
+    def __call__(
+        self,
         policy_document: str,
         policy_type: "PolicyTypeType",
         resource_type: "Optional[ValidatePolicyResourceTypeType]",

@@ -26,7 +26,7 @@ class Validator(Protocol):
         ...
 
 class AWSAccessAnalyzerValidator:
-    def __init__(self, session: boto3.Session):
+    def __init__(self, session: "boto3.Session"):
         self.session = session
 
     def __call__(

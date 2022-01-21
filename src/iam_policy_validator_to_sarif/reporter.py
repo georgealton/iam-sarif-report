@@ -9,5 +9,5 @@ class CLIReporter:
     def __init__(self, location):
         self.location = location
 
-    def __call__(self, sarif):
+    def __call__(self, sarif) -> None:
         click.echo(file=self.location, message=sarif)
