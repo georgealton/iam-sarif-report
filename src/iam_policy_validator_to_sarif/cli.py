@@ -7,7 +7,7 @@ from . import bootstrap, commands, definitions
 @click.command()
 @click.option(
     "--policy-type",
-    type=click.Choice(definitions.POLICY_TYPES.values()),
+    type=click.Choice(definitions.POLICY_TYPES),
     default="IDENTITY_POLICY",
     help="The type of policy to validate. Defaults to 'IDENTITY_POLICY'",
 )
@@ -42,7 +42,9 @@ def generate_findings_and_report_sarif(policy, policy_type, locale, resource_typ
         policy_type=policy_type,
         locale=locale,
         resource_type=resource_type,
+        report=result
     )
 
-    handler = bootstrap.bootstrap()
+    handlers = bootstrap.bootstrap()
+    handler = handlers[type(command)]
     handler(command)

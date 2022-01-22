@@ -1,44 +1,39 @@
 from dataclasses import dataclass
 from types import MappingProxyType
-from typing import TYPE_CHECKING, Callable, final
+from typing import TYPE_CHECKING, final
 
 from . import commands
 
 if TYPE_CHECKING:
+    from typing import Mapping, Type, TypeVar
+
     from .converter import Converter
     from .validator import Validator
-    from sarif_om import SarifLog
-    from typing import Optional
+    from .reporter import Reporter
 
-    from mypy_boto3_accessanalyzer.literals import (
-        LocaleType,
-        PolicyTypeType,
-        ValidatePolicyResourceTypeType,
-    )
+class Handler:
+    def __call__(self, command: C) -> None:
+        pass
+
 
 @final
 @dataclass(frozen=True)
-class GenerateFindingsAndReportSarif:
-    validator: Validator
-    converter: Converter
-    reporter: Callable[]
+class GenerateFindingsAndReportSarif(Handler):
+    validator: "Validator"
+    converter: "Converter"
+    reporter: "Reporter"
 
-    def __call__(
-        self,
-        policy_document: str,
-        policy_type: "PolicyTypeType",
-        resource_type: "Optional[ValidatePolicyResourceTypeType]",
-        locale: "LocaleType",
-    ) -> "SarifLog":
+    def __call__(self, command: "commands.GenerateFindingsAndReportSarif") -> None:
         findings = self.validator(
-            locale=locale,
-            policy_type=policy_type,
-            policy=policy_document,
-            resource_type=resource_type,
+            locale=str(command.locale),
+            policy_type=str(command.policy_type),
+            policy=command.policy_document,
+            resource_type=str(command.resource_type),
         )
         results = self.converter(findings)
-        self.reporter(results)
+        self.reporter(command.report, results)
 
-COMMAND_HANDLERS = MappingProxyType({
-    commands.GenerateFindingsAndReportSarif: GenerateFindingsAndReportSarif
-})
+
+COMMAND_HANDLERS: "Mapping[Type[commands.Command], Type[Handler]]" = MappingProxyType(
+    {commands.GenerateFindingsAndReportSarif: GenerateFindingsAndReportSarif}
+)

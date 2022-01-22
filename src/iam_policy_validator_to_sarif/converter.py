@@ -8,7 +8,7 @@ from jschema_to_python.to_json import to_json
 
 if TYPE_CHECKING:
     from pathlib import Path
-    from typing import Iterable
+    from typing import Iterable, Optional
 
     from mypy_boto3_accessanalyzer.type_defs import (
         LocationTypeDef,
@@ -44,13 +44,13 @@ level_map = MappingProxyType(
 
 
 class Converter(Protocol):
-    def __call__(self, findings: "Findings") -> "sarif.SarifLog":
+    def __call__(self, policy_path: "Path", findings: "Findings") -> "sarif.SarifLog":
         ...
 
 
 class SarifConverter(Converter):
-    def __init__(self, policy_path: "Path") -> None:
-        self.policy_path = policy_path
+    def __init__(self):
+        self.policy_path: Optional[Path] = None
 
     @staticmethod
     def to_rule_id(finding: "Finding") -> str:
@@ -79,7 +79,8 @@ class SarifConverter(Converter):
             end_column=end["column"] + 1,
         )
 
-    def __call__(self, findings: "Findings") -> "sarif.SarifLog":
+    def __call__(self, policy_path: "Path", findings: "Findings") -> "sarif.SarifLog":
+        self.policy_path = policy_path
         results = list(self.findings_to_results(findings))
         iam_policy_validator_tool.driver.rules = list(self.get_rules(results))
         run = sarif.Run(tool=iam_policy_validator_tool, results=results)

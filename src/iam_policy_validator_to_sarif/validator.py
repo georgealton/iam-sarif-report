@@ -1,7 +1,7 @@
+import boto3
 from typing import TYPE_CHECKING, Protocol
 
 if TYPE_CHECKING:
-    import boto3
     from typing import Iterable, Optional
 
     from mypy_boto3_accessanalyzer.literals import (
