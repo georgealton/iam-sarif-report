@@ -44,5 +44,5 @@ jobs:
 ### Locally
 
 ```sh
-pipx run iam-policy-validator-to-sarif "policies/test-policy.json" "test-policy.sarif"
+pipx run --spec git+https://github.com/georgealton/iam-policy-validator-to-sarif.git@v0.0.1 iam-policy-validate-to-sarif policies
 ```

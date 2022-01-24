@@ -1,7 +1,7 @@
 name: IAM Policy Validator as SARIF
 author: George Alton
 description: |
-  Calls IAM ValidatePolicy API to generate Findings for a Policy.
+  Calls IAM AccessAnalyzer ValidatePolicy API to generate Findings for a Policy.
   Then converts the findings to the SARIF format.
 branding:
   icon: check-square

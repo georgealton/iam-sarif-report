@@ -30,12 +30,11 @@ warn_no_return = true
 legacy_tox_ini = """
 [tox]
 
-envlist = py36, py37, py38, py39, py310
+envlist = py37, py38, py39, py310
 isolated_build = True
 
 [gh-actions]
 python =
-    3.6: py36
     3.7: py37
     3.8: py38
     3.9: py39
@@ -43,7 +42,7 @@ python =
 
 [testenv]
 extras = test
-commands = pytest
+commands = pytest -v
 """
 
 [tool.isort]
