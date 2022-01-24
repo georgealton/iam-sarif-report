@@ -5,7 +5,7 @@ from typing import TYPE_CHECKING, final
 from . import commands
 
 if TYPE_CHECKING:
-    from typing import Mapping, Type, TypeVar
+    from typing import Mapping, Type
 
     from .converter import Converter
     from .validator import Validator

@@ -45,6 +45,8 @@ def generate_findings_and_report_sarif(policy, policy_type, locale, resource_typ
         report=result
     )
 
-    handlers = bootstrap.bootstrap()
     handler = handlers[type(command)]
     handler(command)
+
+if __name__ == "__main__":
+    handlers = bootstrap.bootstrap()
