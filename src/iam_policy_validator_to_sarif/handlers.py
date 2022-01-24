@@ -11,10 +11,7 @@ if TYPE_CHECKING:
     from .validator import Validator
     from .reporter import Reporter
 
-class Handler:
-    def __call__(self, command: C) -> None:
-        pass
-
+class Handler: ...
 
 @final
 @dataclass(frozen=True)
@@ -30,7 +27,7 @@ class GenerateFindingsAndReportSarif(Handler):
             policy=command.policy_document,
             resource_type=str(command.resource_type),
         )
-        results = self.converter(findings)
+        results = self.converter(command.policy_path, findings)
         self.reporter(command.report, results)
 
 

@@ -1,4 +1,4 @@
-import boto3
+import boto3.session
 from typing import TYPE_CHECKING, Protocol
 
 if TYPE_CHECKING:
@@ -26,8 +26,8 @@ class Validator(Protocol):
         ...
 
 class AWSAccessAnalyzerValidator:
-    def __init__(self, session: "boto3.Session"):
-        self.session = session
+    def __init__(self,):
+        self.session = boto3.session.Session()
 
     def __call__(
         self,

@@ -24,20 +24,20 @@ from . import bootstrap, commands, definitions
     help="Specify a value for the policy validation resource type only if the policy type is RESOURCE_POLICY",
 )
 @click.argument(
-    "policy",
+    "policy_path",
     type=click.Path(
         exists=True, path_type=pathlib.Path, dir_okay=False, allow_dash=True
     ),
     default="-",
 )
 @click.argument("result", type=click.File("w"), default="-")
-def generate_findings_and_report_sarif(policy, policy_type, locale, resource_type, result):
+def generate_findings_and_report_sarif(policy_path, policy_type, locale, resource_type, result):
 
-    with click.open_file(policy) as data:
+    with click.open_file(policy_path) as data:
         policy_document = data.read()
 
     command = commands.GenerateFindingsAndReportSarif(
-        policy_path=policy,
+        policy_path=policy_path,
         policy_document=policy_document,
         policy_type=policy_type,
         locale=locale,
@@ -45,8 +45,6 @@ def generate_findings_and_report_sarif(policy, policy_type, locale, resource_typ
         report=result
     )
 
+    handlers = bootstrap.bootstrap()
     handler = handlers[type(command)]
     handler(command)
-
-if __name__ == "__main__":
-    handlers = bootstrap.bootstrap()
