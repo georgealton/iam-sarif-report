@@ -1,6 +1,10 @@
 import json
 from types import MappingProxyType
-from typing import TYPE_CHECKING, Protocol
+from typing import TYPE_CHECKING
+try:
+    from typing import Protocol
+except ImportError:
+    from typing_extensions import Protocol
 
 import pkg_resources
 import sarif_om as sarif
