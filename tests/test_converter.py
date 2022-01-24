@@ -25,8 +25,8 @@ def test_convertor(policy):
     findings = json.loads(findings_path.read_text())["findings"]
     expected_sarif = json.loads(sarif_path.read_text())
 
-    sarif_converter = converter.SarifConverter(policy_path)
-    sarif = json.loads(sarif_converter(findings))
+    sarif_converter = converter.SarifConverter()
+    sarif = json.loads(sarif_converter(policy_path, findings))
     print(json.dumps(sarif))
 
     assert sarif == expected_sarif
