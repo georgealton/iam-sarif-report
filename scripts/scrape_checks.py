@@ -59,5 +59,5 @@ for check in checks:
             desc += str(sib)
 
 
-with open("../iam_policy_validate_sarif/checks.json", "w") as checks:
+with open("../src/iam_policy_validator_to_sarif/checks.json", "w") as checks:
     json.dump(rules, checks, indent=2)
