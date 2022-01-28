@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from attrs import define
+from attr import define
 from pathlib import Path
 
 try:
@@ -16,7 +16,7 @@ class Command:
 
 
 @final
-@define(frozen=True)
+@define(frozen=True, kw_only=True)
 class GenerateFindingsAndReportSarif(Command):
     policy_path: Path
     policy_document: str

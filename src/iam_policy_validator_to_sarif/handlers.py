@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from attrs import define
+from attr import define
 from types import MappingProxyType
 from typing import TYPE_CHECKING
 
