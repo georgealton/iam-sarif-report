@@ -1,6 +1,10 @@
-from dataclasses import dataclass
+from attrs import define
 from types import MappingProxyType
-from typing import TYPE_CHECKING, final
+from typing import TYPE_CHECKING
+try:
+    from typing import final
+except ImportError:
+    from typing_extensions import final
 
 from . import commands
 
@@ -14,7 +18,7 @@ if TYPE_CHECKING:
 class Handler: ...
 
 @final
-@dataclass(frozen=True)
+@define(frozen=True)
 class GenerateFindingsAndReportSarif(Handler):
     validator: "Validator"
     converter: "Converter"

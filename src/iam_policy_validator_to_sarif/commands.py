@@ -1,11 +1,15 @@
-from dataclasses import dataclass
+from attrs import define
 from pathlib import Path
-from typing_extensions import final
+try:
+    from typing import final
+except ImportError:
+    from typing_extensions import final
+
 from .definitions import POLICY_TYPES, LOCALES, RESOURCE_TYPES
 
 class Command: ...
 @final
-@dataclass(frozen=True)
+@define(frozen=True)
 class GenerateFindingsAndReportSarif(Command):
     policy_path: "Path"
     policy_document: str
