@@ -33,7 +33,9 @@ from . import bootstrap, commands, definitions
     default="-",
 )
 @click.argument("result", type=click.File("w"), default="-")
-def generate_findings_and_report_sarif(policy_path, policy_type, locale, resource_type, result):
+def generate_findings_and_report_sarif(
+    policy_path, policy_type, locale, resource_type, result
+):
 
     with click.open_file(policy_path) as data:
         policy_document = data.read()
@@ -44,7 +46,7 @@ def generate_findings_and_report_sarif(policy_path, policy_type, locale, resourc
         policy_type=policy_type,
         locale=locale,
         resource_type=resource_type,
-        report=result
+        report=result,
     )
 
     handlers = bootstrap.bootstrap()

@@ -3,6 +3,7 @@ from __future__ import annotations
 from attrs import define
 from types import MappingProxyType
 from typing import TYPE_CHECKING
+
 try:
     from typing import final
 except ImportError:
@@ -17,7 +18,10 @@ if TYPE_CHECKING:
     from .validator import Validator
     from .reporter import Reporter
 
-class Handler: ...
+
+class Handler:
+    ...
+
 
 @final
 @define(frozen=True)

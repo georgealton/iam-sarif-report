@@ -12,6 +12,7 @@ class POLICY_TYPES(str, Enum):
     def __str__(self) -> str:
         return str.__str__(self)
 
+
 @unique
 class LOCALES(str, Enum):
     de = "DE"
@@ -27,6 +28,7 @@ class LOCALES(str, Enum):
 
     def __str__(self) -> str:
         return str.__str__(self)
+
 
 @unique
 class RESOURCE_TYPES(str, Enum):
