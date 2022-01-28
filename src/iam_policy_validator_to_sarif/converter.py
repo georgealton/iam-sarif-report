@@ -1,6 +1,9 @@
+from __future__ import annotations
+
 import json
 from types import MappingProxyType
 from typing import TYPE_CHECKING
+
 try:
     from typing import Protocol
 except ImportError:
@@ -48,7 +51,7 @@ level_map = MappingProxyType(
 
 
 class Converter(Protocol):
-    def __call__(self, policy_path: "Path", findings: "Findings") -> "sarif.SarifLog":
+    def __call__(self, policy_path: Path, findings: Findings) -> sarif.SarifLog:
         ...
 
 
@@ -57,7 +60,7 @@ class SarifConverter(Converter):
         self.policy_path: Optional[Path] = None
 
     @staticmethod
-    def to_rule_id(finding: "Finding") -> str:
+    def to_rule_id(finding: Finding) -> str:
         return "_".join(
             [
                 "_".join(finding["findingType"].lower().split()),
@@ -66,15 +69,15 @@ class SarifConverter(Converter):
         )
 
     @staticmethod
-    def to_sarif_level(finding: "Finding") -> str:
+    def to_sarif_level(finding: Finding) -> str:
         return level_map.get(finding["findingType"], "none")
 
     @staticmethod
-    def to_message(finding: "Finding") -> "sarif.Message":
+    def to_message(finding: Finding) -> sarif.Message:
         return sarif.Message(text=finding["findingDetails"])
 
     @staticmethod
-    def to_region(span: "SpanTypeDef") -> "sarif.Region":
+    def to_region(span: SpanTypeDef) -> sarif.Region:
         start, end = span["start"], span["end"]
         return sarif.Region(
             start_line=start["line"],
@@ -83,7 +86,7 @@ class SarifConverter(Converter):
             end_column=end["column"] + 1,
         )
 
-    def __call__(self, policy_path: "Path", findings: "Findings") -> "sarif.SarifLog":
+    def __call__(self, policy_path: Path, findings: Findings) -> sarif.SarifLog:
         self.policy_path = policy_path
         results = list(self.findings_to_results(findings))
         iam_policy_validator_tool.driver.rules = list(self.get_rules(results))
@@ -91,8 +94,8 @@ class SarifConverter(Converter):
         return to_json(sarif.SarifLog(schema_uri=schema, version=version, runs=[run]))
 
     def get_rules(
-        self, results: "Iterable[sarif.Result]"
-    ) -> "Iterable[sarif.ReportingDescriptor]":
+        self, results: Iterable[sarif.Result]
+    ) -> Iterable[sarif.ReportingDescriptor]:
         matched_rules = set(result.rule_id for result in results if result.rule_id)
         for rule_id in matched_rules:
             check = checks.get(rule_id)
@@ -115,11 +118,11 @@ class SarifConverter(Converter):
                     ),
                 )
 
-    def findings_to_results(self, findings: "Findings") -> "Iterable[sarif.Result]":
+    def findings_to_results(self, findings: Findings) -> Iterable[sarif.Result]:
         for finding in findings:
             yield from self.to_results(finding)
 
-    def to_location(self, location: "LocationTypeDef") -> "sarif.Location":
+    def to_location(self, location: LocationTypeDef) -> sarif.Location:
         return sarif.Location(
             physical_location=sarif.PhysicalLocation(
                 artifact_location=sarif.ArtifactLocation(
@@ -129,7 +132,7 @@ class SarifConverter(Converter):
             )
         )
 
-    def to_results(self, finding: "Finding") -> "Iterable[sarif.Result]":
+    def to_results(self, finding: Finding) -> Iterable[sarif.Result]:
         for location in finding["locations"]:
             yield sarif.Result(
                 rule_id=SarifConverter.to_rule_id(finding),
@@ -141,8 +144,8 @@ class SarifConverter(Converter):
             )
 
     def to_related_locations(
-        self, finding: "Finding", current_location: "LocationTypeDef"
-    ) -> "Iterable[sarif.Location]":
+        self, finding: Finding, current_location: LocationTypeDef
+    ) -> Iterable[sarif.Location]:
         for related_location in finding["locations"]:
             if related_location != current_location:
                 yield self.to_location(related_location)
