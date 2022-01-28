@@ -34,7 +34,7 @@ class LOCALES(str, Enum):
 class RESOURCE_TYPES(str, Enum):
     s3_bucket = "AWS::S3::Bucket"
     s3_access_point = "AWS::S3::AccessPoint"
-    s3_multi_region_acess_point = "AWS::S3::MultiRegionAccessPoint"
+    s3_multi_region_access_point = "AWS::S3::MultiRegionAccessPoint"
     s3_object_lambda_access_point = "AWS::S3ObjectLambda::AccessPoint"
 
     def __str__(self) -> str:
