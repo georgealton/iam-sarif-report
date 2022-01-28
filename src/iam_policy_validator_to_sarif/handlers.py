@@ -26,10 +26,10 @@ class GenerateFindingsAndReportSarif(Handler):
 
     def __call__(self, command: "commands.GenerateFindingsAndReportSarif") -> None:
         findings = self.validator(
-            locale=str(command.locale),
-            policy_type=str(command.policy_type),
+            locale=command.locale,
+            policy_type=command.policy_type,
             policy=command.policy_document,
-            resource_type=str(command.resource_type),
+            resource_type=command.resource_type,
         )
         results = self.converter(command.policy_path, findings)
         self.reporter(command.report, results)
