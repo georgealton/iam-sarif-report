@@ -1,5 +1,8 @@
+from __future__ import annotations
+
 import boto3.session
 from typing import TYPE_CHECKING
+
 try:
     from typing import Protocol
 except ImportError:
@@ -22,27 +25,28 @@ if TYPE_CHECKING:
 class Validator(Protocol):
     def __call__(
         self,
-        locale: "LocaleType",
-        policy_type: "PolicyTypeType",
-        resource_type: "Optional[ValidatePolicyResourceTypeType]",
+        locale: LocaleType,
+        policy_type: PolicyTypeType,
+        resource_type: Optional[ValidatePolicyResourceTypeType],
         policy: str,
     ):
         ...
 
+
 class AWSAccessAnalyzerValidator:
-    def __init__(self,):
+    def __init__(self):
         self.session = boto3.session.Session()
 
     def __call__(
         self,
-        locale: "LocaleType",
-        policy_type: "PolicyTypeType",
-        resource_type: "Optional[ValidatePolicyResourceTypeType]",
+        locale: LocaleType,
+        policy_type: PolicyTypeType,
+        resource_type: Optional[ValidatePolicyResourceTypeType],
         policy: str,
-    ) -> "Iterable[ValidatePolicyFindingTypeDef]":
+    ) -> Iterable[ValidatePolicyFindingTypeDef]:
         client = self.session.client("accessanalyzer")
         paginator = client.get_paginator("validate_policy")
-        opts: "ValidatePolicyRequestRequestTypeDef" = {
+        opts: ValidatePolicyRequestRequestTypeDef = {
             "locale": locale,
             "policyDocument": policy,
             "policyType": policy_type,

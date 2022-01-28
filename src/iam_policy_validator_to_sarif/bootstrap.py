@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from types import MappingProxyType
 from typing import Mapping
 import punq
@@ -6,7 +8,9 @@ import punq
 from . import reporter, converter, validator, handlers, commands
 
 from typing import Type
-def bootstrap() -> "Mapping[Type[commands.Command], handlers.Handler]" :
+
+
+def bootstrap() -> Mapping[Type[commands.Command], handlers.Handler]:
     container = punq.Container()
     container.register("Reporter", reporter.CLIReporter)
     container.register("Converter", converter.SarifConverter)

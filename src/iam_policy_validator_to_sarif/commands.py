@@ -1,15 +1,21 @@
-from dataclasses import dataclass
+from __future__ import annotations
+
+from attr import define
 from pathlib import Path
 from typing_extensions import final
 from .definitions import POLICY_TYPES, LOCALES, RESOURCE_TYPES
 
-class Command: ...
+
+class Command:
+    ...
+
+
 @final
-@dataclass(frozen=True)
+@define(frozen=True)
 class GenerateFindingsAndReportSarif(Command):
-    policy_path: "Path"
+    policy_path: Path
     policy_document: str
-    policy_type: "POLICY_TYPES"
-    locale: "LOCALES"
-    resource_type: "RESOURCE_TYPES"
+    policy_type: POLICY_TYPES
+    locale: LOCALES
+    resource_type: RESOURCE_TYPES
     report: str

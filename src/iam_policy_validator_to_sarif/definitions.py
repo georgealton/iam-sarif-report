@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from enum import unique, Enum
 
 
@@ -6,6 +8,9 @@ class POLICY_TYPES(str, Enum):
     identity = "IDENTITY_POLICY"
     resource = "RESOURCE_POLICY"
     scp = "SERVICE_CONTROL_POLICY"
+
+    def __str__(self) -> str:
+        return str.__str__(self)
 
 
 @unique
@@ -21,6 +26,9 @@ class LOCALES(str, Enum):
     zh_cn = "ZH_CN"
     zh_tw = "ZH_TW"
 
+    def __str__(self) -> str:
+        return str.__str__(self)
+
 
 @unique
 class RESOURCE_TYPES(str, Enum):
@@ -28,3 +36,6 @@ class RESOURCE_TYPES(str, Enum):
     s3_access_point = "AWS::S3::AccessPoint"
     s3_multi_region_acess_point = "AWS::S3::MultiRegionAccessPoint"
     s3_object_lambda_access_point = "AWS::S3ObjectLambda::AccessPoint"
+
+    def __str__(self) -> str:
+        return str.__str__(self)
