@@ -1,17 +1,18 @@
 from __future__ import annotations
 
-import json
 from types import MappingProxyType
 from typing import TYPE_CHECKING
 
 try:
-    from typing import Protocol
+    from typing import Protocol, final
 except ImportError:
-    from typing_extensions import Protocol
+    from typing_extensions import Protocol, final
 
-import pkg_resources
+from attr import define, field
 import sarif_om as sarif
 from jschema_to_python.to_json import to_json
+
+from .checks import Check, ChecksRepository
 
 if TYPE_CHECKING:
     from pathlib import Path
@@ -37,9 +38,6 @@ iam_policy_validator_tool = sarif.Tool(
     )
 )
 
-checks_fp = pkg_resources.resource_stream(__name__, "checks.json")
-checks = json.load(checks_fp)
-
 level_map = MappingProxyType(
     {
         "ERROR": "error",
@@ -50,14 +48,20 @@ level_map = MappingProxyType(
 )
 
 
+@final
+@define
 class Converter(Protocol):
+    ChecksRepository: ChecksRepository
+
     def __call__(self, policy_path: Path, findings: Findings) -> sarif.SarifLog:
         ...
 
 
-class SarifConverter(Converter):
-    def __init__(self):
-        self.policy_path: Optional[Path] = None
+@final
+@define
+class SarifConverter:
+    ChecksRepository: ChecksRepository
+    policy_path: Optional[Path] = field(init=False, default=None)
 
     @staticmethod
     def to_rule_id(finding: Finding) -> str:
@@ -98,25 +102,28 @@ class SarifConverter(Converter):
     ) -> Iterable[sarif.ReportingDescriptor]:
         matched_rules = set(result.rule_id for result in results if result.rule_id)
         for rule_id in matched_rules:
-            check = checks.get(rule_id)
+            check = self.ChecksRepository.get(rule_id)
             if check:
-                yield sarif.ReportingDescriptor(
-                    id=rule_id,
-                    name=check.get("name"),
-                    help=sarif.MultiformatMessageString(
-                        text=check.get("short_description"),
-                        markdown=check.get("short_description"),
-                    ),
-                    help_uri=check.get("url"),
-                    short_description=sarif.MultiformatMessageString(
-                        text=check.get("short_description"),
-                        markdown=check.get("short_description"),
-                    ),
-                    full_description=sarif.MultiformatMessageString(
-                        text=check.get("description"),
-                        markdown=check.get("description"),
-                    ),
-                )
+                yield self.check_to_reporting_descriptor(check)
+
+    def check_to_reporting_descriptor(self, check: Check) -> sarif.ReportingDescriptor:
+        return sarif.ReportingDescriptor(
+            id=check.id,
+            name=check.name,
+            help=sarif.MultiformatMessageString(
+                text=check.short_description,
+                markdown=check.short_description,
+            ),
+            help_uri=check.url,
+            short_description=sarif.MultiformatMessageString(
+                text=check.short_description,
+                markdown=check.short_description,
+            ),
+            full_description=sarif.MultiformatMessageString(
+                text=check.description,
+                markdown=check.description,
+            ),
+        )
 
     def findings_to_results(self, findings: Findings) -> Iterable[sarif.Result]:
         for finding in findings:

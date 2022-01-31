@@ -4,6 +4,7 @@ from pathlib import Path
 import jsonschema
 import pytest
 
+from iam_policy_validator_to_sarif import checks
 from iam_policy_validator_to_sarif import converter
 
 
@@ -25,7 +26,7 @@ def test_convertor(policy):
     findings = json.loads(findings_path.read_text())["findings"]
     expected_sarif = json.loads(sarif_path.read_text())
 
-    sarif_converter = converter.SarifConverter()
+    sarif_converter = converter.SarifConverter(checks.ChecksPackageDataRepository())
     sarif = json.loads(sarif_converter(policy_path, findings))
     print(json.dumps(sarif))
 
