@@ -48,7 +48,6 @@ level_map = MappingProxyType(
 )
 
 
-@final
 @define
 class Converter(Protocol):
     ChecksRepository: ChecksRepository
@@ -111,17 +110,14 @@ class SarifConverter:
             id=check.id,
             name=check.name,
             help=sarif.MultiformatMessageString(
-                text=check.short_description,
-                markdown=check.short_description,
+                text=check.short_description, markdown=check.short_description
             ),
             help_uri=check.url,
             short_description=sarif.MultiformatMessageString(
-                text=check.short_description,
-                markdown=check.short_description,
+                text=check.short_description, markdown=check.short_description
             ),
             full_description=sarif.MultiformatMessageString(
-                text=check.description,
-                markdown=check.description,
+                text=check.description, markdown=check.description
             ),
         )
 
