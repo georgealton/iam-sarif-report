@@ -61,7 +61,7 @@ class Converter(Protocol):
 @final
 @define
 class SarifConverter:
-    ChecksRepository: ChecksRepository
+    checks_repository: ChecksRepository
     policy_path: Optional[Path] = field(init=False, default=None)
 
     @staticmethod
