@@ -1,16 +1,14 @@
 from __future__ import annotations
 
 import json
-
 from typing import Optional
 
 try:
-    from typing import Protocol, Final
+    from typing import Final, Protocol
 except ImportError:
     from typing_extensions import Protocol, Final
 
 import pkg_resources
-
 from attr import define
 
 CHECKS_DATA_FILE: Final[str] = "checks.json"

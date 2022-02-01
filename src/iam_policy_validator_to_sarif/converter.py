@@ -8,8 +8,8 @@ try:
 except ImportError:
     from typing_extensions import Protocol, final
 
-from attr import define, field
 import sarif_om as sarif
+from attr import define, field
 from jschema_to_python.to_json import to_json
 
 from .checks import Check
@@ -67,10 +67,10 @@ class SarifConverter:
     @staticmethod
     def to_rule_id(finding: Finding) -> str:
         return "_".join(
-            [
+            (
                 "_".join(finding["findingType"].lower().split()),
                 "_".join(finding["issueCode"].lower().split()),
-            ]
+            )
         )
 
     @staticmethod

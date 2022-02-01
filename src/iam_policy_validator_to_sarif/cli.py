@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import pathlib
+
 import click
 
 from . import bootstrap, commands, definitions

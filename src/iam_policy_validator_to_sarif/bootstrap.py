@@ -1,13 +1,11 @@
 from __future__ import annotations
 
 from types import MappingProxyType
-from typing import Mapping
+from typing import Mapping, Type
+
 import punq
 
-
-from . import reporter, converter, validator, handlers, commands, checks
-
-from typing import Type
+from . import checks, commands, converter, handlers, reporter, validator
 
 
 def bootstrap() -> Mapping[Type[commands.Command], handlers.Handler]:
