@@ -52,7 +52,7 @@ level_map = MappingProxyType(
 
 @define
 class Converter(Protocol):
-    ChecksRepository: ChecksRepository
+    checks_repository: ChecksRepository
 
     def __call__(self, policy_path: Path, findings: Findings) -> sarif.SarifLog:
         ...
@@ -103,7 +103,7 @@ class SarifConverter:
     ) -> Iterable[sarif.ReportingDescriptor]:
         matched_rules = set(result.rule_id for result in results if result.rule_id)
         for rule_id in matched_rules:
-            check = self.ChecksRepository.get(rule_id)
+            check = self.checks_repository.get(rule_id)
             if check:
                 yield self.check_to_reporting_descriptor(check)
 
