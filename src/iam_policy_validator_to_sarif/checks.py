@@ -24,12 +24,11 @@ class Check:
     short_description: str
     description: str
 
-class ChecksRepository(Protocol):
-    def __init__(self) -> None:
-        ...
 
+class ChecksRepository(Protocol):
     def get(self, rule_id: str) -> Optional[Check]:
         ...
+
 
 class ChecksPackageDataRepository:
     def __init__(self) -> None:
