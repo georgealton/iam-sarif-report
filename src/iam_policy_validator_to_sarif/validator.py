@@ -1,7 +1,8 @@
 from __future__ import annotations
 
-import boto3.session
 from typing import TYPE_CHECKING
+
+import boto3.session
 
 try:
     from typing import Protocol

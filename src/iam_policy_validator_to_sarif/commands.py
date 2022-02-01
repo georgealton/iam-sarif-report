@@ -1,14 +1,15 @@
 from __future__ import annotations
 
-from attr import define
 from pathlib import Path
+
+from attr import define
 
 try:
     from typing import final
 except ImportError:
     from typing_extensions import final
 
-from .definitions import POLICY_TYPES, LOCALES, RESOURCE_TYPES
+from .definitions import LOCALES, POLICY_TYPES, RESOURCE_TYPES
 
 
 class Command:

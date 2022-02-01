@@ -1,8 +1,9 @@
 from __future__ import annotations
 
-from attr import define
 from types import MappingProxyType
 from typing import TYPE_CHECKING
+
+from attr import define
 
 try:
     from typing import final
@@ -15,8 +16,8 @@ if TYPE_CHECKING:
     from typing import Mapping, Type
 
     from .converter import Converter
-    from .validator import Validator
     from .reporter import Reporter
+    from .validator import Validator
 
 
 class Handler:
@@ -40,7 +41,8 @@ class GenerateFindingsAndReportSarif(Handler):
         results = self.converter(command.policy_path, findings)
         self.reporter(command.report, results)
 
+CommandToHandlerMap = Mapping[Type[commands.Command], Type[Handler]]
 
-COMMAND_HANDLERS: Mapping[Type[commands.Command], Type[Handler]] = MappingProxyType(
+COMMAND_HANDLERS: CommandToHandlerMap = MappingProxyType(
     {commands.GenerateFindingsAndReportSarif: GenerateFindingsAndReportSarif}
 )
