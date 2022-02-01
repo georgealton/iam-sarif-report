@@ -15,7 +15,8 @@ def bootstrap() -> Mapping[Type[commands.Command], handlers.Handler]:
     container.register("Reporter", reporter.CLIReporter)
     container.register("Converter", converter.SarifConverter)
     container.register("Validator", validator.AWSAccessAnalyzerValidator)
-    container.register("ChecksRepository", checks.ChecksPackageDataRepository)
+    container.register(checks.ChecksRepository, checks.ChecksPackageDataRepository)
+
     return MappingProxyType(
         {
             Command: container.instantiate(Handler)
