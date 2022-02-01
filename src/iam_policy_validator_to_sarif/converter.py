@@ -12,7 +12,7 @@ from attr import define, field
 import sarif_om as sarif
 from jschema_to_python.to_json import to_json
 
-from .checks import Check, ChecksRepository
+from .checks import Check
 
 if TYPE_CHECKING:
     from pathlib import Path
@@ -26,6 +26,8 @@ if TYPE_CHECKING:
 
     Finding = ValidatePolicyFindingTypeDef
     Findings = Iterable[Finding]
+
+    from .checks import ChecksRepository
 
 schema = "https://docs.oasis-open.org/sarif/sarif/v2.1.0/cos02/schemas/sarif-schema-2.1.0.json"
 version = "2.1.0"
@@ -48,10 +50,9 @@ level_map = MappingProxyType(
 )
 
 
-@final
 @define
 class Converter(Protocol):
-    ChecksRepository: ChecksRepository
+    checks_repository: ChecksRepository
 
     def __call__(self, policy_path: Path, findings: Findings) -> sarif.SarifLog:
         ...
@@ -60,7 +61,7 @@ class Converter(Protocol):
 @final
 @define
 class SarifConverter:
-    ChecksRepository: ChecksRepository
+    checks_repository: ChecksRepository
     policy_path: Optional[Path] = field(init=False, default=None)
 
     @staticmethod
@@ -102,7 +103,7 @@ class SarifConverter:
     ) -> Iterable[sarif.ReportingDescriptor]:
         matched_rules = set(result.rule_id for result in results if result.rule_id)
         for rule_id in matched_rules:
-            check = self.ChecksRepository.get(rule_id)
+            check = self.checks_repository.get(rule_id)
             if check:
                 yield self.check_to_reporting_descriptor(check)
 
@@ -111,17 +112,14 @@ class SarifConverter:
             id=check.id,
             name=check.name,
             help=sarif.MultiformatMessageString(
-                text=check.short_description,
-                markdown=check.short_description,
+                text=check.short_description, markdown=check.short_description
             ),
             help_uri=check.url,
             short_description=sarif.MultiformatMessageString(
-                text=check.short_description,
-                markdown=check.short_description,
+                text=check.short_description, markdown=check.short_description
             ),
             full_description=sarif.MultiformatMessageString(
-                text=check.description,
-                markdown=check.description,
+                text=check.description, markdown=check.description
             ),
         )
 

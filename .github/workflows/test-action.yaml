@@ -1,3 +1,5 @@
+name: Test Action
+
 on: [push]
 
 jobs:
