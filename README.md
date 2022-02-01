@@ -32,7 +32,7 @@ jobs:
         with:
           role-to-assume: arn:aws:iam::111111111111:role/my-github-actions-role-test
           aws-region: eu-west-1
-      - uses: georgealton/iam-policy-validator-to-sarif@v1
+      - uses: georgealton/iam-policy-validator-to-sarif@v0.0.1
         with:
           policies: policies/
           results: results
@@ -44,5 +44,7 @@ jobs:
 ### Locally
 
 ```sh
-pipx run --spec git+https://github.com/georgealton/iam-policy-validator-to-sarif.git@v0.0.1 iam-policy-validate-to-sarif policies
+pipx run \
+  --spec git+https://github.com/georgealton/iam-policy-validator-to-sarif.git@v0.0.1 \
+  iam-policy-validator-to-sarif tests/data/policy_checks/policies/arn-region-not-allowed.json
 ```
