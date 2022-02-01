@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from types import MappingProxyType
-from typing import Mapping, TYPE_CHECKING
+from typing import Mapping, Type, TYPE_CHECKING
 
 from attr import define
 
@@ -13,8 +13,6 @@ except ImportError:
 from . import commands
 
 if TYPE_CHECKING:
-    from typing import Type
-
     from .converter import Converter
     from .reporter import Reporter
     from .validator import Validator
