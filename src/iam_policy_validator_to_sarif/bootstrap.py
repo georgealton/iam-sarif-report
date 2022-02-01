@@ -12,10 +12,10 @@ from typing import Type
 
 def bootstrap() -> Mapping[Type[commands.Command], handlers.Handler]:
     container = punq.Container()
+    container.register(checks.ChecksRepository, checks.ChecksPackageDataRepository)
     container.register("Reporter", reporter.CLIReporter)
     container.register("Converter", converter.SarifConverter)
     container.register("Validator", validator.AWSAccessAnalyzerValidator)
-    container.register(checks.ChecksRepository, checks.ChecksPackageDataRepository)
 
     return MappingProxyType(
         {
