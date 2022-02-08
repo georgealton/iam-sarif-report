@@ -15,6 +15,7 @@ from . import commands
 
 if TYPE_CHECKING:
     from .converter import Converter
+    from .reader import Reader
     from .reporter import Reporter
     from .validator import Validator
 
@@ -27,15 +28,17 @@ class Handler:
 @final
 @define(frozen=True)
 class GenerateFindingsAndReportSarif(Handler):
+    reader: Reader
     validator: Validator
     converter: Converter
     reporter: Reporter
 
     def __call__(self, command: commands.GenerateFindingsAndReportSarif) -> None:
+        policy = self.reader(command.policy_path)
         findings = self.validator(
             locale=command.locale,
             policy_type=command.policy_type,
-            policy=command.policy_document,
+            policy=policy,
             resource_type=command.resource_type,
         )
         results = self.converter(command.policy_path, findings)

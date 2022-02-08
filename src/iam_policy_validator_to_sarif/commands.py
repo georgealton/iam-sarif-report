@@ -21,7 +21,6 @@ class Command:
 @define(frozen=True, kw_only=True)
 class GenerateFindingsAndReportSarif(Command):
     policy_path: Path
-    policy_document: str
     policy_type: POLICY_TYPES
     locale: LOCALES
     resource_type: RESOURCE_TYPES

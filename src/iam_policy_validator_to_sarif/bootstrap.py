@@ -5,12 +5,13 @@ from typing import Mapping, Type
 
 import punq
 
-from . import checks, commands, converter, handlers, reporter, validator
+from . import checks, commands, converter, handlers, reader, reporter, validator
 
 
 def bootstrap() -> Mapping[Type[commands.Command], handlers.Handler]:
     container = punq.Container()
 
+    container.register("Reader", reader.CLIReader)
     container.register("ChecksRepository", checks.ChecksPackageDataRepository)
     container.register("Reporter", reporter.CLIReporter)
     container.register("Converter", converter.SarifConverter)

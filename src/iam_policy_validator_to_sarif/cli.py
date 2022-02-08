@@ -38,12 +38,8 @@ def generate_findings_and_report_sarif(
     policy_path, policy_type, locale, resource_type, result
 ):
 
-    with click.open_file(policy_path) as data:
-        policy_document = data.read()
-
     command = commands.GenerateFindingsAndReportSarif(
         policy_path=policy_path,
-        policy_document=policy_document,
         policy_type=policy_type,
         locale=locale,
         resource_type=resource_type,
