@@ -4,7 +4,7 @@ import click
 
 
 class Reader:
-    def __call__(self, *args: Any, **kwds: Any) -> Any:
+    def __call__(self):
         ...
 
 
