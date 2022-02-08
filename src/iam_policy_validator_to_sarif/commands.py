@@ -1,12 +1,13 @@
 from __future__ import annotations
 
 from pathlib import Path
+import sys
 
 from attr import define
 
-try:
+if sys.version_info >= (3, 8):
     from typing import final
-except ImportError:
+else:
     from typing_extensions import final
 
 from .definitions import LOCALES, POLICY_TYPES, RESOURCE_TYPES

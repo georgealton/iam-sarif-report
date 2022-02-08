@@ -1,11 +1,12 @@
 from __future__ import annotations
+import sys
 
 from types import MappingProxyType
 from typing import TYPE_CHECKING
 
-try:
+if sys.version_info >= (3, 8):
     from typing import Protocol, final
-except ImportError:
+else:
     from typing_extensions import Protocol, final
 
 import sarif_om as sarif

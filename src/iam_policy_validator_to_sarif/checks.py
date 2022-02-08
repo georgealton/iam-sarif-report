@@ -1,12 +1,13 @@
 from __future__ import annotations
 
 import json
+import sys
 from typing import Optional
 
-try:
-    from typing import Final, Protocol
-except ImportError:
-    from typing_extensions import Protocol, Final
+if sys.version_info >= (3, 8):
+    from typing import Protocol, final
+else:
+    from typing_extensions import Protocol, final
 
 import pkg_resources
 from attr import define

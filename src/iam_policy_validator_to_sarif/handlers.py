@@ -1,13 +1,14 @@
 from __future__ import annotations
+import sys
 
 from types import MappingProxyType
 from typing import Mapping, Type, TYPE_CHECKING
 
 from attr import define
 
-try:
+if sys.version_info >= (3, 8):
     from typing import final
-except ImportError:
+else:
     from typing_extensions import final
 
 from . import commands
