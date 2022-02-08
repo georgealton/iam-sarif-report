@@ -1,10 +1,11 @@
 from __future__ import annotations
+import sys
 
 from typing import TYPE_CHECKING
 
-try:
+if sys.version_info >= (3, 8):
     from typing import Protocol
-except ImportError:
+else:
     from typing_extensions import Protocol
 
 import click
