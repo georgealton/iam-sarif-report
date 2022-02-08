@@ -2,7 +2,7 @@ from __future__ import annotations
 import sys
 
 from types import MappingProxyType
-from typing import Mapping, Type, TYPE_CHECKING
+from typing import Mapping, Type, TYPE_CHECKING, TypeVar
 
 from attr import define
 
@@ -20,7 +20,7 @@ if TYPE_CHECKING:
 
 
 class Handler:
-    ...
+    def __call__(self, command): ...
 
 
 @final

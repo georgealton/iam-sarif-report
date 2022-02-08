@@ -5,9 +5,9 @@ import sys
 from typing import Optional
 
 if sys.version_info >= (3, 8):
-    from typing import Protocol, final
+    from typing import Protocol, Final
 else:
-    from typing_extensions import Protocol, final
+    from typing_extensions import Protocol, Final
 
 import pkg_resources
 from attr import define
