@@ -2,7 +2,7 @@ from __future__ import annotations
 import sys
 
 from types import MappingProxyType
-from typing import Mapping, Type, TYPE_CHECKING, TypeVar
+from typing import Mapping, Type, TYPE_CHECKING
 
 from attr import define
 
