@@ -1,6 +1,6 @@
 from __future__ import annotations
-import sys
 
+import sys
 from typing import TYPE_CHECKING
 
 if sys.version_info >= (3, 8):

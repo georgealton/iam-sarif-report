@@ -1,8 +1,7 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
 import sys
-
+from typing import TYPE_CHECKING
 
 import boto3.session
 

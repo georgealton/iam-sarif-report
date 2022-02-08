@@ -1,8 +1,8 @@
 from __future__ import annotations
-import sys
 
+import sys
 from types import MappingProxyType
-from typing import Mapping, Type, TYPE_CHECKING
+from typing import TYPE_CHECKING, Mapping, Type
 
 from attr import define
 
@@ -20,7 +20,8 @@ if TYPE_CHECKING:
 
 
 class Handler:
-    def __call__(self, command): ...
+    def __call__(self, command):
+        ...
 
 
 @final
@@ -39,6 +40,7 @@ class GenerateFindingsAndReportSarif(Handler):
         )
         results = self.converter(command.policy_path, findings)
         self.reporter(command.report, results)
+
 
 CommandToHandlerMap = Mapping[Type[commands.Command], Type[Handler]]
 

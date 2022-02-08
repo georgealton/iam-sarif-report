@@ -4,8 +4,7 @@ from pathlib import Path
 import jsonschema
 import pytest
 
-from iam_policy_validator_to_sarif import checks
-from iam_policy_validator_to_sarif import converter
+from iam_policy_validator_to_sarif import checks, converter
 
 
 @pytest.mark.parametrize(

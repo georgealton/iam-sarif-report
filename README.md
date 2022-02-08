@@ -29,19 +29,19 @@ jobs:
     steps:
       # checkout your code
       - uses: actions/checkout@v1
-      
+
       # setup aws access
       - uses: aws-actions/configure-aws-credentials@v1
         with:
           role-to-assume: arn:aws:iam::111111111111:role/my-github-actions-role-test
           aws-region: eu-west-1
-      
+
       # validate some policies!
       - uses: georgealton/iam-policy-validator-to-sarif@v0.0.1
         with:
           policies: policies/
           results: results
-      
+
       # upload results
       - uses: github/codeql-action/upload-sarif@v1
         with:
