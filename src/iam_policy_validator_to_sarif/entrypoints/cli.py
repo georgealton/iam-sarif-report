@@ -4,7 +4,7 @@ import pathlib
 
 import click
 
-from . import bootstrap, commands, definitions
+from .. import bootstrap, commands, definitions
 
 
 @click.command()
