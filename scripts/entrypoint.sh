@@ -15,5 +15,5 @@ for policy in $(find_policies "$policy_path"); do
     if [[ -n "$resource_type" ]]; then
         opts+=( --resource-type "$resource_type" )
     fi
-    iam-policy-validator-to-sarif ${opts[@]} -- "$policy" "$result"
+    iam-sarif-report ${opts[@]} -- "$policy" "$result"
 done
