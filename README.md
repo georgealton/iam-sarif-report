@@ -31,7 +31,7 @@ jobs:
       - uses: actions/checkout@v1
 
       # setup aws access
-      - uses: aws-actions/configure-aws-credentials@v1
+      - uses: aws-actions/configure-aws-credentials@v3
         with:
           role-to-assume: arn:aws:iam::111111111111:role/my-github-actions-role-test
           aws-region: eu-west-1
