@@ -10,7 +10,7 @@ from .adapters import checks, reader, reporter, validator
 from .service_layer import handlers
 
 
-def bootstrap() -> Mapping[Type[commands.Command], handlers.Handler]:
+def bootstrap() -> Mapping[type[commands.Command], handlers.Handler]:
     container = punq.Container()
 
     container.register("Reader", reader.CLIReader)

@@ -26,7 +26,7 @@ class Check:
 
 
 class ChecksRepository(Protocol):
-    def get(self, rule_id: str) -> Optional[Check]:
+    def get(self, rule_id: str) -> Check | None:
         ...
 
 
@@ -37,7 +37,7 @@ class ChecksPackageDataRepository:
         )
         self.data = json.load(checks_fp)
 
-    def get(self, rule_id: str) -> Optional[Check]:
+    def get(self, rule_id: str) -> Check | None:
         _check = self.data.get(rule_id)
         if _check:
             return Check(id=rule_id, **_check)

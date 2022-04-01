@@ -63,7 +63,7 @@ class Converter(Protocol):
 @define
 class SarifConverter:
     checks_repository: ChecksRepository
-    policy_path: Optional[Path] = field(init=False, default=None)
+    policy_path: Path | None = field(init=False, default=None)
 
     @staticmethod
     def to_rule_id(finding: Finding) -> str:
@@ -102,7 +102,7 @@ class SarifConverter:
     def get_rules(
         self, results: Iterable[sarif.Result]
     ) -> Iterable[sarif.ReportingDescriptor]:
-        matched_rules = set(result.rule_id for result in results if result.rule_id)
+        matched_rules = {result.rule_id for result in results if result.rule_id}
         for rule_id in matched_rules:
             check = self.checks_repository.get(rule_id)
             if check:

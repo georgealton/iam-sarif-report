@@ -29,7 +29,7 @@ class Validator(Protocol):
         self,
         locale: LocaleType,
         policy_type: PolicyTypeType,
-        resource_type: Optional[ValidatePolicyResourceTypeType],
+        resource_type: ValidatePolicyResourceTypeType | None,
         policy: str,
     ):
         ...
@@ -43,7 +43,7 @@ class AWSAccessAnalyzerValidator:
         self,
         locale: LocaleType,
         policy_type: PolicyTypeType,
-        resource_type: Optional[ValidatePolicyResourceTypeType],
+        resource_type: ValidatePolicyResourceTypeType | None,
         policy: str,
     ) -> Iterable[ValidatePolicyFindingTypeDef]:
         client = self.session.client("accessanalyzer")
