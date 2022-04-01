@@ -52,7 +52,7 @@ jobs:
 
 ```sh
 pipx run \
-  --spec git+https://github.com/georgealton/iam-policy-validator-to-sarif.git@v0.0.1 \
-  iam-policy-validator-to-sarif \
+  --spec git+https://github.com/georgealton/iam-policy-validator-to-sarif.git@main \
+  iam-sarif-report \
   tests/data/policy_checks/policies/arn-region-not-allowed.json
 ```
