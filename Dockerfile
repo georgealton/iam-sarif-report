@@ -10,7 +10,7 @@ ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
 RUN \
-    pip install --upgrade --no-cache-dir git+https://github.com/georgealton/iam-policy-validator-to-sarif.git
+    pip install --upgrade --no-cache-dir git+https://github.com/georgealton/iam-sarif-report.git
 
 COPY ./scripts/entrypoint.sh /
 RUN chmod +x /entrypoint.sh

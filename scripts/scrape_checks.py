@@ -19,11 +19,11 @@ finding_type_name_pattern = re.compile(
 )
 
 
-def paragraph_matches_resolving(node):
+def paragraph_matches_resolving(node) -> bool:
     return node.name == "p" and node.b and node.b.contents[0].startswith("Resolving")
 
 
-def finding_description_finished(node):
+def finding_description_finished(node) -> bool:
     return (
         getattr(node, "attrs", {})
         .get("id", "")
@@ -34,6 +34,8 @@ def finding_description_finished(node):
 rules = {}
 for check in checks:
     result = finding_type_name_pattern.match(check.attrs["id"])
+    if not result:
+        continue
     finding_type, finding_name = result.groups()
     rule_id = check.attrs["id"].split(id_prefix)[1]
     rule_id = re.sub("-", "_", rule_id)

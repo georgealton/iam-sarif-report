@@ -1,4 +1,4 @@
-name: IAM Policy Validator as SARIF
+name: IAM SARIF Report
 author: George Alton
 description: |
   Calls IAM AccessAnalyzer ValidatePolicy API to generate Findings for a Policy.
