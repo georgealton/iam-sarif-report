@@ -13,7 +13,7 @@ import sarif_om as sarif
 from attr import define, field
 from jschema_to_python.to_json import to_json
 
-from .checks import Check
+from .adapters.checks import Check
 
 if TYPE_CHECKING:
     from pathlib import Path
@@ -28,7 +28,7 @@ if TYPE_CHECKING:
     Finding = ValidatePolicyFindingTypeDef
     Findings = Iterable[Finding]
 
-    from .checks import ChecksRepository
+    from .adapters.checks import ChecksRepository
 
 schema = "https://docs.oasis-open.org/sarif/sarif/v2.1.0/cos02/schemas/sarif-schema-2.1.0.json"
 version = "2.1.0"

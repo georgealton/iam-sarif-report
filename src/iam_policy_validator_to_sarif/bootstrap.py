@@ -5,7 +5,9 @@ from typing import Mapping, Type
 
 import punq
 
-from . import checks, commands, converter, handlers, reader, reporter, validator
+from . import commands, converter
+from .adapters import checks, reader, reporter, validator
+from .service_layer import handlers
 
 
 def bootstrap() -> Mapping[Type[commands.Command], handlers.Handler]:

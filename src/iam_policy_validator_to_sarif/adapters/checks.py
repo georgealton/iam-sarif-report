@@ -9,7 +9,8 @@ if sys.version_info >= (3, 8):
 else:
     from typing_extensions import Final, Protocol
 
-import pkg_resources
+import importlib.resources
+
 from attr import define
 
 CHECKS_DATA_FILE: Final[str] = "checks.json"
@@ -31,7 +32,9 @@ class ChecksRepository(Protocol):
 
 class ChecksPackageDataRepository:
     def __init__(self) -> None:
-        checks_fp = pkg_resources.resource_stream(__name__, CHECKS_DATA_FILE)
+        checks_fp = importlib.resources.open_text(
+            __package__.partition(".")[0], CHECKS_DATA_FILE
+        )
         self.data = json.load(checks_fp)
 
     def get(self, rule_id: str) -> Optional[Check]:

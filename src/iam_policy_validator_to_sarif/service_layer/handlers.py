@@ -11,13 +11,13 @@ if sys.version_info >= (3, 8):
 else:
     from typing_extensions import final
 
-from . import commands
+from .. import commands
 
 if TYPE_CHECKING:
-    from .converter import Converter
-    from .reader import Reader
-    from .reporter import Reporter
-    from .validator import Validator
+    from ..adapters.reader import Reader
+    from ..adapters.reporter import Reporter
+    from ..adapters.validator import Validator
+    from ..converter import Converter
 
 
 class Handler:

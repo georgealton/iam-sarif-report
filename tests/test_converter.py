@@ -4,7 +4,8 @@ from pathlib import Path
 import jsonschema
 import pytest
 
-from iam_policy_validator_to_sarif import checks, converter
+from iam_policy_validator_to_sarif import converter
+from iam_policy_validator_to_sarif.adapters import checks
 
 
 @pytest.mark.parametrize(
@@ -17,9 +18,9 @@ from iam_policy_validator_to_sarif import checks, converter
 def test_convertor(policy):
     schema_path = Path("tests/data/sarif-schema-2.1.0.json")
     base_path = Path("tests/data/policy_checks")
-    policy_path = Path(base_path, "policies/", f"{policy}.json")
-    findings_path = Path(base_path, "findings/", f"{policy}.json")
-    sarif_path = Path(base_path, "sarif/", f"{policy}.sarif")
+    policy_path = base_path / "policies" / f"{policy}.json"
+    findings_path = base_path / "findings" / f"{policy}.json"
+    sarif_path = base_path / "sarif" / f"{policy}.sarif"
 
     sarif_schema = json.loads(schema_path.read_text())
     findings = json.loads(findings_path.read_text())["findings"]

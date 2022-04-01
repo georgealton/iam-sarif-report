@@ -55,8 +55,8 @@ class AWSAccessAnalyzerValidator:
         }
         if resource_type:
             opts["validatePolicyResourceType"] = resource_type
-        
+
         pages = paginator.paginate(**opts)
-        
+
         for page in pages:
             yield from page["findings"]
