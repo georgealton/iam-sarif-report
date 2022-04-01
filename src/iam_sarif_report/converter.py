@@ -30,13 +30,13 @@ if TYPE_CHECKING:
 
     from .adapters.checks import ChecksRepository
 
-schema = "https://docs.oasis-open.org/sarif/sarif/v2.1.0/cos02/schemas/sarif-schema-2.1.0.json"
 version = "2.1.0"
+schema = f"https://docs.oasis-open.org/sarif/sarif/v{version}/cos02/schemas/sarif-schema-{version}.json"
 
 iam_policy_validator_tool = sarif.Tool(
     driver=sarif.ToolComponent(
-        name="IAM Policy Validator",
-        full_name="IAM Access Analyzer Policy Validator",
+        name="IAM SARIF Report",
+        full_name="IAM SARIF Report",
         information_uri="https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-policy-validation.html",
     )
 )
