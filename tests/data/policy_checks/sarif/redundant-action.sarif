@@ -3,7 +3,7 @@
     {
       "tool": {
         "driver": {
-          "name": "IAM Policy Validator",
+          "name": "IAM SARIF Report",
           "rules": [
             {
               "id": "suggestion_redundant_action",
@@ -23,7 +23,7 @@
               }
             }
           ],
-          "fullName": "IAM Access Analyzer Policy Validator",
+          "fullName": "IAM SARIF Report",
           "informationUri": "https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-policy-validation.html"
         }
       },
