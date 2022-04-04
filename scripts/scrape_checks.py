@@ -6,6 +6,7 @@ import html2text
 import requests
 from bs4 import BeautifulSoup
 
+checks_apth = "../src/iam_sarif_report/checks.json"
 check_reference = "https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-reference-policy-checks.html"
 html = requests.get(check_reference).text
 reference = BeautifulSoup(html, "html.parser")
@@ -61,6 +62,6 @@ for check in checks:
             desc += str(sib)
 
 
-with open("../src/iam_sarif_report/checks.json", "w") as checks:
+with open(checks_path, "w") as checks:
     json.dump(rules, checks, indent=2)
     print(file=checks)
