@@ -6,7 +6,7 @@ import html2text
 import requests
 from bs4 import BeautifulSoup
 
-checks_apth = "../src/iam_sarif_report/checks.json"
+checks_path = "../src/iam_sarif_report/checks.json"
 check_reference = "https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-reference-policy-checks.html"
 html = requests.get(check_reference).text
 reference = BeautifulSoup(html, "html.parser")
