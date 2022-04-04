@@ -63,3 +63,4 @@ for check in checks:
 
 with open("../src/iam_sarif_report/checks.json", "w") as checks:
     json.dump(rules, checks, indent=2)
+    print("", file=checks)
