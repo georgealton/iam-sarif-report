@@ -1,6 +1,5 @@
 # IAM SARIF Report
 
-[![Open in VSCode](https://open.vscode.dev/badges/open-in-vscode.svg)](https://open.vscode.dev/georgealton/iam-sarif-report)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 Validate your IAM Policies and SCPs for best practice, and convert those results into SARIF documents for reporting.
