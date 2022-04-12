@@ -1,14 +1,15 @@
 [build-system]
 requires = [
   "setuptools >= 62.1.0",
+  "setuptools_scm[toml]>=6.2",
   "wheel",
 ]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "iam-sarif-report"
-version = "0.0.1"
 authors = [{name = "George Alton", email = "georgealton@gmail.com"}]
+dynamic = ["version"]
 requires-python = ">=3.7"
 license = {file = "LICENSE"}
 readme = "README.md"
@@ -32,7 +33,7 @@ dependencies = [
     "boto3",
     "sarif_om",
     "jschema_to_python",
-    "typing_extensions; python_version<'3.8'"
+    "typing_extensions; python_version<'3.8'",
 ]
 
 [project.optional-dependencies]
@@ -69,6 +70,8 @@ iam-sarif-report = "iam_sarif_report.entrypoints.cli:generate_findings_and_repor
 
 [tool.setuptools.package-data]
 "*" = ["checks.json"]
+
+[tool.setuptools_scm]
 
 [tool.mypy]
 # The mypy configurations: http://bit.ly/2zEl9WI
