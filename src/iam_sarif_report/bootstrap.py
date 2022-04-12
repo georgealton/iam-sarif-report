@@ -5,8 +5,9 @@ from typing import Mapping
 
 import punq
 
-from . import commands, converter
+from . import converter
 from .adapters import checks, reader, reporter, validator
+from .domain import commands
 from .service_layer import handlers
 
 

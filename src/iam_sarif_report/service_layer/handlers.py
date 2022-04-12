@@ -11,7 +11,7 @@ if sys.version_info >= (3, 8):
 else:
     from typing_extensions import final
 
-from .. import commands
+from ..domain import commands
 
 if TYPE_CHECKING:
     from ..adapters.reader import Reader
