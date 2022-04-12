@@ -28,7 +28,7 @@ dependencies = [
     "boto3",
     "sarif_om",
     "jschema_to_python",
-    "typing_extensions; python_version<3.8"
+    "typing_extensions; python_version<'3.8'"
 ]
 
 license = {file = "LICENSE"}
