@@ -11,7 +11,7 @@ else:
     from typing_extensions import Protocol
 
 if TYPE_CHECKING:
-    from typing import Iterable, Optional
+    from typing import Iterable
 
     from mypy_boto3_accessanalyzer.literals import (
         LocaleType,

@@ -10,6 +10,9 @@ name = "iam-sarif-report"
 version = "0.0.1"
 authors = [{name = "George Alton", email = "georgealton@gmail.com"}]
 requires-python = ">=3.7"
+license = {file = "LICENSE"}
+readme = "README.md"
+
 classifiers = [
     "Intended Audience :: Developers",
     "License :: OSI Approved :: MIT License",
@@ -32,9 +35,6 @@ dependencies = [
     "typing_extensions; python_version<'3.8'"
 ]
 
-license = {file = "LICENSE"}
-readme = "README.md"
-
 [project.optional-dependencies]
 dev = [
     "black",
@@ -45,18 +45,20 @@ dev = [
     "isort",
     "mypy_boto3_accessanalyzer",
     "types-setuptools",
-    "pre-commit"
+    "pre-commit",
 ]
 
 test = [
     "pytest",
-    "jsonschema"
+    "pytest-cov",
+    "pytest-datadir",
+    "jsonschema",
 ]
 
 scraper = [
     "beautifulsoup4",
     "requests",
-    "html2text"
+    "html2text",
 ]
 
 [project.urls]
@@ -118,3 +120,6 @@ commands =
 
 [tool.isort]
 profile = "black"
+
+[tool.coverage.run]
+branch = true

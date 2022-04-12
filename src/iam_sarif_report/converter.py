@@ -17,7 +17,7 @@ from .adapters.checks import Check
 
 if TYPE_CHECKING:
     from pathlib import Path
-    from typing import Iterable, Optional
+    from typing import Iterable
 
     from mypy_boto3_accessanalyzer.type_defs import (
         LocationTypeDef,
