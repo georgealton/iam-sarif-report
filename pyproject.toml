@@ -60,13 +60,10 @@ scraper = [
 ]
 
 [project.urls]
-homepage = "example.com"
-documentation = "readthedocs.org"
 repository = "https://github.com/georgealton/iam-sarif-report"
 
 [project.scripts]
 iam-sarif-report = "iam_sarif_report.entrypoints.cli:generate_findings_and_report_sarif"
-
 
 [tool.mypy]
 # The mypy configurations: http://bit.ly/2zEl9WI
