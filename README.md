@@ -34,7 +34,7 @@ jobs:
           role-to-assume: arn:aws:iam::111111111111:role/my-github-actions-role-test
           aws-region: eu-west-1
       # validate some policies!
-      - uses: georgealton/iam-sarif-report@v0.0.1
+      - uses: georgealton/iam-sarif-report@v1
         with:
           policies: policies/
           results: results
