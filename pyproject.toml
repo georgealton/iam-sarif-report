@@ -5,6 +5,68 @@ requires = [
 ]
 build-backend = "setuptools.build_meta"
 
+[project]
+name = iam-sarif-report
+authors = [{name = "George Alton", email = georgealton@gmail.com}]
+requires-python = ">=3.7"
+classifiers = [
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Topic :: Software Development :: Libraries :: Python Modules"
+]
+
+dependencies = [
+    "attrs",
+    "click",
+    "punq",
+    "boto3",
+    "sarif_om",
+    "jschema_to_python",
+    "typing_extensions; python_version<'3.8'"
+]
+
+license = {file = "LICENSE"}
+readme = "README.md"
+
+[project.optional-dependencies]
+dev = [
+    "black",
+    "mypy",
+    "pytest",
+    "tox",
+    "jsonschema",
+    "isort",
+    "mypy_boto3_accessanalyzer",
+    "types-setuptools",
+    "pre-commit"
+]
+
+test = [
+    "pytest",
+    "jsonschema"
+]
+
+scraper = [
+    "beautifulsoup4",
+    "requests",
+    "html2text"
+]
+
+[project.urls]
+homepage = "example.com"
+documentation = "readthedocs.org"
+repository = "https://github.com/georgealton/iam-sarif-report"
+
+[project.scripts]
+iam-sarif-report = iam_sarif_report.entrypoints.cli:generate_findings_and_report_sarif
+
+
 [tool.mypy]
 # The mypy configurations: http://bit.ly/2zEl9WI
 allow_redefinition = false
