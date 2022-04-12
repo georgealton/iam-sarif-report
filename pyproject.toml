@@ -6,8 +6,8 @@ requires = [
 build-backend = "setuptools.build_meta"
 
 [project]
-name = iam-sarif-report
-authors = [{name = "George Alton", email = georgealton@gmail.com}]
+name = "iam-sarif-report"
+authors = [{name = "George Alton", email = "georgealton@gmail.com"}]
 requires-python = ">=3.7"
 classifiers = [
     "Intended Audience :: Developers",
@@ -28,7 +28,7 @@ dependencies = [
     "boto3",
     "sarif_om",
     "jschema_to_python",
-    "typing_extensions; python_version<'3.8'"
+    "typing_extensions; python_version<3.8"
 ]
 
 license = {file = "LICENSE"}
@@ -64,7 +64,7 @@ documentation = "readthedocs.org"
 repository = "https://github.com/georgealton/iam-sarif-report"
 
 [project.scripts]
-iam-sarif-report = iam_sarif_report.entrypoints.cli:generate_findings_and_report_sarif
+iam-sarif-report = "iam_sarif_report.entrypoints.cli:generate_findings_and_report_sarif"
 
 
 [tool.mypy]
