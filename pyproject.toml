@@ -7,6 +7,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "iam-sarif-report"
+version = "0.0.1"
 authors = [{name = "George Alton", email = "georgealton@gmail.com"}]
 requires-python = ">=3.7"
 classifiers = [
