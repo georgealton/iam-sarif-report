@@ -22,3 +22,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: Actions-R-Us/actions-tagger@f411bd910a5ad370d4511517e3eac7ff887c90ea
+      - name: Build
+        run: pipx run build --sdist --wheel
+      - uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          user: __token__
+          password: ${{ secrets.PYPI_API_TOKEN }}
