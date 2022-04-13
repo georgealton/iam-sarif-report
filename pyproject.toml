@@ -63,6 +63,7 @@ scraper = [
 ]
 
 [project.urls]
+homepage = "https://github.com/georgealton/iam-sarif-report"
 repository = "https://github.com/georgealton/iam-sarif-report"
 
 [project.scripts]
