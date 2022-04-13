@@ -1,8 +1,8 @@
 FROM python:3.9-alpine
 
 LABEL "maintainer" "George Alton <georgealton@gmail.com>"
-LABEL "repository" "https://github.com/georgealton/iam-policy-validator-to-sarif"
-LABEL "homepage" "https://github.com/georgealton/iam-policy-validator-to-sarif"
+LABEL "repository" "https://github.com/georgealton/iam-sarif-report"
+LABEL "homepage" "https://github.com/georgealton/iam-sarif-report"
 
 RUN apk add --no-cache bash git wget
 
