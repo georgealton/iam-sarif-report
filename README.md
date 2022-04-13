@@ -18,7 +18,7 @@ To generate findings, we've got to make API requests to AWS. The AWS Principal y
 
 ### GitHub Action
 
-See the [action.yaml](action.yaml) for more detailed usage information.
+See the [action.yaml](action.yaml) for detailed usage information.
 
 ```yaml
 on: [push]
