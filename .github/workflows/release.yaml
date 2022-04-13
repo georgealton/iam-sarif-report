@@ -30,6 +30,7 @@ jobs:
   publish:
     needs: [dist]
     runs-on: ubuntu-latest
+    environment: main
     if: github.event_name == 'release' && github.event.action == 'published'
     steps:
       - uses: actions/download-artifact@v3
