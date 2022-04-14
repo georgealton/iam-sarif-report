@@ -73,7 +73,7 @@ iam-sarif-report = "iam_sarif_report.entrypoints.cli:generate_findings_and_repor
 "*" = ["checks.json"]
 
 [tool.setuptools_scm]
-tag_regex = "^(?:[\\w-]+-)?(?P<version>[vV]?\\d+(?:\\.\\d+){2}[^\\+]*)(?:\\+.*)?$"
+git_describe_command = "git describe --dirty --tags --long --match *[0-9].*"
 
 [tool.mypy]
 # The mypy configurations: http://bit.ly/2zEl9WI
