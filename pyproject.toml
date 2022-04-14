@@ -73,7 +73,7 @@ iam-sarif-report = "iam_sarif_report.entrypoints.cli:generate_findings_and_repor
 "*" = ["checks.json"]
 
 [tool.setuptools_scm]
-tag_regex = "^(?:[\w-]+-)?(?P<version>[vV]?\d+(?:\.\d+){2}[^\+]*)(?:\+.*)?$"
+tag_regex = "^(?:[\\w-]+-)?(?P<version>[vV]?\\d+(?:\\.\\d+){2}[^\\+]*)(?:\\+.*)?$"
 
 [tool.mypy]
 # The mypy configurations: http://bit.ly/2zEl9WI
