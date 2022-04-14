@@ -47,8 +47,5 @@ jobs:
 ### Locally
 
 ```sh
-pipx run \
-  --spec git+https://github.com/georgealton/iam-sarif-report.git@main \
-  iam-sarif-report \
-  tests/data/policy_checks/policies/arn-region-not-allowed.json
+pipx run iam-sarif-report tests/data/policy_checks/policies/arn-region-not-allowed.json
 ```
