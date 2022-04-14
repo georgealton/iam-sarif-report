@@ -1,8 +1,6 @@
 name: IAM SARIF Report
 author: George Alton
-description: |
-  Calls IAM AccessAnalyzer ValidatePolicy API to generate Findings for a Policy.
-  Then converts the findings to the SARIF format.
+description: Generate SARIF from AWS IAM Access Analyzer findings
 branding:
   icon: check-square
   color: green
