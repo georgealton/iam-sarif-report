@@ -39,7 +39,7 @@ jobs:
           policies: policies/
           results: results
       # upload results
-      - uses: github/codeql-action/upload-sarif@v1
+      - uses: github/codeql-action/upload-sarif@v2
         with:
           sarif_file: results
 ```
