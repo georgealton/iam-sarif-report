@@ -47,6 +47,5 @@ def generate_findings_and_report_sarif(
         report=result,
     )
 
-    handlers = bootstrap.bootstrap()
-    handler = handlers[type(command)]
-    handler(command)
+    bus = bootstrap.bootstrap()
+    bus.handle(command)
