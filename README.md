@@ -6,7 +6,7 @@ Validate your IAM Policies and SCPs for best practice, and convert those results
 
 ## Use Me
 
-To generate findings, we've got to make API requests to AWS. The AWS Principal you use must be allowed to use the access-analyzer service ValidatePolicy action.
+To generate findings iam-sarif-report makes AWS API requests. The AWS Principal you use must be allowed to use the `access-analyzer:ValidatePolicy` command.
 
 ```json
 {
@@ -24,21 +24,25 @@ See the [action.yaml](action.yaml) for detailed usage information.
 on: [push]
 jobs:
   example:
+    permissions:
+      security-events: write
+      actions: read
+      contents: read
     runs-on: ubuntu-latest
     steps:
-      # checkout your code
       - uses: actions/checkout@v3
       # setup aws access
       - uses: aws-actions/configure-aws-credentials@v3
         with:
           role-to-assume: arn:aws:iam::111111111111:role/my-github-actions-role-test
           aws-region: eu-west-1
-      # validate some policies!
+      # validate some policies, and get some SARIF back
+      # the action creates .sarif file for each policy in the policies directory
       - uses: georgealton/iam-sarif-report@v1
         with:
           policies: policies/
           results: results
-      # upload results
+      # upload sarif files
       - uses: github/codeql-action/upload-sarif@v2
         with:
           sarif_file: results
