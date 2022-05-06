@@ -6,7 +6,7 @@ Validate your IAM Policies and SCPs for best practice, and convert those results
 
 ## Use Me
 
-To generate findings iam-sarif-report makes AWS API requests. The AWS Principal you use must be allowed to use the `access-analyzer:ValidatePolicy` command.
+To generate findings, iam-sarif-report makes AWS API requests. The AWS Principal you use must be allowed to use the `access-analyzer:ValidatePolicy` command.
 
 ```json
 {
