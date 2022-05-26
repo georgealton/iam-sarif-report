@@ -21,12 +21,12 @@ if TYPE_CHECKING:
 
 
 class Handler:
-    _registry: dict[type[commands.Command], type[Handler]] = {}
-    registry = MappingProxyType(_registry)
+    __registry: dict[type[commands.Command], type[Handler]] = {}
+    registry = MappingProxyType(__registry)
 
     def __init_subclass__(cls) -> None:
         command_type: type[commands.Command] = get_type_hints(cls.__call__)["command"]
-        Handler._registry[command_type] = cls
+        Handler.__registry[command_type] = cls
 
     def __call__(self, command: commands.Command):
         ...
