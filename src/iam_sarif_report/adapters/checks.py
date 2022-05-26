@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import json
 import sys
-from typing import Optional
 
 if sys.version_info >= (3, 8):
     from typing import Final, Protocol
