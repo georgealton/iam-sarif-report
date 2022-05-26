@@ -1,8 +1,7 @@
 from __future__ import annotations
 
 import sys
-from types import MappingProxyType
-from typing import TYPE_CHECKING, Mapping, Type
+from typing import TYPE_CHECKING, Mapping, get_type_hints
 
 from attr import define
 
@@ -21,6 +20,12 @@ if TYPE_CHECKING:
 
 
 class Handler:
+    _registry: Mapping[type[commands.Command], type[Handler]] = {}
+
+    def __init_subclass__(cls) -> None:
+        command_type: type[commands.Command] = get_type_hints(cls.__call__)["command"]
+        Handler._registry[command_type] = cls
+
     def __call__(self, command):
         ...
 
@@ -43,10 +48,3 @@ class GenerateFindingsAndReportSarif(Handler):
         )
         results = self.converter(command.policy_path, findings)
         self.reporter(command.report, results)
-
-
-CommandToHandlerMap = Mapping[Type[commands.Command], Type[Handler]]
-
-COMMAND_HANDLERS: CommandToHandlerMap = MappingProxyType(
-    {commands.GenerateFindingsAndReportSarif: GenerateFindingsAndReportSarif}
-)
