@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import sys
+from types import MappingProxyType
 from typing import TYPE_CHECKING, get_type_hints
 
 from attr import define
@@ -20,11 +21,12 @@ if TYPE_CHECKING:
 
 
 class Handler:
-    registry: dict[type[commands.Command], type[Handler]] = {}
+    _registry: dict[type[commands.Command], type[Handler]] = {}
+    registry = MappingProxyType(_registry)
 
     def __init_subclass__(cls) -> None:
         command_type: type[commands.Command] = get_type_hints(cls.__call__)["command"]
-        Handler.registry[command_type] = cls
+        Handler._registry[command_type] = cls
 
     def __call__(self, command):
         ...
