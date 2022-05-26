@@ -28,7 +28,7 @@ class Handler:
         command_type: type[commands.Command] = get_type_hints(cls.__call__)["command"]
         Handler._registry[command_type] = cls
 
-    def __call__(self, command):
+    def __call__(self, command: commands.Command):
         ...
 
 
