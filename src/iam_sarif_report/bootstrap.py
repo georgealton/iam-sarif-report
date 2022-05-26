@@ -19,6 +19,6 @@ def bootstrap() -> bus.Bus:
     return bus.Bus(
         command_handlers={
             Command: container.instantiate(Handler)
-            for Command, Handler in handlers.Handler._registry.items()
+            for Command, Handler in handlers.Handler.registry.items()
         }
     )

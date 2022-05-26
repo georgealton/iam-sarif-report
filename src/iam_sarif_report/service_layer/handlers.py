@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import sys
-from typing import TYPE_CHECKING, Mapping, get_type_hints
+from typing import TYPE_CHECKING, get_type_hints
 
 from attr import define
 
@@ -20,11 +20,11 @@ if TYPE_CHECKING:
 
 
 class Handler:
-    _registry: Mapping[type[commands.Command], type[Handler]] = {}
+    registry: dict[type[commands.Command], type[Handler]] = {}
 
     def __init_subclass__(cls) -> None:
         command_type: type[commands.Command] = get_type_hints(cls.__call__)["command"]
-        Handler._registry[command_type] = cls
+        Handler.registry[command_type] = cls
 
     def __call__(self, command):
         ...
