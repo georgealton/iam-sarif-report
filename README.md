@@ -2,7 +2,7 @@
 
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
-Validate your IAM Policies and SCPs for best practice, and convert those results into SARIF documents for reporting.
+Validate your IAM Policies and SCPs with AWS Policy Validator, and convert those results into SARIF documents for reporting.
 
 ## Use Me
 
