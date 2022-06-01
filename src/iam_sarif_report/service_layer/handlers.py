@@ -40,7 +40,7 @@ class GenerateFindingsAndReportSarif(Handler):
     converter: Converter
     reporter: Reporter
 
-    def __call__(self, command: commands.GenerateFindingsAndReportSarif) -> None:
+    def __call__(self, command: commands.GenerateFindingsAndReportSarif) -> None:  # type: ignore[override]
         policy = self.reader(command.policy_path)
         findings = self.validator(
             locale=command.locale,

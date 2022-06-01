@@ -4,7 +4,7 @@ import click
 
 
 class Reader:
-    def __call__(self):
+    def __call__(self, source):
         ...
 
 
