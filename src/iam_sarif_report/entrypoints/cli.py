@@ -30,7 +30,10 @@ from ..domain import commands, definitions
 @click.argument(
     "policy_path",
     type=click.Path(
-        exists=True, path_type=pathlib.Path, dir_okay=False, allow_dash=True
+        exists=True,
+        path_type=pathlib.Path,
+        dir_okay=False,
+        allow_dash=True,
     ),
     default="-",
 )
