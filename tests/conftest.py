@@ -2,8 +2,8 @@ import json
 
 import pytest
 
-from iam_sarif_report import converter
 from iam_sarif_report.adapters import checks
+from iam_sarif_report.domain import converter
 
 
 @pytest.fixture(name="sarif_schema")

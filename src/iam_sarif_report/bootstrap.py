@@ -2,8 +2,8 @@ from __future__ import annotations
 
 import punq
 
-from . import converter
 from .adapters import checks, reader, reporter, validator
+from .domain import converter
 from .service_layer import bus, handlers
 
 

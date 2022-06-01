@@ -17,7 +17,7 @@ if TYPE_CHECKING:
     from ..adapters.reader import Reader
     from ..adapters.reporter import Reporter
     from ..adapters.validator import Validator
-    from ..converter import Converter
+    from ..domain.converter import Converter
 
 
 class Handler:

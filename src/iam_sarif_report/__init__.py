@@ -1,3 +1,3 @@
-from . import converter
+from .domain import converter
 
 __all__ = ["converter"]
