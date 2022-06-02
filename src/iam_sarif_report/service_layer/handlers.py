@@ -41,12 +41,12 @@ class GenerateFindingsAndReportSarif(Handler):
     reporter: Reporter
 
     def __call__(self, command: commands.GenerateFindingsAndReportSarif) -> None:  # type: ignore[override]
-        policy = self.reader(command.policy_path)
+        policy = self.reader(command.policy_location)
         findings = self.validator(
             locale=command.locale.value,
             policy_type=command.policy_type.value,
             policy=policy,
-            resource_type=command.resource_type.value,
+            resource_type=getattr(command.resource_type, "value", None),
         )
-        results = self.converter(command.policy_path, findings)
+        results = self.converter(command.policy_location, findings)
         self.reporter(command.report, results)

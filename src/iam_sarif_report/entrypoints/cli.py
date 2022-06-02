@@ -43,7 +43,7 @@ def generate_findings_and_report_sarif(
 ):
 
     command = commands.GenerateFindingsAndReportSarif(
-        policy_path=policy_path,
+        policy_location=policy_path,
         policy_type=policy_type,
         locale=locale,
         resource_type=resource_type,
