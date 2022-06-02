@@ -11,19 +11,19 @@ from ..domain import commands, definitions
 @click.command()
 @click.option(
     "--policy-type",
-    type=click.Choice(definitions.POLICY_TYPES),
+    type=click.Choice(list(definitions.POLICY_TYPES)),
     default="IDENTITY_POLICY",
     help="The type of policy to validate. Defaults to 'IDENTITY_POLICY'",
 )
 @click.option(
     "--locale",
-    type=click.Choice(definitions.LOCALES),
+    type=click.Choice(list(definitions.LOCALES)),
     default="EN",
     help="The locale to use for localizing the findings. Defaults to 'EN'",
 )
 @click.option(
     "--resource-type",
-    type=click.Choice(definitions.RESOURCE_TYPES),
+    type=click.Choice(list(definitions.RESOURCE_TYPES)),
     default=None,
     help="Specify a value for the policy validation resource type only if the policy type is RESOURCE_POLICY",
 )
