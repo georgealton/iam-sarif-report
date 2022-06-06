@@ -3,7 +3,7 @@
   "Statement": [
     {
       "Effect": "Allow",
-      "Action": ["s3:Get*", "s3:GetObject"],
+      "Action": ["s3:Get*", "s3:GetObject" ],
       "Resource": "arn:aws:lambda:eu-west-1::test/*"
     }
   ]
