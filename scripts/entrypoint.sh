@@ -6,7 +6,7 @@ result_path=$4
 result=$4
 resource_type=$5
 function find_policies(){ find "$1" -type f -maxdepth 1; }
-for policy in $(find_policies "$policy_path"); do
+for policy in "$(find_policies $policy_path)"; do
     if [[ "$result_path" != "-" ]]; then
         mkdir -p "$result_path"
         result="$result_path/$(basename $policy).sarif"
