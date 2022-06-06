@@ -2,6 +2,11 @@ name: Test Action
 
 on: [push]
 
+permissions:
+  security-events: write
+  actions: read
+  contents: read
+
 jobs:
   test:
     runs-on: ubuntu-latest
