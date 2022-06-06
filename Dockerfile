@@ -11,7 +11,6 @@ RUN \
         --no-cache-dir \
         --quiet \
         --no-input \
-        --root-user-action ignore \
         git+https://github.com/georgealton/iam-sarif-report.git
 
 COPY ./scripts/entrypoint.sh /
