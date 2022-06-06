@@ -7,6 +7,7 @@ result_path=$4
 result=$4
 resource_type=$5
 
+
 function find_policies(){ find "$1" -type f -maxdepth 1 -print0; }
 
 opts+=( "$policy_type" "$locale" )
@@ -20,5 +21,7 @@ while IFS= read -rd '' policy <&3; do
         mkdir -p "$result_path"
         result=$result_path/$(basename "$policy").sarif
     fi
+    echo "::group::$policy"
     iam-sarif-report ${opts[@]} -- "$policy" "$result"
+    echo "::endgroup::"
 done 3< <(find_policies "$policy_path")
