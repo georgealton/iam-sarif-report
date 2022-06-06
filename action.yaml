@@ -6,7 +6,8 @@ branding:
   color: green
 inputs:
   policies:
-    description: "path to policy/policies"
+    description: |-
+      Path to a Policy file or directory containing Policy files.
     required: true
   policy_type:
     default: IDENTITY_POLICY
@@ -15,7 +16,12 @@ inputs:
   resource_type:
     required: false
   results:
-    description: "where to store results"
+    description: |-
+      Directory (created if required) where SARIF results are created.
+
+      SARIF Results are created with the `.sarif` extension appended to the policy filename.
+
+      By default results will be written to stdout.
     default: "-"
 runs:
   using: docker
