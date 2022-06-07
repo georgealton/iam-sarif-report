@@ -3,6 +3,7 @@ name: Test Action
 on: [push]
 
 permissions:
+  id-token: write
   security-events: write
   actions: read
   contents: read
