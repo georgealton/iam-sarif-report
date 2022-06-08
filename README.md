@@ -42,7 +42,8 @@ jobs:
         with:
           policies: policies/
           results: results
-      # upload sarif files - codeql is available to public repositories and organizations with GitHub Advanced Security
+      # upload sarif files using codeql 
+      # (Public repositories and Organizations with GitHub Advanced Security license)
       - uses: github/codeql-action/upload-sarif@v2
         with:
           sarif_file: results
