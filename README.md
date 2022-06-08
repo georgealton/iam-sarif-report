@@ -31,19 +31,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      
       # setup aws access
       - uses: aws-actions/configure-aws-credentials@v3
         with:
           role-to-assume: arn:aws:iam::111111111111:role/my-github-actions-role-test
           aws-region: eu-west-1
+      
       # validate some policies, and get some SARIF back
       # the action creates .sarif file for each policy in the policies directory
       - uses: georgealton/iam-sarif-report@v1
         with:
           policies: policies/
           results: results
-      # upload sarif files using codeql 
-      # (Public repositories and Organizations with GitHub Advanced Security license)
+      
+      # Public repositories / Organizations with GitHub Advanced Security
+      # upload sarif files using CodeQL
       - uses: github/codeql-action/upload-sarif@v2
         with:
           sarif_file: results
