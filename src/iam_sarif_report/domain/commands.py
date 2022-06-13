@@ -20,7 +20,7 @@ class Command:
 @final
 @define(frozen=True, kw_only=True)
 class GenerateFindingsAndReportSarif(Command):
-    policy_location: Path
+    policy_locations: list[Path]
     policy_type: POLICY_TYPES
     locale: LOCALES
     resource_type: RESOURCE_TYPES | None

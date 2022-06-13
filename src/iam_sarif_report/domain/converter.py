@@ -55,7 +55,10 @@ level_map = MappingProxyType(
 class Converter(Protocol):
     checks_repository: ChecksRepository
 
-    def __call__(self, policy_path: Path, findings: Findings) -> sarif.SarifLog:
+    def __call__(
+        self,
+        policy_findings: Iterable[tuple[Path, Findings]],
+    ) -> sarif.SarifLog:
         ...
 
 
@@ -92,9 +95,15 @@ class SarifConverter:
             end_column=end["column"] + 1,
         )
 
-    def __call__(self, policy_path: Path, findings: Findings) -> sarif.SarifLog:
-        self.policy_path = policy_path
-        results = list(self.findings_to_results(findings))
+    def __call__(
+        self,
+        policy_findings: Iterable[tuple[Path, Findings]],
+    ) -> sarif.SarifLog:
+        results = []
+        for policy_path, findings in policy_findings:
+            self.policy_path = policy_path
+            results.extend(list(self.findings_to_results(findings)))
+
         iam_policy_validator_tool.driver.rules = list(self.get_rules(results))
         run = sarif.Run(tool=iam_policy_validator_tool, results=results)
         return to_json(sarif.SarifLog(schema_uri=schema, version=version, runs=[run]))
@@ -135,7 +144,8 @@ class SarifConverter:
         return sarif.Location(
             physical_location=sarif.PhysicalLocation(
                 artifact_location=sarif.ArtifactLocation(
-                    uri=self.policy_path, uri_base_id="EXECUTIONROOT"
+                    uri=self.policy_path,
+                    uri_base_id="EXECUTIONROOT",
                 ),
                 region=SarifConverter.to_region(location["span"]),
             )
