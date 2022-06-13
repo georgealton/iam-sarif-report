@@ -35,7 +35,6 @@ from ..domain import commands, definitions
         dir_okay=False,
         allow_dash=True,
     ),
-    default="-",
     nargs=-1,
 )
 @click.argument("result", type=click.File("w"), default="-")
@@ -44,7 +43,7 @@ def generate_findings_and_report_sarif(
 ):
 
     command = commands.GenerateFindingsAndReportSarif(
-        policy_location=policy_paths,
+        policy_locations=policy_paths,
         policy_type=policy_type,
         locale=locale,
         resource_type=resource_type,
