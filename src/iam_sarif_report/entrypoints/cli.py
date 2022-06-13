@@ -28,7 +28,7 @@ from ..domain import commands, definitions
     help="Specify a value for the policy validation resource type only if the policy type is RESOURCE_POLICY",
 )
 @click.argument(
-    "policy_path",
+    "policy_paths",
     type=click.Path(
         exists=True,
         path_type=pathlib.Path,
@@ -36,14 +36,15 @@ from ..domain import commands, definitions
         allow_dash=True,
     ),
     default="-",
+    nargs=-1,
 )
 @click.argument("result", type=click.File("w"), default="-")
 def generate_findings_and_report_sarif(
-    policy_path, policy_type, locale, resource_type, result
+    policy_paths, policy_type, locale, resource_type, result
 ):
 
     command = commands.GenerateFindingsAndReportSarif(
-        policy_location=policy_path,
+        policy_location=policy_paths,
         policy_type=policy_type,
         locale=locale,
         resource_type=resource_type,
