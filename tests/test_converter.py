@@ -19,7 +19,7 @@ def _policy(request):
 
 
 def test_converter(policy, sarif_schema, sarif_converter):
-    policy, findings, expected_sarif = policy
-    sarif = json.loads(sarif_converter(policy, findings))
+    policy_path, findings, expected_sarif = policy
+    sarif = json.loads(sarif_converter([(policy_path, findings)]))
     assert sarif == expected_sarif
     jsonschema.validate(sarif, sarif_schema)
