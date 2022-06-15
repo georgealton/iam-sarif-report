@@ -18,7 +18,7 @@ inputs:
     description: |-
       The file where results are written.
 
-      For example, 'results/iam-sarif-report.sarif.json'
+      For example, 'results/iam-sarif-report.sarif'
 
       By default results are written to stdout.
     default: "-"
