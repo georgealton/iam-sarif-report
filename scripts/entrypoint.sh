@@ -6,7 +6,7 @@ policy_path=$3
 result_path=$4
 resource_type=$5
 
-function find_policies() { find "$1" -type f -maxdepth 1 -print0; }
+function find_policies() { find "$1" -type f -maxdepth 1; }
 
 opts+=("$policy_type" "$locale" "$result_path")
 
