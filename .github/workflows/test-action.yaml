@@ -22,7 +22,7 @@ jobs:
       - uses: ./
         with:
           policies: tests/data/policy_checks/policies/
-          results: results
+          results: results/iam-sarif-report.sarif.json
       - uses: github/codeql-action/upload-sarif@v2
         with:
           sarif_file: results

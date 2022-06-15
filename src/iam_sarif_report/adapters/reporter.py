@@ -21,4 +21,7 @@ class Reporter(Protocol):
 
 class CLIReporter:
     def __call__(self, location, sarif) -> None:
-        click.echo(file=location, message=sarif)
+        if str(location) != "-":
+            location.parent.mkdir(parents=True, exist_ok=True)
+        with click.open_file(str(location), "w") as f:
+            click.echo(file=f, message=sarif)
