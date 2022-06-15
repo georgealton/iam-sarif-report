@@ -38,8 +38,7 @@ jobs:
           role-to-assume: arn:aws:iam::111111111111:role/my-github-actions-role-test
           aws-region: eu-west-1
 
-      # validate some policies, and get some SARIF back
-      # the action creates .sarif file for each policy in the policies directory
+      # validate some policies and write a SARIF result file
       - uses: georgealton/iam-sarif-report@v1
         with:
           policies: policies/
