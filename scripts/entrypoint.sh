@@ -14,4 +14,4 @@ if [[ -n "$resource_type" ]]; then
     opts+=(--resource-type "$resource_type")
 fi
 
-iam-sarif-report ${opts[@]} -- $(find_policies)
+iam-sarif-report ${opts[@]} -- $(find_policies "$policy_path")
