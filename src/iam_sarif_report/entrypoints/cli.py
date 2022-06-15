@@ -28,26 +28,35 @@ from ..domain import commands, definitions
     help="Specify a value for the policy validation resource type only if the policy type is RESOURCE_POLICY",
 )
 @click.argument(
-    "policy_paths",
+    "policies",
     type=click.Path(
         exists=True,
         path_type=pathlib.Path,
         dir_okay=False,
-        allow_dash=True,
     ),
     nargs=-1,
 )
-@click.argument("result", type=click.File("w"), default="-")
+@click.option(
+    "--output-file",
+    "-o",
+    type=click.Path(
+        exists=False,
+        path_type=pathlib.Path,
+        dir_okay=False,
+        allow_dash=True,
+    ),
+    default="-",
+)
 def generate_findings_and_report_sarif(
-    policy_paths, policy_type, locale, resource_type, result
+    policies, policy_type, locale, resource_type, output_file
 ):
 
     command = commands.GenerateFindingsAndReportSarif(
-        policy_locations=policy_paths,
+        policy_locations=policies,
         policy_type=policy_type,
         locale=locale,
         resource_type=resource_type,
-        report=result,
+        report=output_file,
     )
 
     bus = bootstrap.bootstrap()

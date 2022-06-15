@@ -6,8 +6,7 @@ branding:
   color: green
 inputs:
   policies:
-    description: |-
-      Path to a Policy file or directory containing Policy files.
+    description: Path to a Policy files
     required: true
   policy_type:
     default: IDENTITY_POLICY
@@ -15,13 +14,13 @@ inputs:
     default: EN
   resource_type:
     required: false
-  results:
+  result:
     description: |-
-      Directory (created if required) where SARIF results are created.
+      The file where results are written.
 
-      SARIF Results are created with the `.sarif` extension appended to the policy filename.
+      For example, 'results/iam-sarif-report.sarif'
 
-      By default results will be written to stdout.
+      By default results are written to stdout.
     default: "-"
 runs:
   using: docker
@@ -30,5 +29,5 @@ runs:
     - "--policy-type ${{ inputs.policy_type }}"
     - "--locale ${{ inputs.locale }}"
     - "${{ inputs.policies }}"
-    - "${{ inputs.results }}"
+    - "--output-file ${{ inputs.result }}"
     - "${{ inputs.resource_type }}"

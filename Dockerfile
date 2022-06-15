@@ -5,14 +5,8 @@ ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 ENV PIP_DISABLE_PIP_VERSION_CHECK 1
 
-RUN \
-    pip install \
-        --upgrade \
-        --no-cache-dir \
-        --quiet \
-        --no-input \
-        git+https://github.com/georgealton/iam-sarif-report.git
+COPY . .
 
-COPY ./scripts/entrypoint.sh /
-RUN chmod +x /entrypoint.sh
-ENTRYPOINT ["/entrypoint.sh"]
+RUN pip install --upgrade --no-cache-dir --quiet --no-input .
+RUN chmod +x /scripts/entrypoint.sh
+ENTRYPOINT ["/scripts/entrypoint.sh"]
