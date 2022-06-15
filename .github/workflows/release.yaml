@@ -12,7 +12,7 @@ jobs:
     if: github.event_name == 'release'
     runs-on: ubuntu-latest
     steps:
-      - uses: Actions-R-Us/actions-tagger@f411bd910a5ad370d4511517e3eac7ff887c90ea
+      - uses: Actions-R-Us/actions-tagger@v2
 
   dist:
     runs-on: ubuntu-latest
