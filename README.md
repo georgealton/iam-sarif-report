@@ -39,7 +39,7 @@ jobs:
           aws-region: eu-west-1
 
       # validate some policies and write a SARIF result file
-      - uses: georgealton/iam-sarif-report@v1
+      - uses: georgealton/iam-sarif-report@v2
         with:
           policies: policies/
           result: results/iam.sarif
