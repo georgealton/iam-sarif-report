@@ -43,7 +43,7 @@ jobs:
       - uses: georgealton/iam-sarif-report@v1
         with:
           policies: policies/
-          results: results
+          result: results/iam.sarif
 
       # Public repositories / Organizations with GitHub Advanced Security
       # upload sarif files using CodeQL
