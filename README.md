@@ -55,5 +55,5 @@ jobs:
 ### Locally
 
 ```sh
-pipx run iam-sarif-report tests/data/policy_checks/policies/arn-region-not-allowed.json
+pipx run iam-sarif-report tests/data/policy_checks/policies/*
 ```
