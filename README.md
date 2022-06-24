@@ -44,8 +44,8 @@ jobs:
           policies: policies/
           result: results/iam.sarif
 
-      # Public repositories / Organizations with GitHub Advanced Security
-      # upload sarif files using CodeQL
+      # Public repositories and Organizations with GitHub Advanced Security
+      # can upload sarif files using CodeQL
       - uses: github/codeql-action/upload-sarif@v2
         with:
           sarif_file: results
