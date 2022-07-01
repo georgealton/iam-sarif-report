@@ -7,6 +7,7 @@ permissions:
   security-events: write
   actions: read
   contents: read
+  checks: write # SARIF Annotator
 
 jobs:
   test:
