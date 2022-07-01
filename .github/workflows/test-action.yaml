@@ -26,3 +26,7 @@ jobs:
       - uses: github/codeql-action/upload-sarif@v2
         with:
           sarif_file: results
+      - uses: SirYwell/sarif-annotator@v0.2.1
+        with:
+          report-path: results/iam-sarif-report.sarif
+          source: qodana
