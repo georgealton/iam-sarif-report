@@ -25,9 +25,10 @@ on: [push]
 jobs:
   example:
     permissions:
-      security-events: write
+      security-events: write # When using GitHub Advanced Security
       actions: read
       contents: read
+      checks: write # When using SARIF annotator
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -49,6 +50,12 @@ jobs:
       - uses: github/codeql-action/upload-sarif@v2
         with:
           sarif_file: results
+
+      # Without GitHub Advanced Security use sarif-annotator
+      - uses: SirYwell/sarif-annotator@v0.2.1
+        with:
+          report-path: results/iam.sarif
+          source: qodana
 ```
 
 ### Locally
