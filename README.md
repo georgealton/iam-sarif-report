@@ -50,7 +50,7 @@ jobs:
       - uses: github/codeql-action/upload-sarif@v2
         with:
           sarif_file: results
-      
+
       # Without GitHub Advanced Security use sarif-annotator
       - uses: SirYwell/sarif-annotator@v0.2.1
         with:
