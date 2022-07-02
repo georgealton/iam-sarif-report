@@ -31,3 +31,6 @@ runs:
     - "${{ inputs.policies }}"
     - "--output-file ${{ inputs.result }}"
     - "${{ inputs.resource_type }}"
+outputs:
+  result:
+    description: The result path

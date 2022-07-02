@@ -15,3 +15,5 @@ if [[ -n "$resource_type" ]]; then
 fi
 
 iam-sarif-report ${opts[@]} -- $(find_policies "$policy_path")
+
+echo "::set-output name=result::${4}"
