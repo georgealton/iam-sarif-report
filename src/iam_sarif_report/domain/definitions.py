@@ -36,4 +36,3 @@ class RESOURCE_TYPES(StrEnum):
     s3_multi_region_access_point = "AWS::S3::MultiRegionAccessPoint"
     s3_object_lambda_access_point = "AWS::S3ObjectLambda::AccessPoint"
     iam_role_trust_policy = "AWS::IAM::AssumeRolePolicyDocument"
-
