@@ -61,5 +61,5 @@ jobs:
 ### Locally
 
 ```sh
-pipx run iam-sarif-report tests/data/policy_checks/policies/*
+pipx run iam-sarif-report tests/data/policy_checks/policies
 ```
