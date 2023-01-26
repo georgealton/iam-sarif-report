@@ -152,19 +152,18 @@ class SarifConverter:
         )
 
     def to_results(self, finding: Finding) -> Iterable[sarif.Result]:
-        for location in finding["locations"]:
+        locations = finding["locations"]
+        for location in locations:
             yield sarif.Result(
                 rule_id=SarifConverter.to_rule_id(finding),
                 level=SarifConverter.to_sarif_level(finding),
                 message=SarifConverter.to_message(finding),
                 locations=[self.to_location(location)],
-                related_locations=list(self.to_related_locations(finding, location))
+                related_locations=list(self.to_related_locations(locations, location))
                 or None,
             )
 
     def to_related_locations(
-        self, finding: Finding, current_location: LocationTypeDef
+        self, locations: Iterable[LocationTypeDef], current_location: LocationTypeDef
     ) -> Iterable[sarif.Location]:
-        for related_location in finding["locations"]:
-            if related_location != current_location:
-                yield self.to_location(related_location)
+        yield from (location for location in locations if location != current_location)
