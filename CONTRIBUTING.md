@@ -6,8 +6,9 @@
 
 You'll need python3 installed
 and pip >= 21.3 to
- - support self resolving dependencies
- - editable installs pyproject.toml
+
+- support self resolving dependencies
+- editable installs pyproject.toml
 
 ```console
 $ python3 -m venv .venv
