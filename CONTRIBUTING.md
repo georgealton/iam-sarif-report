@@ -13,8 +13,8 @@ and pip >= 21.3 to
 ```console
 $ python3 -m venv .venv
 $ . .venv/bin/activate
-$ python -m pip install --upgrade 'pip>=21.3'
-$ python -m pip install --editable '.[dev]'
+$ python -m pip install --quiet --upgrade 'pip>=21.3'
+$ python -m pip install --quiet --editable '.[dev]'
 ```
 
 Then verify by running the tests
