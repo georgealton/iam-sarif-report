@@ -16,7 +16,6 @@ from jschema_to_python.to_json import to_json
 from ..adapters.checks import Check
 
 if TYPE_CHECKING:
-    from pathlib import Path
     from typing import Iterable
 
     from mypy_boto3_accessanalyzer.type_defs import (
@@ -57,7 +56,7 @@ class Converter(Protocol):
 
     def __call__(
         self,
-        policy_findings: Iterable[tuple[Path, Findings]],
+        policy_findings: Iterable[tuple[str, Findings]],
     ) -> sarif.SarifLog:
         ...
 
@@ -66,7 +65,7 @@ class Converter(Protocol):
 @define
 class SarifConverter:
     checks_repository: ChecksRepository
-    policy_path: Path | None = field(init=False, default=None)
+    policy_path: str | None = field(init=False, default=None)
 
     @staticmethod
     def to_rule_id(finding: Finding) -> str:
@@ -97,7 +96,7 @@ class SarifConverter:
 
     def __call__(
         self,
-        policy_findings: Iterable[tuple[Path, Findings]],
+        policy_findings: Iterable[tuple[str, Findings]],
     ) -> sarif.SarifLog:
         results = []
         for policy_path, findings in policy_findings:
@@ -143,10 +142,7 @@ class SarifConverter:
     def to_sarif_location(self, location: LocationTypeDef) -> sarif.Location:
         return sarif.Location(
             physical_location=sarif.PhysicalLocation(
-                artifact_location=sarif.ArtifactLocation(
-                    uri=self.policy_path,
-                    uri_base_id="EXECUTIONROOT",
-                ),
+                artifact_location=sarif.ArtifactLocation(uri=self.policy_path),
                 region=SarifConverter.to_region(location["span"]),
             )
         )
