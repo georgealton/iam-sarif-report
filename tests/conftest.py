@@ -2,7 +2,7 @@ import json
 
 import pytest
 
-from iam_sarif_report.adapters import checks
+from iam_sarif_report.adapters import checks, reader
 from iam_sarif_report.domain import converter
 
 
@@ -20,3 +20,8 @@ def _checks_repository():
 @pytest.fixture(name="sarif_converter")
 def _sarif_converter(checks_repository):
     yield converter.SarifConverter(checks_repository=checks_repository)
+
+
+@pytest.fixture(name="url_reader")
+def _url_reader():
+    yield reader.URLReader()
