@@ -43,8 +43,7 @@
                   "startLine": 6
                 },
                 "artifactLocation": {
-                  "uri": "tests/data/policy_checks/policies/redundant-action.json",
-                  "uriBaseId": "EXECUTIONROOT"
+                  "uri": "tests/data/policy_checks/policies/redundant-action.json"
                 }
               }
             }
@@ -59,8 +58,7 @@
                   "startLine": 6
                 },
                 "artifactLocation": {
-                  "uri": "tests/data/policy_checks/policies/redundant-action.json",
-                  "uriBaseId": "EXECUTIONROOT"
+                  "uri": "tests/data/policy_checks/policies/redundant-action.json"
                 }
               }
             }
@@ -82,8 +80,7 @@
                   "startLine": 6
                 },
                 "artifactLocation": {
-                  "uri": "tests/data/policy_checks/policies/redundant-action.json",
-                  "uriBaseId": "EXECUTIONROOT"
+                  "uri": "tests/data/policy_checks/policies/redundant-action.json"
                 }
               }
             }
@@ -98,8 +95,7 @@
                   "startLine": 6
                 },
                 "artifactLocation": {
-                  "uri": "tests/data/policy_checks/policies/redundant-action.json",
-                  "uriBaseId": "EXECUTIONROOT"
+                  "uri": "tests/data/policy_checks/policies/redundant-action.json"
                 }
               }
             }
