@@ -10,7 +10,7 @@ from .service_layer import bus, handlers
 def bootstrap() -> bus.Bus:
     container = punq.Container()
 
-    container.register("Reader", reader.LocalFileReader)
+    container.register("Reader", reader.URLReader)
     container.register("ChecksRepository", checks.ChecksPackageDataRepository)
     container.register("Reporter", reporter.CLIReporter)
     container.register("Converter", converter.SarifConverter)

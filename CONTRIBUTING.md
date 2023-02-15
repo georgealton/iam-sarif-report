@@ -4,7 +4,7 @@
 
 ### Setup Python
 
-You'll need python3 installed
+You'll need Python >= 3.9 installed
 and pip >= 21.3 to
 
 - support self resolving dependencies
