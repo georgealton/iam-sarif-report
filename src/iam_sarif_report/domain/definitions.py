@@ -2,6 +2,8 @@ from __future__ import annotations
 
 from enum import Enum, unique
 
+URI: str
+
 
 class StrEnum(str, Enum):
     def __str__(self) -> str:

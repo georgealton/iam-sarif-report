@@ -1,6 +1,6 @@
 from typing import TextIO
 
-import click
+from urllib.request import urlopen
 
 
 class Reader:
@@ -8,7 +8,7 @@ class Reader:
         ...
 
 
-class LocalFileReader:
+class URLReader:
     def __call__(self, source) -> TextIO:
-        with click.open_file(source) as data:
+        with urlopen(source) as data:
             return data.read()
