@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from enum import Enum, unique
 
-URI: str
+URI = str
 
 
 class StrEnum(str, Enum):
