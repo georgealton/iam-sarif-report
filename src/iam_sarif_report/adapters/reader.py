@@ -11,4 +11,4 @@ class Reader:
 class URLReader:
     def __call__(self, source) -> TextIO:
         with urlopen(source) as data:
-            return data.read()
+            return data.read().decode("utf-8")

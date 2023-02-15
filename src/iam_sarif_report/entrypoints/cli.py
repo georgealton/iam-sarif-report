@@ -52,7 +52,7 @@ def generate_findings_and_report_sarif(
 ):
 
     command = commands.GenerateFindingsAndReportSarif(
-        policy_locations=[policy.as_uri() for policy in policies],
+        policy_locations=[policy.absolute().as_uri() for policy in policies],
         policy_type=policy_type,
         locale=locale,
         resource_type=resource_type,
