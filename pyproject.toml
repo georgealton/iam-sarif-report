@@ -46,7 +46,13 @@ dev = [
   "mypy_boto3_accessanalyzer",
   "types-setuptools",
   "pre-commit",
-  "iam-sarif-report[test]",
+  "iam-sarif-report[test,docs]",
+]
+
+docs = [
+  "mkdocs",
+  "mkdocs-material",
+  "mkdocstrings",
 ]
 
 test = [
