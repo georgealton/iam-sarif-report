@@ -1,4 +1,4 @@
-name: ci
+name: cd
 
 on:
   push:
@@ -9,7 +9,7 @@ permissions:
   contents: write
 
 jobs:
-  deploy:
+  docs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
