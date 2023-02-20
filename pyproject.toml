@@ -57,6 +57,7 @@ docs = [
 
 test = [
   "pytest",
+  "pytest-sugar",
   "pytest-cov",
   "pytest-datadir",
   "jsonschema",
