@@ -12,7 +12,6 @@ else:
 
 if TYPE_CHECKING:
     from typing import Iterable
-
     from mypy_boto3_accessanalyzer.literals import (
         LocaleType,
         PolicyTypeType,
@@ -31,7 +30,7 @@ class Validator(Protocol):
         policy_type: PolicyTypeType,
         resource_type: ValidatePolicyResourceTypeType | None,
         policy: str,
-    ):
+    ) -> Iterable[ValidatePolicyFindingTypeDef]:
         ...
 
 

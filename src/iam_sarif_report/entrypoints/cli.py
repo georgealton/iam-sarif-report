@@ -50,7 +50,6 @@ from ..domain import commands, definitions
 def generate_findings_and_report_sarif(
     policies, policy_type, locale, resource_type, output_file
 ):
-
     command = commands.GenerateFindingsAndReportSarif(
         policy_locations=[policy.absolute().as_uri() for policy in policies],
         policy_type=policy_type,
@@ -60,4 +59,4 @@ def generate_findings_and_report_sarif(
     )
 
     bus = bootstrap.bootstrap()
-    bus.handle(command)
+    bus.put(command)

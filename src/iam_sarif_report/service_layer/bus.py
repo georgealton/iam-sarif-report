@@ -18,4 +18,4 @@ class Bus:
         handler = self.command_handlers[type(operation)]
         handler(operation)
 
-    handle = __call__
+    put = __call__
