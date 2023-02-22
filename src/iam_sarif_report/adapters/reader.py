@@ -1,14 +1,19 @@
-from typing import TextIO
+import sys
 
 from urllib.request import urlopen
 
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
 
-class Reader:
-    def __call__(self, source):
+
+class Reader(Protocol):
+    def __call__(self, source) -> str:
         ...
 
 
 class URLReader:
-    def __call__(self, source) -> TextIO:
+    def __call__(self, source) -> str:
         with urlopen(source) as data:
             return data.read().decode("utf-8")

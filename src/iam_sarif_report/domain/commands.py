@@ -9,7 +9,7 @@ if sys.version_info >= (3, 8):
     from typing import final
 else:
     from typing_extensions import final
-
+    
 from .definitions import LOCALES, POLICY_TYPES, RESOURCE_TYPES, URI
 
 
