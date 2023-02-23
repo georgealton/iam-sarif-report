@@ -6,7 +6,12 @@ on:
       - main
 
 env:
-  FORCE_COLOR: "true"
+  # GitHub Actions Runner is not a tty therefore lots of tools disable colour
+  # The webview supports ANSI colour so we try to add colour support here
+  #| env var                         | supported by      |
+  FORCE_COLOR: "true"                # nox,pip            
+  PYTEST_ADDOPTS: "--color=yes"      # pytest
+  PRE_COMMIT_COLOR: "always"         # pre-commit
 
 jobs:
   build:
