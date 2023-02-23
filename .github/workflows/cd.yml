@@ -20,7 +20,6 @@ jobs:
   docs:
     name: Deploy Documentation
     runs-on: ubuntu-latest
-    name: Deploy Documentation
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
@@ -32,8 +31,8 @@ jobs:
           path: .cache
       - run: pip install '.[docs]'
       - run: mkdocs gh-deploy --force
-
-   update-major-tag:
+  
+  update-major-tag:
     name: GitHub Actions Major Version Update
     runs-on: ubuntu-latest
     if: github.event_name == 'release'
