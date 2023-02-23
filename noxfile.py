@@ -3,11 +3,11 @@ import nox
 base_python = "python3.11"
 
 python_versions = [
-    "python3.7",
-    "python3.8",
-    "python3.9",
-    "python3.10",
-    "python3.11",
+    "3.7",
+    "3.8",
+    "3.9",
+    "3.10",
+    "3.11",
 ]
 
 @nox.session(python=python_versions)
