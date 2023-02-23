@@ -1,24 +1,65 @@
-name: ci
+name: Continuous Integration
 
 on:
   push:
-    branches:
+    branches-ignore:
       - main
 
-permissions:
-  contents: write
+env:
+  # GitHub Actions Runner is not a tty therefore lots of tools disable colour
+  # The webview supports ANSI colour so we try to add colour support here
+  #| env var                         | supported by      |
+  FORCE_COLOR: "true"                # nox,pip,pytest,mypy
+  PRE_COMMIT_COLOR: "always"         # pre-commit
 
 jobs:
-  deploy:
+  static-analysis:
     runs-on: ubuntu-latest
+    name: Static Analysis
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+
+  unit-tests:
+    runs-on: ubuntu-latest
+    name: Unit Tests
+    strategy:
+      matrix:
+        python-version:
+          - "3.7"
+          - "3.8"
+          - "3.9"
+          - "3.10"
+          - "3.11"
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
         with:
-          python-version: 3.x
-      - uses: actions/cache@v3
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+          cache-dependency-path: pyproject.toml
+      - run: python -m pip install --upgrade --no-input nox
+      - run: python -Im nox --python ${{matrix.python-version}}
+
+  github-actions-integration-tests:
+    runs-on: ubuntu-latest
+    name: GitHub Actions Integration Tests
+    permissions:
+      id-token: write
+      security-events: write
+      actions: read
+      contents: read
+    environment: main
+    steps:
+      - uses: actions/checkout@v3
+      - uses: aws-actions/configure-aws-credentials@v1
         with:
-          key: ${{ github.ref }}
-          path: .cache
-      - run: pip install '.[docs]'
-      - run: mkdocs gh-deploy --force
+          role-to-assume: arn:aws:iam::531249009620:role/Deploy
+          aws-region: eu-west-1
+      - uses: ./
+        with:
+          policies: tests/data/policy_checks/policies/
+          result: results/iam-sarif-report.sarif
+      - uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: results

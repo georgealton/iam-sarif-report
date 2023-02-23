@@ -83,6 +83,8 @@ iam-sarif-report = "iam_sarif_report.entrypoints.cli:generate_findings_and_repor
 git_describe_command = "git describe --dirty --tags --long --match *[0-9].*"
 
 [tool.mypy]
+mypy_path = "src"
+
 # The mypy configurations: http://bit.ly/2zEl9WI
 allow_redefinition = false
 check_untyped_defs = true
