@@ -5,7 +5,6 @@ from attrs import define
 from ..domain import commands
 from . import handlers
 
-
 COMMAND_HANDLERS = Mapping[type[commands.Command], handlers.Handler]
 
 

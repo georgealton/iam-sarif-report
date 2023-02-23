@@ -41,7 +41,7 @@ dependencies = [
 dev = [
   "black",
   "mypy",
-  "tox",
+  "nox",
   "isort",
   "mypy_boto3_accessanalyzer",
   "types-setuptools",
