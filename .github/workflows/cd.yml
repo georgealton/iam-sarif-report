@@ -1,16 +1,28 @@
-name: cd
+name: Continuous Delivery
 
 on:
   push:
     branches:
       - main
+  release:
+    types: [published, edited]
+
+env:
+  # GitHub Actions Runner is not a tty therefore lots of tools disable colour
+  # The webview supports ANSI colour so we try to add colour support here
+  #| env var                         | supported by      |
+  FORCE_COLOR: "true"                # nox,pip,pytest,mypy
+
 
 permissions:
   contents: write
 
+defaults:
+  runs-on: ubuntu-latest
+
 jobs:
   docs:
-    runs-on: ubuntu-latest
+    name: Deploy Documentation
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
@@ -22,3 +34,37 @@ jobs:
           path: .cache
       - run: pip install '.[docs]'
       - run: mkdocs gh-deploy --force
+
+   update-major-tag:
+    name: GitHub Actions Major Version Update
+    if: github.event_name == 'release'
+    steps:
+      - uses: Actions-R-Us/actions-tagger@v2
+
+  dist:
+    name: Build Package
+    if: github.event_name == 'release' && github.event.action == 'published'
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - run: pipx run build
+      - uses: actions/upload-artifact@v3
+        with:
+          path: dist/*
+      - run: pipx run twine check dist/*
+
+  publish:
+    name: Publish Package
+    needs: [dist]
+    environment: main
+    if: github.event_name == 'release' && github.event.action == 'published'
+    steps:
+      - uses: actions/download-artifact@v3
+        with:
+          name: artifact
+          path: dist
+      - uses: pypa/gh-action-pypi-publish@v1.6.4
+        with:
+          user: __token__
+          password: ${{ secrets.PYPI_API_TOKEN }} update-major-tag:
