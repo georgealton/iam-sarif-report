@@ -1,5 +1,4 @@
 import sys
-
 from urllib.request import urlopen
 
 if sys.version_info >= (3, 8):

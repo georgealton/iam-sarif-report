@@ -28,5 +28,5 @@ jobs:
       - name: test
         run: |
           python -m pip install --upgrade --no-input pip
-          python -m pip install --upgrade --no-input tox tox-gh-actions
-          tox
+          python -m pip install --upgrade --no-input nox
+          nox

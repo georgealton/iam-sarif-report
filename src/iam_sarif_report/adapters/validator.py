@@ -12,6 +12,7 @@ else:
 
 if TYPE_CHECKING:
     from typing import Iterable
+
     from mypy_boto3_accessanalyzer.literals import (
         LocaleType,
         PolicyTypeType,
