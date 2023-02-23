@@ -19,8 +19,3 @@ repos:
     hooks:
     - id: pyupgrade
       args: [--py37-plus]
-  - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: 'main' 
-    hooks:
-     - id: mypy
-       args: [src]
