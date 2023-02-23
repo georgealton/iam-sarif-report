@@ -20,6 +20,7 @@ jobs:
   docs:
     name: Deploy Documentation
     runs-on: ubuntu-latest
+    name: Deploy Documentation
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
