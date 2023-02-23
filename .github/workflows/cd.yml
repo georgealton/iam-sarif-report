@@ -11,7 +11,7 @@ env:
   # GitHub Actions Runner is not a tty therefore lots of tools disable colour
   # The webview supports ANSI colour so we try to add colour support here
   #| env var                         | supported by      |
-  FORCE_COLOR: "true"                # nox,pip,pytest,mypy
+  FORCE_COLOR: "true" # nox,pip,pytest,mypy
 
 permissions:
   contents: write
@@ -31,7 +31,7 @@ jobs:
           path: .cache
       - run: pip install '.[docs]'
       - run: mkdocs gh-deploy --force
-  
+
   update-major-tag:
     name: GitHub Actions Major Version Update
     runs-on: ubuntu-latest
