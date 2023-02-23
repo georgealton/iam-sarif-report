@@ -18,8 +18,8 @@ permissions:
 
 jobs:
   docs:
-    runs-on: ubuntu-latest
     name: Deploy Documentation
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
@@ -67,4 +67,4 @@ jobs:
       - uses: pypa/gh-action-pypi-publish@v1.6.4
         with:
           user: __token__
-          password: ${{ secrets.PYPI_API_TOKEN }} update-major-tag:
+          password: ${{ secrets.PYPI_API_TOKEN }}
