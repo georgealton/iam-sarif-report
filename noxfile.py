@@ -1,6 +1,6 @@
 import nox
 
-base_python = "python3.11"
+base_python = "3.11"
 
 python_versions = [
     "3.7",
