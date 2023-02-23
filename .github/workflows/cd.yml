@@ -13,15 +13,12 @@ env:
   #| env var                         | supported by      |
   FORCE_COLOR: "true"                # nox,pip,pytest,mypy
 
-
 permissions:
   contents: write
 
-defaults:
-  runs-on: ubuntu-latest
-
 jobs:
   docs:
+    runs-on: ubuntu-latest
     name: Deploy Documentation
     steps:
       - uses: actions/checkout@v3
@@ -37,12 +34,14 @@ jobs:
 
    update-major-tag:
     name: GitHub Actions Major Version Update
+    runs-on: ubuntu-latest
     if: github.event_name == 'release'
     steps:
       - uses: Actions-R-Us/actions-tagger@v2
 
   dist:
     name: Build Package
+    runs-on: ubuntu-latest
     if: github.event_name == 'release' && github.event.action == 'published'
     steps:
       - uses: actions/checkout@v3
@@ -56,6 +55,7 @@ jobs:
 
   publish:
     name: Publish Package
+    runs-on: ubuntu-latest
     needs: [dist]
     environment: main
     if: github.event_name == 'release' && github.event.action == 'published'

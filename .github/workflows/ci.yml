@@ -12,17 +12,16 @@ env:
   FORCE_COLOR: "true"                # nox,pip,pytest,mypy
   PRE_COMMIT_COLOR: "always"         # pre-commit
 
-defaults:
-    runs-on: ubuntu-latest
-
 jobs:
   static-analysis:
+    runs-on: ubuntu-latest
     name: Static Analysis
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
   
   unit-tests:
+    runs-on: ubuntu-latest
     name: Unit Tests
     strategy:
       matrix:
@@ -43,6 +42,7 @@ jobs:
       - run: python -Im nox --python ${{matrix.python-version}}
 
   github-actions-integration-tests:
+    runs-on: ubuntu-latest
     name: GitHub Actions Integration Tests
     permissions:
       id-token: write
