@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import pathlib
+from typing import Literal
 
 import click
 
@@ -48,12 +49,26 @@ from ..domain import commands, definitions
     default="-",
 )
 def generate_findings_and_report_sarif(
-    policies, policy_type, locale, resource_type, output_file
-):
+    policies: list[pathlib.Path] | Literal["-"],
+    policy_type: str,
+    locale: str,
+    resource_type: str | None,
+    output_file: pathlib.Path | Literal["-"],
+) -> None:
+
+    policy_locations: str | list[str]
+    if isinstance(policies, str) and policies == "-":
+        policy_locations = policies
+    else:
+        policy_locations = [policy.absolute().as_uri() for policy in policies]
+
+    if resource_type is not None:
+        resource_type = definitions.RESOURCE_TYPES(resource_type)
+
     command = commands.GenerateFindingsAndReportSarif(
-        policy_locations=[policy.absolute().as_uri() for policy in policies],
-        policy_type=policy_type,
-        locale=locale,
+        policy_locations=policy_locations,
+        policy_type=definitions.POLICY_TYPES(policy_type),
+        locale=definitions.LOCALES(locale),
         resource_type=resource_type,
         report=output_file,
     )

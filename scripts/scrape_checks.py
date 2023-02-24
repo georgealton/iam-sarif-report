@@ -8,7 +8,7 @@ from bs4 import BeautifulSoup
 
 checks_path = "../src/iam_sarif_report/checks.json"
 check_reference = "https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-reference-policy-checks.html"
-html = requests.get(check_reference).text
+html = requests.get(check_reference, timeout=30).text
 reference = BeautifulSoup(html, "html.parser")
 id_prefix = "access-analyzer-reference-policy-checks-"
 

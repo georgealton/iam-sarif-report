@@ -13,7 +13,7 @@ COMMAND_HANDLERS = Mapping[type[commands.Command], handlers.Handler]
 class Bus:
     command_handlers: COMMAND_HANDLERS
 
-    def __call__(self, operation: commands.Command):
+    def __call__(self, operation: commands.Command) -> None:
         handler = self.command_handlers[type(operation)]
         handler(operation)
 
