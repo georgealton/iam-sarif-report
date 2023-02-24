@@ -1,7 +1,6 @@
 import json
 
 import pytest
-
 from iam_sarif_report.adapters import checks, reader
 from iam_sarif_report.domain import converter
 

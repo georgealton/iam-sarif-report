@@ -16,13 +16,13 @@ if TYPE_CHECKING:
 
 
 class Reporter(Protocol):
-    def __call__(self, location, sarif: SarifLog):
+    def __call__(self, location: Path | str, sarif: SarifLog) -> None:
         ...
 
 
 class CLIReporter:
-    def __call__(self, location: Path, sarif: SarifLog) -> None:
-        if str(location) != "-":
+    def __call__(self, location: Path | str, sarif: SarifLog) -> None:
+        if not isinstance(location, str) and str(location) != "-":
             location.parent.mkdir(parents=True, exist_ok=True)
         with click.open_file(str(location), "w") as f:
             click.echo(file=f, message=sarif)
