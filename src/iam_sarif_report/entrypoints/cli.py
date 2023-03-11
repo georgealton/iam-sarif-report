@@ -28,15 +28,7 @@ from ..domain import commands, definitions
     default=None,
     help="Specify a value for the policy validation resource type only if the policy type is RESOURCE_POLICY",
 )
-@click.argument(
-    "policies",
-    type=click.Path(
-        exists=True,
-        path_type=pathlib.Path,
-        dir_okay=False,
-    ),
-    nargs=-1,
-)
+@click.argument("policies", nargs=-1)
 @click.option(
     "--output-file",
     "-o",
@@ -49,18 +41,14 @@ from ..domain import commands, definitions
     default="-",
 )
 def generate_findings_and_report_sarif(
-    policies: list[pathlib.Path] | Literal["-"],
+    policies: list[str] | Literal["-"],
     policy_type: str,
     locale: str,
     resource_type: str | None,
     output_file: pathlib.Path | Literal["-"],
 ) -> None:
-
     policy_locations: str | list[str]
-    if isinstance(policies, str) and policies == "-":
-        policy_locations = policies
-    else:
-        policy_locations = [policy.absolute().as_uri() for policy in policies]
+    policy_locations = policies
 
     if resource_type is not None:
         resource_type = definitions.RESOURCE_TYPES(resource_type)
