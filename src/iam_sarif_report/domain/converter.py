@@ -10,7 +10,7 @@ else:
     from typing_extensions import Protocol, final
 
 import sarif_om as sarif
-from attr import define, field
+from attrs import define, field
 from jschema_to_python.to_json import to_json
 
 from ..adapters.checks import Check

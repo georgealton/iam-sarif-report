@@ -4,7 +4,7 @@ import sys
 from types import MappingProxyType
 from typing import TYPE_CHECKING, get_type_hints
 
-from attr import define
+from attrs import frozen
 
 if sys.version_info >= (3, 8):
     from typing import final
@@ -33,7 +33,7 @@ class Handler:
 
 
 @final
-@define(frozen=True)
+@frozen
 class GenerateFindingsAndReportSarif(Handler):
     reader: Reader
     validator: Validator
