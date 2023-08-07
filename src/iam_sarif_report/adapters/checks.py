@@ -10,12 +10,12 @@ else:
 
 import importlib.resources
 
-from attr import define
+from attrs import frozen
 
 CHECKS_DATA_FILE: Final[str] = "checks.json"
 
 
-@define(frozen=True, slots=True)
+@frozen
 class Check:
     id: str
     url: str

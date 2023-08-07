@@ -1,6 +1,6 @@
 from typing import Mapping, final
 
-from attrs import define
+from attrs import frozen
 
 from ..domain import commands
 from . import handlers
@@ -9,7 +9,7 @@ COMMAND_HANDLERS = Mapping[type[commands.Command], handlers.Handler]
 
 
 @final
-@define(frozen=True, kw_only=True)
+@frozen(kw_only=True)
 class Bus:
     command_handlers: COMMAND_HANDLERS
 
