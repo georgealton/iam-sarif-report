@@ -52,7 +52,7 @@ jobs:
     environment: main
     steps:
       - uses: actions/checkout@v4
-      - uses: aws-actions/configure-aws-credentials@v3
+      - uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: arn:aws:iam::531249009620:role/Deploy
           aws-region: eu-west-1
