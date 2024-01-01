@@ -28,7 +28,7 @@ classifiers = [
 ]
 
 dependencies = [
-  "attrs==23.1.0",
+  "attrs==23.2.0",
   "click==8.1.7",
   "punq==0.6.2",
   "boto3==1.28.68",
