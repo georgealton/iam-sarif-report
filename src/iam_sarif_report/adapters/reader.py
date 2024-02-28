@@ -1,10 +1,5 @@
-import sys
+from typing import Protocol
 from urllib.request import urlopen
-
-if sys.version_info >= (3, 8):
-    from typing import Protocol
-else:
-    from typing_extensions import Protocol
 
 
 class Reader(Protocol):

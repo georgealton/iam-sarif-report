@@ -1,23 +1,15 @@
 from __future__ import annotations
 
-import sys
 from types import MappingProxyType
-from typing import TYPE_CHECKING, get_type_hints
+from typing import final, get_type_hints
 
 from attrs import frozen
 
-if sys.version_info >= (3, 8):
-    from typing import final
-else:
-    from typing_extensions import final
-
+from ..adapters.reader import Reader
+from ..adapters.reporter import Reporter
+from ..adapters.validator import Validator
 from ..domain import commands
-
-if TYPE_CHECKING:
-    from ..adapters.reader import Reader
-    from ..adapters.reporter import Reporter
-    from ..adapters.validator import Validator
-    from ..domain.converter import Converter
+from ..domain.converter import Converter
 
 
 class Handler:
@@ -40,7 +32,8 @@ class GenerateFindingsAndReportSarif(Handler):
     converter: Converter
     reporter: Reporter
 
-    def __call__(self, command: commands.GenerateFindingsAndReportSarif) -> None:  # type: ignore[override]
+    # type: ignore[override]
+    def __call__(self, command: commands.GenerateFindingsAndReportSarif) -> None:
         policy_findings = (
             (
                 location,

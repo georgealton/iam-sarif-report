@@ -25,7 +25,7 @@ on: [push]
 jobs:
   example:
     permissions:
-      id-token: write 
+      id-token: write
       security-events: write # When using GitHub Advanced Security
       actions: read
       contents: read

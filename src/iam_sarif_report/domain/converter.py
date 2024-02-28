@@ -1,23 +1,13 @@
 from __future__ import annotations
 
-import sys
 from types import MappingProxyType
-from typing import TYPE_CHECKING
-
-if sys.version_info >= (3, 8):
-    from typing import Protocol, final
-else:
-    from typing_extensions import Protocol, final
+from typing import TYPE_CHECKING, Iterable, Protocol, final
 
 import sarif_om as sarif
 from attrs import define, field
 from jschema_to_python.to_json import to_json
 
-from ..adapters.checks import Check
-
 if TYPE_CHECKING:
-    from typing import Iterable
-
     from mypy_boto3_accessanalyzer.type_defs import (
         LocationTypeDef,
         SpanTypeDef,
@@ -27,7 +17,7 @@ if TYPE_CHECKING:
     Finding = ValidatePolicyFindingTypeDef
     Findings = Iterable[Finding]
 
-    from ..adapters.checks import ChecksRepository
+from ..adapters.checks import Check, ChecksRepository
 
 version = "2.1.0"
 schema = f"https://docs.oasis-open.org/sarif/sarif/v{version}/cos02/schemas/sarif-schema-{version}.json"

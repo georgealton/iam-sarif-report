@@ -1,14 +1,9 @@
 from __future__ import annotations
 
-import sys
 from pathlib import Path
+from typing import final
 
 from attrs import frozen
-
-if sys.version_info >= (3, 8):
-    from typing import final
-else:
-    from typing_extensions import final
 
 from .definitions import LOCALES, POLICY_TYPES, RESOURCE_TYPES, URI
 

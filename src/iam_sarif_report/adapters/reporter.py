@@ -1,18 +1,10 @@
 from __future__ import annotations
 
-import sys
 from pathlib import Path
-from typing import TYPE_CHECKING
-
-if sys.version_info >= (3, 8):
-    from typing import Protocol
-else:
-    from typing_extensions import Protocol
+from typing import Protocol
 
 import click
-
-if TYPE_CHECKING:
-    from sarif_om import SarifLog
+from sarif_om import SarifLog
 
 
 class Reporter(Protocol):
