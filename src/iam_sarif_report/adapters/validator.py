@@ -1,18 +1,10 @@
 from __future__ import annotations
 
-import sys
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Iterable, Protocol
 
 import boto3.session
 
-if sys.version_info >= (3, 8):
-    from typing import Protocol
-else:
-    from typing_extensions import Protocol
-
 if TYPE_CHECKING:
-    from typing import Iterable
-
     from mypy_boto3_accessanalyzer.literals import (
         LocaleType,
         PolicyTypeType,

@@ -1,14 +1,8 @@
 from __future__ import annotations
 
-import json
-import sys
-
-if sys.version_info >= (3, 8):
-    from typing import Final, Protocol
-else:
-    from typing_extensions import Final, Protocol
-
 import importlib.resources
+import json
+from typing import Final, Protocol
 
 from attrs import frozen
 

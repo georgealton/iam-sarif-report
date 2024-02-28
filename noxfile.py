@@ -1,8 +1,8 @@
 import nox
 from nox.sessions import Session
 
-BASE_PYTHON = "3.11"
-ALL_PYTHON_VERSIONS = ("3.7", "3.8", "3.9", "3.10", "3.11")
+BASE_PYTHON = "3.12"
+ALL_PYTHON_VERSIONS = ("3.8", "3.9", "3.10", "3.11", "3.12")
 
 
 @nox.session(python=ALL_PYTHON_VERSIONS, tags=["tests"])

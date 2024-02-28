@@ -7,4 +7,4 @@ def test_url_reader(request, url_reader):
     uri = policy_path.absolute().as_uri()
     policy = url_reader(uri)
 
-    assert type(policy) is str
+    assert isinstance(policy, str)
