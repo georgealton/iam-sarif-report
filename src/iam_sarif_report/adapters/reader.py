@@ -1,5 +1,6 @@
 from typing import Protocol
-from urllib.request import urlopen
+
+from click import open_file
 
 
 class Reader(Protocol):
@@ -7,7 +8,7 @@ class Reader(Protocol):
         ...
 
 
-class URLReader:
+class LocalFileReader:
     def __call__(self, source: str) -> str:
-        with urlopen(source) as data:
-            return str(data.read().decode("utf-8"))
+        with open_file(source) as data:
+            return data.read()
