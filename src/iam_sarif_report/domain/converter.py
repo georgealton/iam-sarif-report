@@ -102,8 +102,7 @@ class SarifConverter:
     ) -> Iterable[sarif.ReportingDescriptor]:
         matched_rules = {result.rule_id for result in results if result.rule_id}
         for rule_id in matched_rules:
-            check = self.checks_repository.get(rule_id)
-            if check:
+            if check := self.checks_repository.get(rule_id):
                 yield self.check_to_reporting_descriptor(check)
 
     def check_to_reporting_descriptor(self, check: Check) -> sarif.ReportingDescriptor:
