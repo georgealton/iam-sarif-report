@@ -16,4 +16,4 @@ fi
 
 iam-sarif-report ${opts[@]} -- $(find_policies "$policy_path")
 
-echo "::set-output name=result::${4}"
+echo "result=${4}" >> "$GITHUB_OUTPUT"
