@@ -18,7 +18,7 @@ jobs:
           cache-dependency-path: pyproject.toml
       - run: pip install --upgrade --no-input '.[scraper]'
       - run: cd scripts && ./scrape_checks.py
-      - uses: peter-evans/create-pull-request@v5
+      - uses: peter-evans/create-pull-request@v6
         with:
           title: '[:wrench:] Automated Checks Update'
           commit-message: Updates Access Analyzer checks
