@@ -200,8 +200,8 @@
   "error_missing_resource": {
     "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-reference-policy-checks.html#access-analyzer-reference-policy-checks-error-missing-resource",
     "name": "MissingResource",
-    "short_description": "Identity-based policies must include a `Resource` or `NotResource` element.",
-    "description": "Identity-based policies must include a `Resource` or `NotResource` element.\n\n**Related terms**\n\n  * [Resource element](./reference_policies_elements_resource.html)\n\n  * [NotResource element](./reference_policies_elements_notresource.html)\n\n  * [Identity-based policies and resource-based policies](./access_policies_identity-vs-resource.html)\n\n  * [Overview of JSON policies](./access_policies.html#access_policies-json)"
+    "short_description": "All policies except role trust policies must include a `Resource` or\n`NotResource` element.",
+    "description": "All policies except role trust policies must include a `Resource` or\n`NotResource` element.\n\n**Related terms**\n\n  * [Resource element](./reference_policies_elements_resource.html)\n\n  * [NotResource element](./reference_policies_elements_notresource.html)\n\n  * [Identity-based policies and resource-based policies](./access_policies_identity-vs-resource.html)\n\n  * [Overview of JSON policies](./access_policies.html#access_policies-json)"
   },
   "error_missing_statement": {
     "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-reference-policy-checks.html#access-analyzer-reference-policy-checks-error-missing-statement",
