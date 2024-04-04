@@ -1,76 +1,51 @@
 [build-system]
 build-backend = "setuptools.build_meta"
-requires = [
-  "setuptools >= 65.0.1",
-  "setuptools_scm[toml]>=6.2",
-  "wheel",
-]
+requires = ["setuptools >= 65.0.1", "setuptools_scm[toml]>=6.2", "wheel"]
 
 [project]
-authors = [{name = "George Alton", email = "georgealton@gmail.com"}]
+authors = [{ name = "George Alton", email = "georgealton@gmail.com" }]
 dynamic = ["version"]
-license = {file = "LICENSE"}
+license = { file = "LICENSE" }
 name = "iam-sarif-report"
 readme = "README.md"
 requires-python = ">=3.8"
 
 classifiers = [
-  "Intended Audience :: Developers",
-  "License :: OSI Approved :: MIT License",
-  "Operating System :: OS Independent",
-  "Programming Language :: Python",
-  "Programming Language :: Python :: 3.8",
-  "Programming Language :: Python :: 3.9",
-  "Programming Language :: Python :: 3.10",
-  "Programming Language :: Python :: 3.11",
-  "Programming Language :: Python :: 3.12",
-  "Topic :: Software Development :: Libraries :: Python Modules",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Libraries :: Python Modules",
 ]
 
 dependencies = [
-  "attrs==23.2.0",
-  "click==8.1.7",
-  "punq==0.7.0",
-  "boto3==1.34.74",
-  "sarif_om==1.0.4",
-  "jschema_to_python==1.2.3",
-  "typing_extensions==4.1.1; python_version<'3.8'",
+    "attrs==23.2.0",
+    "click==8.1.7",
+    "punq==0.7.0",
+    "boto3==1.34.74",
+    "sarif_om==1.0.4",
+    "jschema_to_python==1.2.3",
 ]
 
 [project.optional-dependencies]
 dev = [
-  "black",
-  "mypy",
-  "nox",
-  "ruff",
-  "pre-commit",
-  "iam-sarif-report[types,test,docs]",
+    "black",
+    "mypy",
+    "nox",
+    "ruff",
+    "pre-commit",
+    "iam-sarif-report[types,test,docs]",
 ]
 
-types = [
-  "mypy_boto3_accessanalyzer",
-  "types-setuptools",
-]
-
-docs = [
-  "mkdocs",
-  "mkdocs-material",
-  "mkdocstrings",
-]
-
-test = [
-  "pytest",
-  "pytest-sugar",
-  "pytest-cov",
-  "pytest-datadir",
-  "jsonschema",
-]
-
-scraper = [
-  "beautifulsoup4",
-  "requests",
-  "html2text",
-]
+types = ["mypy_boto3_accessanalyzer", "types-setuptools"]
+docs = ["mkdocs", "mkdocs-material", "mkdocstrings"]
+test = ["pytest", "pytest-sugar", "pytest-cov", "pytest-datadir", "jsonschema"]
+scraper = ["beautifulsoup4", "requests", "html2text"]
 
 [project.urls]
 homepage = "https://github.com/georgealton/iam-sarif-report"
@@ -94,16 +69,16 @@ ignore_missing_imports = true
 branch = true
 
 [tool.black]
-target-version = ['py37']
+target-version = ['py38']
 
 [tool.ruff]
 select = ["E", "F", "W", "I", "S", "UP"]
 ignore = [
     "E501", # Ignore Line Length Errors (handled by black)
 ]
-target-version = 'py37'
+target-version = 'py38'
 
 [tool.ruff.per-file-ignores]
 "tests/**" = [
-    "S101",  # Allow assert in tests
+    "S101", # Allow assert in tests
 ]
