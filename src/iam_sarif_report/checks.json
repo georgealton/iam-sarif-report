@@ -443,6 +443,36 @@
     "short_description": "For IAM Roles Anywhere to be able to assume a role and deliver temporary AWS\ncredentials, the role must trust the IAM Roles Anywhere service principal. The\nIAM Roles Anywhere service principal requires the `sts:AssumeRole`,\n`sts:SetSourceIdentity`, and `sts:TagSession` permissions to assume a role. If\nany of the permissions are missing, you must add them to your policy.",
     "description": "For IAM Roles Anywhere to be able to assume a role and deliver temporary AWS\ncredentials, the role must trust the IAM Roles Anywhere service principal. The\nIAM Roles Anywhere service principal requires the `sts:AssumeRole`,\n`sts:SetSourceIdentity`, and `sts:TagSession` permissions to assume a role. If\nany of the permissions are missing, you must add them to your policy.\n\n**Related terms**\n\n  * [Trust model in AWS Identity and Access Management Roles Anywhere](https://docs.aws.amazon.com/rolesanywhere/latest/userguide/trust-model.html)"
   },
+  "error_policy_size_exceeds_rcp_quota": {
+    "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-reference-policy-checks.html#access-analyzer-reference-policy-checks-error-policy-size-exceeds-rcp-quota",
+    "name": "PolicySizeExceedsRcpQuota",
+    "short_description": "AWS Organizations resource control policies (RCPs) support specifying values\nin the `Action` element. However, these values can include wildcards (*) only\nat the end of the string. This means that you can specify `s3:Get*` but not\n`s3:*Object`.",
+    "description": "AWS Organizations resource control policies (RCPs) support specifying values\nin the `Action` element. However, these values can include wildcards (*) only\nat the end of the string. This means that you can specify `s3:Get*` but not\n`s3:*Object`.\n\nTo specify multiple actions, AWS recommends that you list them individually.\n\n**Related terms**\n\n  * [Quotas for AWS Organizations](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_reference_limits.html)\n\n  * [AWS Organizations resource control policies](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_rcps.html)"
+  },
+  "error_rcp_syntax_error_principal": {
+    "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-reference-policy-checks.html#access-analyzer-reference-policy-checks-error-rcp-syntax-error-principal",
+    "name": "Principal",
+    "short_description": "AWS Organizations resource control policies (RCPs) only support specifying all\nprincipals (\"`*`\") in the `Principal` element. The `NotPrincipal` element is\nnot supported for RCPs.",
+    "description": "AWS Organizations resource control policies (RCPs) only support specifying all\nprincipals (\"`*`\") in the `Principal` element. The `NotPrincipal` element is\nnot supported for RCPs.\n\n**Related terms**\n\n  * [RCP syntax](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_rcps_syntax.html)\n\n  * [Properties of the principal](./reference_policies_condition-keys.html#condition-keys-principal-properties)"
+  },
+  "error_rcp_syntax_error_allow": {
+    "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-reference-policy-checks.html#access-analyzer-reference-policy-checks-error-rcp-syntax-error-allow",
+    "name": "Allow",
+    "short_description": "AWS Organizations resource control policies (RCPs) only support specifying all\nprincipals (\"`*`\") in the `Principal` element and all resources (\"`*`\") in the\n`Resource` element. The `Condition` element with an effect of `Allow` is not\nsupported for RCPs.",
+    "description": "AWS Organizations resource control policies (RCPs) only support specifying all\nprincipals (\"`*`\") in the `Principal` element and all resources (\"`*`\") in the\n`Resource` element. The `Condition` element with an effect of `Allow` is not\nsupported for RCPs.\n\n**Related terms**\n\n  * [RCP syntax](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_rcps_syntax.html)\n\n  * [Properties of the principal](./reference_policies_condition-keys.html#condition-keys-principal-properties)\n\n  * [Properties of the resource](./reference_policies_condition-keys.html#condition-keys-resource-properties)"
+  },
+  "error_rcp_syntax_error_notaction": {
+    "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-reference-policy-checks.html#access-analyzer-reference-policy-checks-error-rcp-syntax-error-notaction",
+    "name": "Notaction",
+    "short_description": "AWS Organizations resource control policies (RCPs) do not support the\n`NotAction` element. Use the `Action` element.",
+    "description": "AWS Organizations resource control policies (RCPs) do not support the\n`NotAction` element. Use the `Action` element.\n\n**Related terms**\n\n  * [RCP syntax](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_rcps_syntax.html)\n\n  * [IAM JSON policy elements: Action](./reference_policies_elements_action.html)\n\n  * [IAM JSON policy elements: NotAction](./reference_policies_elements_notaction.html)"
+  },
+  "error_rcp_syntax_error_action": {
+    "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-reference-policy-checks.html#access-analyzer-reference-policy-checks-error-rcp-syntax-error-action",
+    "name": "Action",
+    "short_description": "AWS Organizations resource control policies (RCPs) only support specifying\nselect service prefixes in the `Action` element.",
+    "description": "AWS Organizations resource control policies (RCPs) only support specifying\nselect service prefixes in the `Action` element.\n\n**Related terms**\n\n  * [RCP syntax](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_rcps_syntax.html)\n\n  * [List of AWS services that support RCPs](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_rcps.html#rcp-supported-services)"
+  },
   "general_warning_create_slr_with_not_resource": {
     "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-reference-policy-checks.html#access-analyzer-reference-policy-checks-general-warning-create-slr-with-not-resource",
     "name": "CreateSlrWithNotResource",
@@ -574,6 +604,18 @@
     "name": "PolicySizeExceedsRoleTrustPolicyQuota",
     "short_description": "IAM and AWS STS have quotas that limit the size of role trust policies. The\ncharacters in the role trust policy, excluding whitespace, exceed the\ncharacter maximum. We recommend that you request a role trust policy length\nquota increase using Service Quotas and the AWS Support Center Console.",
     "description": "IAM and AWS STS have quotas that limit the size of role trust policies. The\ncharacters in the role trust policy, excluding whitespace, exceed the\ncharacter maximum. We recommend that you request a role trust policy length\nquota increase using Service Quotas and the AWS Support Center Console.\n\n**Related terms**\n\n  * [IAM and AWS STS quotas, name requirements, and character limits](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html)"
+  },
+  "general_warning_rcp_missing_related_principal_condition_key": {
+    "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-reference-policy-checks.html#access-analyzer-reference-policy-checks-general-warning-rcp-missing-related-principal-condition-key",
+    "name": "RcpMissingRelatedPrincipalConditionKey",
+    "short_description": "AWS Organizations resource control policies (RCPs) can impact IAM roles,\nusers, and AWS service principals. To prevent unintended impact to services\nacting on your behalf using a service principal, add the following statement\nto your `Condition` element:",
+    "description": "AWS Organizations resource control policies (RCPs) can impact IAM roles,\nusers, and AWS service principals. To prevent unintended impact to services\nacting on your behalf using a service principal, add the following statement\nto your `Condition` element:\n\n    \n    \n    \"BoolIfExists\": { \"aws:PrincipalIsAWSService\": \"false\"}\n\n**Related terms**\n\n  * [RCP syntax](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_rcps_syntax.html)\n\n  * [Properties of the principal](./reference_policies_condition-keys.html#condition-keys-principal-properties)"
+  },
+  "general_warning_rcp_missing_related_service_principal_condition_key": {
+    "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-reference-policy-checks.html#access-analyzer-reference-policy-checks-general-warning-rcp-missing-related-service-principal-condition-key",
+    "name": "RcpMissingRelatedServicePrincipalConditionKey",
+    "short_description": "AWS Organizations resource control policies (RCPs) can impact IAM roles,\nusers, and AWS service principals. To prevent unintended impact to your\nprincipals, add the following statement to your `Condition` element:",
+    "description": "AWS Organizations resource control policies (RCPs) can impact IAM roles,\nusers, and AWS service principals. To prevent unintended impact to your\nprincipals, add the following statement to your `Condition` element:\n\n    \n    \n    \"BoolIfExists\": { \"aws:PrincipalIsAWSService\": \"true\"}\n\n**Related terms**\n\n  * [RCP syntax](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_rcps_syntax.html)\n\n  * [Properties of the principal](./reference_policies_condition-keys.html#condition-keys-principal-properties)"
   },
   "security_warning_allow_with_not_principal": {
     "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-reference-policy-checks.html#access-analyzer-reference-policy-checks-security-warning-allow-with-not-principal",
