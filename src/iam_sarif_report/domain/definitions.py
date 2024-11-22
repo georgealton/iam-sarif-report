@@ -13,6 +13,7 @@ class POLICY_TYPES(StrEnum):
     identity = "IDENTITY_POLICY"
     resource = "RESOURCE_POLICY"
     scp = "SERVICE_CONTROL_POLICY"
+    rcp = "RESOURCE_CONTROL_POLICY"
 
 
 @unique
