@@ -27,7 +27,7 @@ dependencies = [
     "attrs==25.1.0",
     "click==8.1.8",
     "punq==0.7.0",
-    "boto3==1.36.16",
+    "boto3==1.36.26",
     "sarif_om==1.0.4",
     "jschema_to_python==1.2.3",
 ]
