@@ -159,7 +159,7 @@
     "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-reference-policy-checks.html#access-analyzer-reference-policy-checks-error-json-syntax-error",
     "name": "JsonSyntaxError",
     "short_description": "Your policy includes a syntax error. Check your JSON syntax.",
-    "description": "Your policy includes a syntax error. Check your JSON syntax.\n\n**Related terms**\n\n  * [JSON validator](https://jsonlint.com/)\n\n  * [IAM JSON policy elements reference](./reference_policies_elements.html)\n\n  * [Overview of JSON policies](./access_policies.html#access_policies-json)"
+    "description": "Your policy includes a syntax error. Check your JSON syntax.\n\n**Related terms**\n\n  * [JSON validator](https://json-validate.com/)\n\n  * [IAM JSON policy elements reference](./reference_policies_elements.html)\n\n  * [Overview of JSON policies](./access_policies.html#access_policies-json)"
   },
   "error_missing_action": {
     "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-reference-policy-checks.html#access-analyzer-reference-policy-checks-error-missing-action",
