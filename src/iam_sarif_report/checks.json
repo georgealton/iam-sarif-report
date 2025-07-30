@@ -629,6 +629,12 @@
     "short_description": "AWS Organizations resource control policies (RCPs) can impact IAM roles,\nusers, and AWS service principals. To prevent unintended impact to services\nacting on your behalf using a service principal, add one of the following\nstatements to your `Condition` element whenever the specified key is used:",
     "description": "AWS Organizations resource control policies (RCPs) can impact IAM roles,\nusers, and AWS service principals. To prevent unintended impact to services\nacting on your behalf using a service principal, add one of the following\nstatements to your `Condition` element whenever the specified key is used:\n\n    \n    \n    \"Null\": { \"aws:SourceAccount\": \"false\"}\n\nor\n\n    \n    \n    \"Null\": { \"aws:SourceArn\": \"false\"}\n\n**Related terms**\n\n  * [RCP syntax](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_rcps_syntax.html)\n\n  * [Properties of the principal](./reference_policies_condition-keys.html#condition-keys-principal-properties)"
   },
+  "general_warning_untrustworthy_condition_key": {
+    "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-reference-policy-checks.html#access-analyzer-reference-policy-checks-general-warning-untrustworthy-condition-key",
+    "name": "UntrustworthyConditionKey",
+    "short_description": "Do not use this condition key for access control. The caller can potentially\nmanipulate or spoof the key value, which creates a security risk.",
+    "description": "Do not use this condition key for access control. The caller can potentially\nmanipulate or spoof the key value, which creates a security risk.\n\n**Related terms**\n\n  * [AWS global condition context keys](./reference_policies_condition-keys.html)"
+  },
   "security_warning_allow_with_not_principal": {
     "url": "https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-reference-policy-checks.html#access-analyzer-reference-policy-checks-security-warning-allow-with-not-principal",
     "name": "AllowWithNotPrincipal",
